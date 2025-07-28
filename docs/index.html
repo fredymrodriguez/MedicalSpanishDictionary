@@ -96,10 +96,9 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            /* Initially hide all entries */
-            display: none; /* KEY CHANGE: Hide by default */
+            display: none;
         }
-        .dictionary-entry.visible { /* New class to show items */
+        .dictionary-entry.visible {
             display: block;
         }
 
@@ -108,17 +107,17 @@
             text-align: center;
             margin: 30px 0;
             padding: 15px;
-            background-color: #e0e7ff; /* Light blue background for filters */
+            background-color: #e0e7ff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex; /* Use flexbox for layout */
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-            justify-content: center; /* Center items */
-            gap: 15px; /* Space between filter groups */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
         .filter-group-dropdown {
-            flex: 1 1 auto; /* Allow items to grow and shrink */
-            min-width: 250px; /* Minimum width before wrapping */
+            flex: 1 1 auto;
+            min-width: 250px;
             text-align: left;
         }
         .filter-group-dropdown label {
@@ -137,13 +136,13 @@
             cursor: pointer;
         }
         .clear-filters-button {
-            background-color: #dc3545; /* Red for clear filters */
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin: 10px auto; /* Center button */
+            margin: 10px auto;
             font-size: 1em;
             transition: background-color 0.3s ease;
         }
@@ -168,13 +167,13 @@
 
                 <option value="allergies-and-reactions">Allergies and reactions (Alergias y reacciones)</option>
     
-                <option value="anesthetic-medications">Anesthetic medications (Consentimiento informado)</option>
+                <option value="anesthetic-medications">Anesthetic medications (Medicamentos anestésicos)</option>
     
-                <option value="informed-consent">Informed Consent (Cuidados postoperatorios)</option>
+                <option value="informed-consent">Informed Consent (Consentimiento informado)</option>
     
-                <option value="patient’s-faq">Patient’s FAQ (Medicamentos anestésicos)</option>
+                <option value="patient’s-faq">Patient’s FAQ (Preguntas frecuentes del paciente)</option>
     
-                <option value="postoperative-care">Postoperative care (Preguntas frecuentes del paciente)</option>
+                <option value="postoperative-care">Postoperative care (Cuidados postoperatorios)</option>
     
                 <option value="procedures-and-monitoring">Procedures and monitoring (Procedimientos y seguimiento)</option>
     
@@ -194,291 +193,291 @@
     
                 <option value="allergology-/-anesthesiology">Allergology / Anesthesiology (Alergología / Anestesiología)</option>
     
-                <option value="allergology-/-critical-care-medicine">Allergology / Critical Care Medicine (Alergología / Cirugía)</option>
+                <option value="allergology-/-critical-care-medicine">Allergology / Critical Care Medicine (Alergología / Medicina crítica)</option>
     
-                <option value="allergology-/-dentistry-/-anesthesiology">Allergology / Dentistry / Anesthesiology (Alergología / Dermatología)</option>
+                <option value="allergology-/-dentistry-/-anesthesiology">Allergology / Dentistry / Anesthesiology (Alergología / Odontología / Anestesiología)</option>
     
-                <option value="allergology-/-dermatology">Allergology / Dermatology (Alergología / Medicina crítica)</option>
+                <option value="allergology-/-dermatology">Allergology / Dermatology (Alergología / Dermatología)</option>
     
-                <option value="allergology-/-internal-medicine">Allergology / Internal Medicine (Alergología / Medicina del dolor)</option>
+                <option value="allergology-/-internal-medicine">Allergology / Internal Medicine (Alergología / Medicina interna)</option>
     
-                <option value="allergology-/-medical-emergencies">Allergology / Medical emergencies (Alergología / Medicina interna)</option>
+                <option value="allergology-/-medical-emergencies">Allergology / Medical emergencies (Alergología / Urgencias médicas)</option>
     
-                <option value="allergology-/-nutrition">Allergology / Nutrition (Alergología / Medicina ocupacional)</option>
+                <option value="allergology-/-nutrition">Allergology / Nutrition (Alergología / Nutrición)</option>
     
-                <option value="allergology-/-occupational-medicine">Allergology / Occupational Medicine (Alergología / Medicina preventiva)</option>
+                <option value="allergology-/-occupational-medicine">Allergology / Occupational Medicine (Alergología / Medicina ocupacional)</option>
     
-                <option value="allergology-/-pain-medicine">Allergology / Pain Medicine (Alergología / Nutrición)</option>
+                <option value="allergology-/-pain-medicine">Allergology / Pain Medicine (Alergología / Medicina del dolor)</option>
     
-                <option value="allergology-/-preventive-medicine">Allergology / Preventive Medicine (Alergología / Odontología / Anestesiología)</option>
+                <option value="allergology-/-preventive-medicine">Allergology / Preventive Medicine (Alergología / Medicina preventiva)</option>
     
-                <option value="allergology-/-surgery">Allergology / Surgery (Alergología / Urgencias médicas)</option>
+                <option value="allergology-/-surgery">Allergology / Surgery (Alergología / Cirugía)</option>
     
-                <option value="ambulatory-medicine-/-minor-surgery">Ambulatory Medicine / Minor Surgery (Anestesiología)</option>
+                <option value="ambulatory-medicine-/-minor-surgery">Ambulatory Medicine / Minor Surgery (Medicina ambulatoria / Cirugía menor)</option>
     
-                <option value="anesthesiology">Anesthesiology (Anestesiología / Alergología)</option>
+                <option value="anesthesiology">Anesthesiology (Anestesiología)</option>
     
-                <option value="anesthesiology-/-allergology">Anesthesiology / Allergology (Anestesiología / Bioética)</option>
+                <option value="anesthesiology-/-allergology">Anesthesiology / Allergology (Anestesiología / Alergología)</option>
     
-                <option value="anesthesiology-/-bioethics">Anesthesiology / Bioethics (Anestesiología / Cirugía)</option>
+                <option value="anesthesiology-/-bioethics">Anesthesiology / Bioethics (Anestesiología / Bioética)</option>
     
-                <option value="anesthesiology-/-clinical-engineering">Anesthesiology / Clinical Engineering (Anestesiología / Cirugía general)</option>
+                <option value="anesthesiology-/-clinical-engineering">Anesthesiology / Clinical Engineering (Anestesiología / Ingeniería clínica)</option>
     
-                <option value="anesthesiology-/-clinical-psychology">Anesthesiology / Clinical Psychology (Anestesiología / Cirugía mayor)</option>
+                <option value="anesthesiology-/-clinical-psychology">Anesthesiology / Clinical Psychology (Anestesiología / Psicología clínica)</option>
     
-                <option value="anesthesiology-/-endocrinology">Anesthesiology / Endocrinology (Anestesiología / Cirugía ortopédica)</option>
+                <option value="anesthesiology-/-endocrinology">Anesthesiology / Endocrinology (Anestesiología / Endocrinología)</option>
     
-                <option value="anesthesiology-/-general-surgery">Anesthesiology / General Surgery (Anestesiología / Cirugía torácica)</option>
+                <option value="anesthesiology-/-general-surgery">Anesthesiology / General Surgery (Anestesiología / Cirugía general)</option>
     
-                <option value="anesthesiology-/-genetic-medicine">Anesthesiology / Genetic Medicine (Anestesiología / Documentación médica)</option>
+                <option value="anesthesiology-/-genetic-medicine">Anesthesiology / Genetic Medicine (Anestesiología / Medicina genética)</option>
     
-                <option value="anesthesiology-/-hospital-medicine">Anesthesiology / Hospital Medicine (Anestesiología / Endocrinología)</option>
+                <option value="anesthesiology-/-hospital-medicine">Anesthesiology / Hospital Medicine (Anestesiología / Medicina hospitalaria)</option>
     
-                <option value="anesthesiology-/-internal-medicine">Anesthesiology / Internal Medicine (Anestesiología / Enfermería)</option>
+                <option value="anesthesiology-/-internal-medicine">Anesthesiology / Internal Medicine (Anestesiología / Medicina interna)</option>
     
-                <option value="anesthesiology-/-legal-medicine">Anesthesiology / Legal Medicine (Anestesiología / Ingeniería clínica)</option>
+                <option value="anesthesiology-/-legal-medicine">Anesthesiology / Legal Medicine (Anestesiología / Medicina legal)</option>
     
-                <option value="anesthesiology-/-major-surgery">Anesthesiology / Major Surgery (Anestesiología / Medicina crítica)</option>
+                <option value="anesthesiology-/-major-surgery">Anesthesiology / Major Surgery (Anestesiología / Cirugía mayor)</option>
     
-                <option value="anesthesiology-/-medical-documentation">Anesthesiology / Medical Documentation (Anestesiología / Medicina de emergencia)</option>
+                <option value="anesthesiology-/-medical-documentation">Anesthesiology / Medical Documentation (Anestesiología / Documentación médica)</option>
     
-                <option value="anesthesiology-/-medical-emergencies">Anesthesiology / Medical Emergencies (Anestesiología / Medicina de recuperación)</option>
+                <option value="anesthesiology-/-medical-emergencies">Anesthesiology / Medical Emergencies (Anestesiología / Urgencias médicas)</option>
     
-                <option value="anesthesiology-/-nephrology">Anesthesiology / Nephrology (Anestesiología / Medicina del dolor)</option>
+                <option value="anesthesiology-/-nephrology">Anesthesiology / Nephrology (Anestesiología / Nefrología)</option>
     
-                <option value="anesthesiology-/-nursing">Anesthesiology / Nursing (Anestesiología / Medicina genética)</option>
+                <option value="anesthesiology-/-nursing">Anesthesiology / Nursing (Anestesiología / Enfermería)</option>
     
-                <option value="anesthesiology-/-obstetrics">Anesthesiology / Obstetrics (Anestesiología / Medicina hospitalaria)</option>
+                <option value="anesthesiology-/-obstetrics">Anesthesiology / Obstetrics (Anestesiología / Obstetricia)</option>
     
-                <option value="anesthesiology-/-orthopedic-surgery">Anesthesiology / Orthopedic Surgery (Anestesiología / Medicina interna)</option>
+                <option value="anesthesiology-/-orthopedic-surgery">Anesthesiology / Orthopedic Surgery (Anestesiología / Cirugía ortopédica)</option>
     
-                <option value="anesthesiology-/-personalized-medicine">Anesthesiology / Personalized Medicine (Anestesiología / Medicina legal)</option>
+                <option value="anesthesiology-/-personalized-medicine">Anesthesiology / Personalized Medicine (Anestesiología / Medicina personalizada)</option>
     
-                <option value="anesthesiology-/-pneumology">Anesthesiology / Pneumology (Anestesiología / Medicina personalizada)</option>
+                <option value="anesthesiology-/-pneumology">Anesthesiology / Pneumology (Anestesiología / Neumología)</option>
     
-                <option value="anesthesiology-/-preventive-medicine">Anesthesiology / Preventive Medicine (Anestesiología / Medicina preoperatoria)</option>
+                <option value="anesthesiology-/-preventive-medicine">Anesthesiology / Preventive Medicine (Anestesiología / Medicina preventiva)</option>
     
-                <option value="anesthesiology-/-surgery">Anesthesiology / Surgery (Anestesiología / Medicina preventiva)</option>
+                <option value="anesthesiology-/-surgery">Anesthesiology / Surgery (Anestesiología / Cirugía)</option>
     
-                <option value="anesthesiology/critical-care-medicine">Anesthesiology/Critical Care Medicine (Anestesiología / Nefrología)</option>
+                <option value="anesthesiology/critical-care-medicine">Anesthesiology/Critical Care Medicine (Anestesiología / Medicina crítica)</option>
     
-                <option value="anesthesiology/emergency-medicine">Anesthesiology/Emergency Medicine (Anestesiología / Neumología)</option>
+                <option value="anesthesiology/emergency-medicine">Anesthesiology/Emergency Medicine (Anestesiología / Medicina de emergencia)</option>
     
-                <option value="anesthesiology/pain-medicine">Anesthesiology/Pain Medicine (Anestesiología / Obstetricia)</option>
+                <option value="anesthesiology/pain-medicine">Anesthesiology/Pain Medicine (Anestesiología / Medicina del dolor)</option>
     
-                <option value="anesthesiology/preoperative-medicine">Anesthesiology/Preoperative Medicine (Anestesiología / Psicología clínica)</option>
+                <option value="anesthesiology/preoperative-medicine">Anesthesiology/Preoperative Medicine (Anestesiología / Medicina preoperatoria)</option>
     
-                <option value="anesthesiology/recovery-medicine">Anesthesiology/Recovery Medicine (Anestesiología / Urgencias médicas)</option>
+                <option value="anesthesiology/recovery-medicine">Anesthesiology/Recovery Medicine (Anestesiología / Medicina de recuperación)</option>
     
-                <option value="anesthesiology/thoracic-surgery">Anesthesiology/Thoracic Surgery (Anestesiología pediátrica)</option>
+                <option value="anesthesiology/thoracic-surgery">Anesthesiology/Thoracic Surgery (Anestesiología / Cirugía torácica)</option>
     
-                <option value="bioethics-/-legal-medicine">Bioethics / Legal Medicine (Anestesiología pediátrica / Cirugía infantil)</option>
+                <option value="bioethics-/-legal-medicine">Bioethics / Legal Medicine (Bioética / Medicina legal)</option>
     
                 <option value="bioethics/general-medicine">Bioethics/General Medicine (Bioética / Medicina general)</option>
     
-                <option value="cardiology">Cardiology (Bioética / Medicina legal)</option>
+                <option value="cardiology">Cardiology (Cardiología)</option>
     
-                <option value="cardiology-/-anesthesiology">Cardiology / Anesthesiology (Cardiología)</option>
+                <option value="cardiology-/-anesthesiology">Cardiology / Anesthesiology (Cardiología / Anestesiología)</option>
     
-                <option value="cardiology-/-critical-care-medicine">Cardiology / Critical Care Medicine (Cardiología / Anestesiología)</option>
+                <option value="cardiology-/-critical-care-medicine">Cardiology / Critical Care Medicine (Cardiología / Medicina crítica)</option>
     
-                <option value="cardiology-/-medical-emergencies">Cardiology / Medical Emergencies (Cardiología / Enfermería)</option>
+                <option value="cardiology-/-medical-emergencies">Cardiology / Medical Emergencies (Cardiología / Urgencias médicas)</option>
     
-                <option value="cardiology-/-nursing">Cardiology / Nursing (Cardiología / Medicina crítica)</option>
+                <option value="cardiology-/-nursing">Cardiology / Nursing (Cardiología / Enfermería)</option>
     
-                <option value="cardiology-/-pulmonology">Cardiology / Pulmonology (Cardiología / Medicina perioperatoria)</option>
+                <option value="cardiology-/-pulmonology">Cardiology / Pulmonology (Cardiología / Neumología)</option>
     
-                <option value="cardiology/perioperative-medicine">Cardiology/Perioperative Medicine (Cardiología / Neumología)</option>
+                <option value="cardiology/perioperative-medicine">Cardiology/Perioperative Medicine (Cardiología / Medicina perioperatoria)</option>
     
-                <option value="clinical-psychology-/-anesthesiology">Clinical Psychology / Anesthesiology (Cardiología / Urgencias médicas)</option>
+                <option value="clinical-psychology-/-anesthesiology">Clinical Psychology / Anesthesiology (Psicología clínica / Anestesiología)</option>
     
-                <option value="clinical-psychology-/-sleep-medicine">Clinical Psychology / Sleep Medicine (Cirugía / Anestesiología)</option>
+                <option value="clinical-psychology-/-sleep-medicine">Clinical Psychology / Sleep Medicine (Psicología clínica / Medicina del sueño)</option>
     
-                <option value="critical-care-medicine-/-anesthesiology">Critical Care Medicine / Anesthesiology (Cirugía / Enfermería)</option>
+                <option value="critical-care-medicine-/-anesthesiology">Critical Care Medicine / Anesthesiology (Medicina crítica / Anestesiología)</option>
     
-                <option value="critical-care-medicine/major-surgery">Critical Care Medicine/Major Surgery (Cirugía / Enfermería superficial)</option>
+                <option value="critical-care-medicine/major-surgery">Critical Care Medicine/Major Surgery (Medicina crítica / Cirugía mayor)</option>
     
-                <option value="dermatology-/-anesthesiology">Dermatology / Anesthesiology (Cirugía / Gastroenterología)</option>
+                <option value="dermatology-/-anesthesiology">Dermatology / Anesthesiology (Dermatología / Anestesiología)</option>
     
-                <option value="dermatology-/-outpatient-medicine">Dermatology / Outpatient Medicine (Cirugía / Medicina ambulatoria)</option>
+                <option value="dermatology-/-outpatient-medicine">Dermatology / Outpatient Medicine (Dermatología / Medicina ambulatoria)</option>
     
-                <option value="digestive-medicine-/-abdominal-surgery">Digestive Medicine / Abdominal Surgery (Cirugía / Medicina de emergencia)</option>
+                <option value="digestive-medicine-/-abdominal-surgery">Digestive Medicine / Abdominal Surgery (Medicina digestiva / Cirugía abdominal)</option>
     
-                <option value="digestive-medicine-/-surgery">Digestive Medicine / Surgery (Cirugía / Medicina familiar)</option>
+                <option value="digestive-medicine-/-surgery">Digestive Medicine / Surgery (Medicina digestiva / Cirugía)</option>
     
-                <option value="endocrinology-/-anesthesiology">Endocrinology / Anesthesiology (Cirugía / Medicina general)</option>
+                <option value="endocrinology-/-anesthesiology">Endocrinology / Anesthesiology (Endocrinología / Anestesiología)</option>
     
-                <option value="endocrinology-/-internal-medicine">Endocrinology / Internal Medicine (Cirugía / Medicina hospitalaria)</option>
+                <option value="endocrinology-/-internal-medicine">Endocrinology / Internal Medicine (Endocrinología / Medicina interna)</option>
     
-                <option value="family-medicine/general-surgery">Family Medicine/General Surgery (Cirugía / Medicina interna)</option>
+                <option value="family-medicine/general-surgery">Family Medicine/General Surgery (Medicina familiar / Cirugía general)</option>
     
-                <option value="gastroenterology-/-anesthesiology">Gastroenterology / Anesthesiology (Cirugía / Medicina preventiva)</option>
+                <option value="gastroenterology-/-anesthesiology">Gastroenterology / Anesthesiology (Gastroenterología / Anestesiología)</option>
     
-                <option value="general-medicine-/-anesthesiology">General Medicine / Anesthesiology (Cirugía vascular / Medicina perioperatoria)</option>
+                <option value="general-medicine-/-anesthesiology">General Medicine / Anesthesiology (Medicina general / Anestesiología)</option>
     
-                <option value="general-medicine-/-bioethics">General Medicine / Bioethics (Cuidados intensivos / Cirugía)</option>
+                <option value="general-medicine-/-bioethics">General Medicine / Bioethics (Medicina general / Bioética)</option>
     
-                <option value="general-medicine/critical-care">General Medicine/Critical Care (Dermatología / Anestesiología)</option>
+                <option value="general-medicine/critical-care">General Medicine/Critical Care (Medicina general / Cuidados críticos)</option>
     
-                <option value="general-medicine/neurology">General Medicine/Neurology (Dermatología / Medicina ambulatoria)</option>
+                <option value="general-medicine/neurology">General Medicine/Neurology (Medicina general / Neurología)</option>
     
-                <option value="general-medicine/nursing">General Medicine/Nursing (Endocrinología / Anestesiología)</option>
+                <option value="general-medicine/nursing">General Medicine/Nursing (Medicina general / Enfermería)</option>
     
-                <option value="general-medicine/post-operative-care">General Medicine/Post-Operative Care (Endocrinología / Medicina interna)</option>
+                <option value="general-medicine/post-operative-care">General Medicine/Post-Operative Care (Medicina general / Cuidados postoperatorios)</option>
     
-                <option value="general-medicine/surgery">General Medicine/Surgery (Enfermería / Cirugía general)</option>
+                <option value="general-medicine/surgery">General Medicine/Surgery (Medicina general / Cirugía)</option>
     
-                <option value="hematology/surgery">Hematology/Surgery (Enfermería / Cirugía menor)</option>
+                <option value="hematology/surgery">Hematology/Surgery (Hematología / Cirugía)</option>
     
-                <option value="hematology/surgical-medicine">Hematology/Surgical Medicine (Enfermería / Cuidados intensivos)</option>
+                <option value="hematology/surgical-medicine">Hematology/Surgical Medicine (Hematología / Medicina quirúrgica)</option>
     
-                <option value="hospital-medicine-/-anesthesiology">Hospital Medicine / Anesthesiology (Enfermería / Medicina hospitalaria)</option>
+                <option value="hospital-medicine-/-anesthesiology">Hospital Medicine / Anesthesiology (Medicina hospitalaria / Anestesiología)</option>
     
-                <option value="hospital-medicine/general-surgery">Hospital Medicine/General Surgery (Enfermería / Medicina postoperatoria)</option>
+                <option value="hospital-medicine/general-surgery">Hospital Medicine/General Surgery (Medicina hospitalaria / Cirugía general)</option>
     
-                <option value="hospital-medicine/surgery">Hospital Medicine/Surgery (Farmacología / Alergología)</option>
+                <option value="hospital-medicine/surgery">Hospital Medicine/Surgery (Medicina hospitalaria / Cirugía)</option>
     
-                <option value="immunology-/-allergology">Immunology / Allergology (Farmacología / Anestesiología)</option>
+                <option value="immunology-/-allergology">Immunology / Allergology (Inmunología / Alergología)</option>
     
-                <option value="intensive-care-/-surgery">Intensive Care / Surgery (Farmacología / Cirugía)</option>
+                <option value="intensive-care-/-surgery">Intensive Care / Surgery (Cuidados intensivos / Cirugía)</option>
     
-                <option value="intensive-care-medicine-/-anesthesiology">Intensive Care Medicine / Anesthesiology (Farmacología / Cirugía ambulatoria)</option>
+                <option value="intensive-care-medicine-/-anesthesiology">Intensive Care Medicine / Anesthesiology (Medicina intensiva / Anestesiología)</option>
     
-                <option value="internal-medicine">Internal Medicine (Farmacología / Cirugía general)</option>
+                <option value="internal-medicine">Internal Medicine (Medicina interna)</option>
     
-                <option value="internal-medicine-/-allergology">Internal Medicine / Allergology (Farmacología / Endoscopía)</option>
+                <option value="internal-medicine-/-allergology">Internal Medicine / Allergology (Medicina interna / Alergología)</option>
     
-                <option value="internal-medicine-/-anesthesiology">Internal Medicine / Anesthesiology (Farmacología / Enfermería)</option>
+                <option value="internal-medicine-/-anesthesiology">Internal Medicine / Anesthesiology (Medicina interna / Anestesiología)</option>
     
-                <option value="internal-medicine-/-critical-care">Internal Medicine / Critical Care (Farmacología / Gastroenterología)</option>
+                <option value="internal-medicine-/-critical-care">Internal Medicine / Critical Care (Medicina interna / Cuidados intensivos)</option>
     
-                <option value="internal-medicine-/-critical-care-medicine">Internal Medicine / Critical Care Medicine (Farmacología / Medicina del dolor)</option>
+                <option value="internal-medicine-/-critical-care-medicine">Internal Medicine / Critical Care Medicine (Medicina interna / Medicina crítica)</option>
     
-                <option value="internal-medicine-/-preoperative">Internal Medicine / Preoperative (Farmacología / Medicina hospitalaria)</option>
+                <option value="internal-medicine-/-preoperative">Internal Medicine / Preoperative (Medicina interna / Preoperatorio)</option>
     
-                <option value="internal-medicine-/-surgery">Internal Medicine / Surgery (Farmacología / Medicina perioperatoria)</option>
+                <option value="internal-medicine-/-surgery">Internal Medicine / Surgery (Medicina interna / Cirugía)</option>
     
-                <option value="legal-medicine-/-bioethics">Legal Medicine / Bioethics (Farmacología / Medicina preoperatoria)</option>
+                <option value="legal-medicine-/-bioethics">Legal Medicine / Bioethics (Medicina legal / Bioética)</option>
     
-                <option value="legal-medicine-/-surgery">Legal Medicine / Surgery (Fisioterapia / Cirugía)</option>
+                <option value="legal-medicine-/-surgery">Legal Medicine / Surgery (Medicina legal / Cirugía)</option>
     
-                <option value="legal-medicine/clinical-safety">Legal Medicine/Clinical Safety (Gastroenterología / Anestesiología)</option>
+                <option value="legal-medicine/clinical-safety">Legal Medicine/Clinical Safety (Medicina legal / Seguridad clínica)</option>
     
-                <option value="medical-emergencies-/-anesthesiology">Medical Emergencies / Anesthesiology (Hematología / Cirugía)</option>
+                <option value="medical-emergencies-/-allergology">Medical emergencies / Allergology (Urgencias médicas / Alergología)</option>
     
-                <option value="medical-emergencies-/-critical-care-medicine">Medical Emergencies / Critical Care Medicine (Hematología / Medicina quirúrgica)</option>
+                <option value="medical-emergencies-/-anesthesiology">Medical Emergencies / Anesthesiology (Urgencias médicas / Anestesiología)</option>
     
-                <option value="medical-emergencies-/-allergology">Medical emergencies / Allergology (Inmunología / Alergología)</option>
+                <option value="medical-emergencies-/-critical-care-medicine">Medical Emergencies / Critical Care Medicine (Urgencias médicas / Medicina crítica)</option>
     
-                <option value="nephrology-/-anesthesiology">Nephrology / Anesthesiology (Medicina ambulatoria / Cirugía menor)</option>
+                <option value="nephrology-/-anesthesiology">Nephrology / Anesthesiology (Nefrología / Anestesiología)</option>
     
-                <option value="neurology">Neurology (Medicina crítica / Anestesiología)</option>
+                <option value="neurology">Neurology (Neurología)</option>
     
-                <option value="neurology-/-anesthesiology">Neurology / Anesthesiology (Medicina crítica / Cirugía mayor)</option>
+                <option value="neurology-/-anesthesiology">Neurology / Anesthesiology (Neurología / Anestesiología)</option>
     
-                <option value="neurology-/-general-medicine">Neurology / General Medicine (Medicina del dolor / Anestesiología)</option>
+                <option value="neurology-/-general-medicine">Neurology / General Medicine (Neurología / Medicina general)</option>
     
-                <option value="neurology-/-hospital-medicine">Neurology / Hospital Medicine (Medicina del dolor / Cirugía)</option>
+                <option value="neurology-/-hospital-medicine">Neurology / Hospital Medicine (Neurología / Medicina hospitalaria)</option>
     
-                <option value="neurology/post-operative-medicine">Neurology/Post-Operative Medicine (Medicina del dolor / Cuidados postoperatorios)</option>
+                <option value="neurology/post-operative-medicine">Neurology/Post-Operative Medicine (Neurología / Medicina postoperatoria)</option>
     
-                <option value="neurosurgery-/-anesthesiology">Neurosurgery / Anesthesiology (Medicina del dolor / Enfermería)</option>
+                <option value="neurosurgery-/-anesthesiology">Neurosurgery / Anesthesiology (Neurocirugía / Anestesiología)</option>
     
-                <option value="nursing-/-hospital-medicine">Nursing / Hospital Medicine (Medicina digestiva / Cirugía)</option>
+                <option value="nursing-/-hospital-medicine">Nursing / Hospital Medicine (Enfermería / Medicina hospitalaria)</option>
     
-                <option value="nursing-/-intensive-care">Nursing / Intensive Care (Medicina digestiva / Cirugía abdominal)</option>
+                <option value="nursing-/-intensive-care">Nursing / Intensive Care (Enfermería / Cuidados intensivos)</option>
     
-                <option value="nursing-/-minor-surgery">Nursing / Minor Surgery (Medicina familiar / Cirugía general)</option>
+                <option value="nursing-/-minor-surgery">Nursing / Minor Surgery (Enfermería / Cirugía menor)</option>
     
-                <option value="nursing/general-surgery">Nursing/General Surgery (Medicina general / Anestesiología)</option>
+                <option value="nursing/general-surgery">Nursing/General Surgery (Enfermería / Cirugía general)</option>
     
-                <option value="nursing/post-operative-medicine">Nursing/Post-Operative Medicine (Medicina general / Bioética)</option>
+                <option value="nursing/post-operative-medicine">Nursing/Post-Operative Medicine (Enfermería / Medicina postoperatoria)</option>
     
-                <option value="nutrition-/-general-surgery">Nutrition / General Surgery (Medicina general / Cirugía)</option>
+                <option value="nutrition-/-general-surgery">Nutrition / General Surgery (Nutrición / Cirugía general)</option>
     
-                <option value="orthopedics-/-physical-medicine">Orthopedics / Physical Medicine (Medicina general / Cuidados críticos)</option>
+                <option value="orthopedics-/-physical-medicine">Orthopedics / Physical Medicine (Ortopedia / Medicina física)</option>
     
-                <option value="pain-medicine-/-anesthesiology">Pain Medicine / Anesthesiology (Medicina general / Cuidados postoperatorios)</option>
+                <option value="pain-medicine-/-anesthesiology">Pain Medicine / Anesthesiology (Medicina del dolor / Anestesiología)</option>
     
-                <option value="pain-medicine-/-nursing">Pain Medicine / Nursing (Medicina general / Enfermería)</option>
+                <option value="pain-medicine-/-nursing">Pain Medicine / Nursing (Medicina del dolor / Enfermería)</option>
     
-                <option value="pain-medicine-/-post-operative-care">Pain Medicine / Post-Operative Care (Medicina general / Neurología)</option>
+                <option value="pain-medicine-/-post-operative-care">Pain Medicine / Post-Operative Care (Medicina del dolor / Cuidados postoperatorios)</option>
     
-                <option value="pain-medicine-/-surgery">Pain Medicine / Surgery (Medicina hospitalaria / Anestesiología)</option>
+                <option value="pain-medicine-/-surgery">Pain Medicine / Surgery (Medicina del dolor / Cirugía)</option>
     
-                <option value="pediatric-anesthesiology">Pediatric Anesthesiology (Medicina hospitalaria / Cirugía)</option>
+                <option value="pediatric-anesthesiology">Pediatric Anesthesiology (Anestesiología pediátrica)</option>
     
-                <option value="pediatric-anesthesiology-/-child-surgery">Pediatric Anesthesiology / Child Surgery (Medicina hospitalaria / Cirugía general)</option>
+                <option value="pediatric-anesthesiology-/-child-surgery">Pediatric Anesthesiology / Child Surgery (Anestesiología pediátrica / Cirugía infantil)</option>
     
-                <option value="pediatric-medicine-/-bioethics">Pediatric Medicine / Bioethics (Medicina intensiva / Anestesiología)</option>
+                <option value="pediatric-medicine-/-bioethics">Pediatric Medicine / Bioethics (Medicina pediátrica / Bioética)</option>
     
-                <option value="pharmacology-/-allergology">Pharmacology / Allergology (Medicina interna)</option>
+                <option value="pharmacology-/-allergology">Pharmacology / Allergology (Farmacología / Alergología)</option>
     
-                <option value="pharmacology-/-anesthesiology">Pharmacology / Anesthesiology (Medicina interna / Alergología)</option>
+                <option value="pharmacology-/-anesthesiology">Pharmacology / Anesthesiology (Farmacología / Anestesiología)</option>
     
-                <option value="pharmacology-/-endoscopy">Pharmacology / Endoscopy (Medicina interna / Anestesiología)</option>
+                <option value="pharmacology-/-endoscopy">Pharmacology / Endoscopy (Farmacología / Endoscopía)</option>
     
-                <option value="pharmacology-/-gastroenterology">Pharmacology / Gastroenterology (Medicina interna / Cirugía)</option>
+                <option value="pharmacology-/-gastroenterology">Pharmacology / Gastroenterology (Farmacología / Gastroenterología)</option>
     
-                <option value="pharmacology-/-general-surgery">Pharmacology / General Surgery (Medicina interna / Cuidados intensivos)</option>
+                <option value="pharmacology-/-general-surgery">Pharmacology / General Surgery (Farmacología / Cirugía general)</option>
     
-                <option value="pharmacology-/-hospital-medicine">Pharmacology / Hospital Medicine (Medicina interna / Medicina crítica)</option>
+                <option value="pharmacology-/-hospital-medicine">Pharmacology / Hospital Medicine (Farmacología / Medicina hospitalaria)</option>
     
-                <option value="pharmacology-/-nursing">Pharmacology / Nursing (Medicina interna / Preoperatorio)</option>
+                <option value="pharmacology-/-nursing">Pharmacology / Nursing (Farmacología / Enfermería)</option>
     
-                <option value="pharmacology-/-outpatient-surgery">Pharmacology / Outpatient Surgery (Medicina legal / Bioética)</option>
+                <option value="pharmacology-/-outpatient-surgery">Pharmacology / Outpatient Surgery (Farmacología / Cirugía ambulatoria)</option>
     
-                <option value="pharmacology-/-pain-medicine">Pharmacology / Pain Medicine (Medicina legal / Cirugía)</option>
+                <option value="pharmacology-/-pain-medicine">Pharmacology / Pain Medicine (Farmacología / Medicina del dolor)</option>
     
-                <option value="pharmacology-/-perioperative-medicine">Pharmacology / Perioperative Medicine (Medicina legal / Seguridad clínica)</option>
+                <option value="pharmacology-/-perioperative-medicine">Pharmacology / Perioperative Medicine (Farmacología / Medicina perioperatoria)</option>
     
-                <option value="pharmacology-/-preoperative-medicine">Pharmacology / Preoperative Medicine (Medicina pediátrica / Bioética)</option>
+                <option value="pharmacology-/-preoperative-medicine">Pharmacology / Preoperative Medicine (Farmacología / Medicina preoperatoria)</option>
     
-                <option value="pharmacology-/-surgery">Pharmacology / Surgery (Medicina preoperatoria / Cirugía general)</option>
+                <option value="pharmacology-/-surgery">Pharmacology / Surgery (Farmacología / Cirugía)</option>
     
-                <option value="physiotherapy-/-surgery">Physiotherapy / Surgery (Medicina quirúrgica / Atención ambulatoria)</option>
+                <option value="physiotherapy-/-surgery">Physiotherapy / Surgery (Fisioterapia / Cirugía)</option>
     
-                <option value="pneumology-/-anesthesiology">Pneumology / Anesthesiology (Medicina quirúrgica / Cuidados intensivos)</option>
+                <option value="pneumology-/-anesthesiology">Pneumology / Anesthesiology (Neumología / Anestesiología)</option>
     
-                <option value="pneumology-/-critical-care-medicine">Pneumology / Critical Care Medicine (Nefrología / Anestesiología)</option>
+                <option value="pneumology-/-critical-care-medicine">Pneumology / Critical Care Medicine (Neumología / Medicina crítica)</option>
     
-                <option value="pneumology-/-general-surgery">Pneumology / General Surgery (Neumología / Anestesiología)</option>
+                <option value="pneumology-/-general-surgery">Pneumology / General Surgery (Neumología / Cirugía general)</option>
     
-                <option value="pneumology-/-intensive-care-medicine">Pneumology / Intensive Care Medicine (Neumología / Cirugía general)</option>
+                <option value="pneumology-/-intensive-care-medicine">Pneumology / Intensive Care Medicine (Neumología / Medicina intensiva)</option>
     
-                <option value="pneumology-/-postoperative-medicine">Pneumology / Postoperative Medicine (Neumología / Medicina crítica)</option>
+                <option value="pneumology-/-postoperative-medicine">Pneumology / Postoperative Medicine (Neumología / Medicina postoperatoria)</option>
     
-                <option value="preoperative-medicine-/-general-surgery">Preoperative Medicine / General Surgery (Neumología / Medicina intensiva)</option>
+                <option value="preoperative-medicine-/-general-surgery">Preoperative Medicine / General Surgery (Medicina preoperatoria / Cirugía general)</option>
     
-                <option value="psychiatry/anesthesiology">Psychiatry/Anesthesiology (Neumología / Medicina postoperatoria)</option>
+                <option value="psychiatry/anesthesiology">Psychiatry/Anesthesiology (Psiquiatría / Anestesiología)</option>
     
-                <option value="surgery-/-anesthesiology">Surgery / Anesthesiology (Neurocirugía / Anestesiología)</option>
+                <option value="surgery-/-anesthesiology">Surgery / Anesthesiology (Cirugía / Anestesiología)</option>
     
-                <option value="surgery-/-gastroenterology">Surgery / Gastroenterology (Neurología)</option>
+                <option value="surgery-/-gastroenterology">Surgery / Gastroenterology (Cirugía / Gastroenterología)</option>
     
-                <option value="surgery-/-general-medicine">Surgery / General Medicine (Neurología / Anestesiología)</option>
+                <option value="surgery-/-general-medicine">Surgery / General Medicine (Cirugía / Medicina general)</option>
     
-                <option value="surgery-/-hospital-medicine">Surgery / Hospital Medicine (Neurología / Medicina general)</option>
+                <option value="surgery-/-hospital-medicine">Surgery / Hospital Medicine (Cirugía / Medicina hospitalaria)</option>
     
-                <option value="surgery/emergency-medicine">Surgery/Emergency Medicine (Neurología / Medicina hospitalaria)</option>
+                <option value="surgery/emergency-medicine">Surgery/Emergency Medicine (Cirugía / Medicina de emergencia)</option>
     
-                <option value="surgery/family-medicine">Surgery/Family Medicine (Neurología / Medicina postoperatoria)</option>
+                <option value="surgery/family-medicine">Surgery/Family Medicine (Cirugía / Medicina familiar)</option>
     
-                <option value="surgery/internal-medicine">Surgery/Internal Medicine (Nutrición / Cirugía general)</option>
+                <option value="surgery/internal-medicine">Surgery/Internal Medicine (Cirugía / Medicina interna)</option>
     
-                <option value="surgery/nursing">Surgery/Nursing (Ortopedia / Medicina física)</option>
+                <option value="surgery/nursing">Surgery/Nursing (Cirugía / Enfermería)</option>
     
-                <option value="surgery/outpatient-medicine">Surgery/Outpatient Medicine (Psicología clínica / Anestesiología)</option>
+                <option value="surgery/outpatient-medicine">Surgery/Outpatient Medicine (Cirugía / Medicina ambulatoria)</option>
     
-                <option value="surgery/preventive-medicine">Surgery/Preventive Medicine (Psicología clínica / Medicina del sueño)</option>
+                <option value="surgery/preventive-medicine">Surgery/Preventive Medicine (Cirugía / Medicina preventiva)</option>
     
-                <option value="surgery/superficial-nursing">Surgery/Superficial Nursing (Psiquiatría / Anestesiología)</option>
+                <option value="surgery/superficial-nursing">Surgery/Superficial Nursing (Cirugía / Enfermería superficial)</option>
     
-                <option value="surgical-medicine-/-critical-care">Surgical Medicine / Critical Care (Urgencias médicas / Alergología)</option>
+                <option value="surgical-medicine-/-critical-care">Surgical Medicine / Critical Care (Medicina quirúrgica / Cuidados intensivos)</option>
     
-                <option value="surgical-medicine/outpatient-care">Surgical Medicine/Outpatient Care (Urgencias médicas / Anestesiología)</option>
+                <option value="surgical-medicine/outpatient-care">Surgical Medicine/Outpatient Care (Medicina quirúrgica / Atención ambulatoria)</option>
     
-                <option value="vascular-surgery-/-perioperative-medicine">Vascular Surgery / Perioperative Medicine (Urgencias médicas / Medicina crítica)</option>
+                <option value="vascular-surgery-/-perioperative-medicine">Vascular Surgery / Perioperative Medicine (Cirugía vascular / Medicina perioperatoria)</option>
     
             </select>
         </div>
@@ -6324,9 +6323,6 @@
             const clearFiltersButton = document.getElementById('clearFiltersButton');
             const dictionaryEntries = document.querySelectorAll('.dictionary-entry');
 
-            // Initial state: all entries are hidden until a filter/search is applied
-            // The CSS 'display: none' for .dictionary-entry already handles this
-
             function applyFilters() {
                 const searchTerm = searchInput.value.toLowerCase();
                 const selectedCategory = categoryFilter.value;
@@ -6334,24 +6330,24 @@
 
                 dictionaryEntries.forEach(entry => {
                     const entryText = entry.textContent.toLowerCase();
-                    const entryCategory = entry.dataset.categoryEn; // get from data-attribute
-                    const entrySpecialty = entry.dataset.specialtyEn; // get from data-attribute
+                    const entryCategory = entry.dataset.categoryEn;
+                    const entrySpecialty = entry.dataset.specialtyEn;
 
                     const matchesSearch = entryText.includes(searchTerm);
                     const matchesCategory = (selectedCategory === 'all' || entryCategory === selectedCategory);
                     const matchesSpecialty = (selectedSpecialty === 'all' || entrySpecialty === selectedSpecialty);
 
                     if (matchesSearch && matchesCategory && matchesSpecialty) {
-                        entry.classList.add('visible'); // Use 'visible' class to show
-                        entry.classList.remove('hidden'); // Ensure 'hidden' is removed
+                        entry.classList.add('visible');
+                        entry.classList.remove('hidden');
                     } else {
-                        entry.classList.add('hidden'); // Use 'hidden' class to hide
-                        entry.classList.remove('visible'); // Ensure 'visible' is removed
+                        entry.classList.add('hidden');
+                        entry.classList.remove('visible');
                     }
                 });
             }
 
-            // Event listeners
+            // Event listeners for changes
             searchInput.addEventListener('keyup', applyFilters);
             categoryFilter.addEventListener('change', applyFilters);
             specialtyFilter.addEventListener('change', applyFilters);
@@ -6363,9 +6359,8 @@
                 applyFilters(); // Re-apply to show all
             });
 
-            // Optional: Initially show all entries if search and filters are empty on load
-            // Or keep them hidden until user interacts (current default behavior).
-            // If you want to show all initially, you can call applyFilters() here:
+            // Initial state (optional, if you want to show all initially on page load)
+            // Uncomment the line below if you want all entries to be visible when the page first loads
             // applyFilters();
         });
     </script>
