@@ -10,64 +10,89 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0; /* Remove default margin */
-            padding: 20px; /* Add padding to body */
+            margin: 0;
+            padding: 20px;
             color: #333;
             background-color: #f4f4f4;
-            display: flex; /* Use flexbox for overall layout */
-            justify-content: center; /* Center the main content wrapper */
-        }
-        .content-wrapper { /* NEW: Main container for two-column layout */
             display: flex;
-            justify-content: space-between; /* Space between main content and sidebar */
-            max-width: 1200px; /* Max width for the entire page content */
+            justify-content: center;
+        }
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
             width: 100%;
-            gap: 20px; /* Space between columns */
+            gap: 20px;
+            align-items: stretch;
         }
-        .main-content { /* NEW: For H1, search, filters, dictionary entries */
-            flex-grow: 1; /* Allow main content to take available space */
-            max-width: 900px; /* Max width for the dictionary content */
-            padding-right: 20px; /* Space from right sidebar */
+        .main-content {
+            flex-grow: 1;
+            max-width: 900px;
         }
-        .alphabetical-sidebar { /* NEW: Right-hand A-Z menu */
-            flex-shrink: 0; /* Don't shrink */
-            width: 80px; /* Fixed width for the sidebar */
+        .alphabetical-sidebar {
+            flex-shrink: 0;
+            width: 120px;
             padding: 15px 5px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky; /* Stick to top when scrolling */
-            top: 20px; /* Distance from top of viewport */
-            align-self: flex-start; /* Align to the start of the cross-axis */
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
             display: flex;
-            flex-direction: column; /* Stack letters vertically */
-            gap: 5px; /* Space between letter links */
+            flex-direction: column;
+            gap: 10px;
         }
-        .alphabetical-sidebar a {
-            display: block; /* Make links block-level for padding */
+        .alphabetical-sidebar h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        .alphabet-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+        .alphabetical-sidebar a,
+        .alphabetical-sidebar .disabled {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-decoration: none;
             color: #007bff;
             font-weight: bold;
-            padding: 3px 0;
-            text-align: center;
-            transition: background-color 0.2s ease;
+            flex-basis: calc(33.33% - 4px);
+            height: 30px;
+            transition: background-color 0.2s ease, color 0.2s ease;
             border-radius: 3px;
+            font-size: 1em;
+            cursor: pointer;
         }
         .alphabetical-sidebar a:hover {
             background-color: #e0e7ff;
         }
-        .alphabetical-sidebar a.active-letter { /* Style for active letter */
+        .alphabetical-sidebar a.active-letter {
             background-color: #007bff;
             color: white;
         }
-        .alphabetical-sidebar .clear-letter-filter { /* Style for 'All' or 'Clear' button */
-            margin-top: 10px;
-            font-size: 0.8em;
-            color: #dc3545;
+        .alphabetical-sidebar .disabled {
+            color: #bbb;
+            cursor: default;
+            font-weight: normal;
+        }
+        .alphabetical-sidebar .clear-letter-filter {
+            margin-top: 15px;
+            font-size: 0.9em;
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 0;
+            border-radius: 5px;
         }
         .alphabetical-sidebar .clear-letter-filter:hover {
-            color: #c82333;
-            background-color: #f8d7da;
+            background-color: #c82333;
         }
 
         h1 {
@@ -81,7 +106,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        h2 { /* This H2 is now used for the main term line */
+        h2 {
             color: #34495e;
             margin-top: 40px;
             margin-bottom: 10px;
@@ -221,8 +246,8 @@
                 padding: 10px;
             }
             .content-wrapper {
-                flex-direction: column; /* Stack columns on small screens */
-                align-items: center; /* Center items when stacked */
+                flex-direction: column;
+                align-items: center;
                 gap: 10px;
             }
             .main-content {
@@ -230,23 +255,98 @@
                 padding-right: 0;
             }
             .alphabetical-sidebar {
-                width: 100%; /* Full width when stacked */
-                position: static; /* Remove sticky positioning */
+                width: 100%;
+                position: static;
                 flex-direction: row; /* Layout letters horizontally */
-                flex-wrap: wrap; /* Allow letters to wrap */
-                justify-content: center; /* Center letters horizontally */
-                gap: 8px; /* Adjust gap for horizontal layout */
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
                 padding: 10px;
             }
-            .alphabetical-sidebar a {
-                padding: 5px 8px;
-                font-size: 1em;
+            .alphabetical-sidebar h3 {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
             }
+            .alphabetical-sidebar a,
+            .alphabetical-sidebar .disabled {
+                 flex-basis: auto; /* Let content determine width */
+                 padding: 5px 8px;
+                 font-size: 1em;
+             }
         }
     </style>
 </head>
 <body>
-    <div class="content-wrapper"> <div class="main-content"> <h1>Medical Spanish Dictionary</h1>
+    <div class="content-wrapper"> <div class="alphabetical-sidebar"> <h3>Alphabetical Index</h3>
+            <a href="#" class="alphabet-link active-letter" data-letter="all">All</a>
+
+            <div class="alphabet-row group-1">
+    
+                <a href="#" class="alphabet-link" data-letter="a">A</a>
+            
+                <a href="#" class="alphabet-link" data-letter="b">B</a>
+            
+                <a href="#" class="alphabet-link" data-letter="c">C</a>
+            
+                <a href="#" class="alphabet-link" data-letter="d">D</a>
+            
+                <a href="#" class="alphabet-link" data-letter="e">E</a>
+            
+                <a href="#" class="alphabet-link" data-letter="f">F</a>
+            
+                <a href="#" class="alphabet-link" data-letter="g">G</a>
+            
+                <a href="#" class="alphabet-link" data-letter="h">H</a>
+            
+                <a href="#" class="alphabet-link" data-letter="i">I</a>
+            
+            </div>
+    
+            <div class="alphabet-row group-2">
+    
+                <span class="alphabet-link disabled" data-letter="j">J</span>
+            
+                <a href="#" class="alphabet-link" data-letter="k">K</a>
+            
+                <a href="#" class="alphabet-link" data-letter="l">L</a>
+            
+                <a href="#" class="alphabet-link" data-letter="m">M</a>
+            
+                <a href="#" class="alphabet-link" data-letter="n">N</a>
+            
+                <a href="#" class="alphabet-link" data-letter="o">O</a>
+            
+                <a href="#" class="alphabet-link" data-letter="p">P</a>
+            
+                <a href="#" class="alphabet-link" data-letter="q">Q</a>
+            
+                <a href="#" class="alphabet-link" data-letter="r">R</a>
+            
+            </div>
+    
+            <div class="alphabet-row group-3">
+    
+                <a href="#" class="alphabet-link" data-letter="s">S</a>
+            
+                <a href="#" class="alphabet-link" data-letter="t">T</a>
+            
+                <a href="#" class="alphabet-link" data-letter="u">U</a>
+            
+                <a href="#" class="alphabet-link" data-letter="v">V</a>
+            
+                <a href="#" class="alphabet-link" data-letter="w">W</a>
+            
+                <span class="alphabet-link disabled" data-letter="x">X</span>
+            
+                <span class="alphabet-link disabled" data-letter="y">Y</span>
+            
+                <span class="alphabet-link disabled" data-letter="z">Z</span>
+            
+            </div>
+    
+            <a href="#" class="alphabet-link clear-letter-filter" data-letter="all">Clear Letter</a>
+        </div> <div class="main-content"> <h1>Medical Spanish Dictionary</h1>
 
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search terms, categories, or specialties...">
@@ -581,7 +681,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="internal-medicine"
-                 data-first-letter="A">
+                 data-first-letter="C">
                 <h2>chronic exhaustion (SP. agotamiento crónico) <span class="gender-display">m.</span> <span class="pronunciation">a.go.taˈmjen.to ˈkɾo.ni.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -598,7 +698,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="allergology"
-                 data-first-letter="A">
+                 data-first-letter="K">
                 <h2>known drug allergies (SP. alergias medicamentosas conocidas) <span class="gender-display">f. pl.</span> <span class="pronunciation">a.leɾˈxjas me.di.ka.men.toˈsas ko.noˈsi.ðas</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -615,7 +715,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>preoperative anxiety (SP. ansiedad preoperatoria) <span class="gender-display">f.</span> <span class="pronunciation">an.sjeˈðað pre.o.pe.raˈto.rja</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -632,7 +732,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="cardiology"
-                 data-first-letter="A">
+                 data-first-letter="F">
                 <h2>family history of heart disease (SP. antecedentes familiares de enfermedad cardíaca) <span class="gender-display">m. pl.</span> <span class="pronunciation">an.te.seˈðen.tes fa.miˈlja.res de em.fer.meˈðað karˈði.a.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -649,7 +749,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="S">
                 <h2>sleep apnea (SP. apnea del sueño) <span class="gender-display">f.</span> <span class="pronunciation">apˈne.a del ˈswe.ɲo</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -666,7 +766,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="cardiology"
-                 data-first-letter="A">
+                 data-first-letter="C">
                 <h2>cardiac arrhythmia (SP. arritmia cardíaca) <span class="gender-display">f.</span> <span class="pronunciation">aˈrit.mja karˈði.a.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -683,7 +783,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="B">
                 <h2>bronchial asthma (SP. asma bronquial) <span class="gender-display">f.</span> <span class="pronunciation">ˈas.ma bɾonˈkjal</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -700,7 +800,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="neurology"
-                 data-first-letter="C">
+                 data-first-letter="T">
                 <h2>tension headache (SP. cefalea tensional) <span class="gender-display">f.</span> <span class="pronunciation">se.faˈle.a ten.si.oˈnal</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -717,7 +817,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology"
-                 data-first-letter="C">
+                 data-first-letter="E">
                 <h2>excessive alcohol consumption (SP. consumo de alcohol excesivo) <span class="gender-display">m.</span> <span class="pronunciation">konˈsu.mo ðe al.ˈkol ek.seˈsi.vo</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -751,7 +851,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="gastroenterology-/-anesthesiology"
-                 data-first-letter="D">
+                 data-first-letter="H">
                 <h2>hepatic dysfunction (SP. disfunción hepática) <span class="gender-display">f.</span> <span class="pronunciation">dis.funˈsjon eˈpa.ti.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -768,7 +868,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="surgery-/-general-medicine"
-                 data-first-letter="D">
+                 data-first-letter="A">
                 <h2>acute abdominal pain (SP. dolor abdominal agudo) <span class="gender-display">m.</span> <span class="pronunciation">doˈlor ab.do.miˈnal aˈgu.ðo</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -785,7 +885,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="neurology"
-                 data-first-letter="D">
+                 data-first-letter="S">
                 <h2>severe headache (SP. dolor de cabeza severo) <span class="gender-display">m.</span> <span class="pronunciation">doˈlor ðe kaˈβe.sa seˈβe.ro</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -802,7 +902,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="orthopedics-/-physical-medicine"
-                 data-first-letter="D">
+                 data-first-letter="I">
                 <h2>intense lower back pain (SP. dolor lumbar intenso) <span class="gender-display">m.</span> <span class="pronunciation">doˈlor lumˈβaɾ inˈten.so</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -819,7 +919,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="cardiology-/-pulmonology"
-                 data-first-letter="D">
+                 data-first-letter="S">
                 <h2>stabbing chest pain (SP. dolor torácico punzante) <span class="gender-display">m.</span> <span class="pronunciation">doˈlor toˈɾa.si.ko punˈsan.te</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -836,7 +936,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="cardiology"
-                 data-first-letter="E">
+                 data-first-letter="I">
                 <h2>ischemic heart disease (SP. enfermedad cardíaca isquémica) <span class="gender-display">f.</span> <span class="pronunciation">em.fer.meˈðað karˈði.a.ka isˈke.mi.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -853,7 +953,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="E">
+                 data-first-letter="C">
                 <h2>chronic obstructive pulmonary disease (COPD) (SP. enfermedad pulmonar obstructiva crónica) <span class="gender-display">f.</span> <span class="pronunciation">em.fer.meˈðað pul.moˈnar ob.strukˈti.βa ˈkɾo.ni.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -887,7 +987,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology"
-                 data-first-letter="E">
+                 data-first-letter="P">
                 <h2>perioperative chills (SP. escalofríos perioperatorios) <span class="gender-display">m. pl.</span> <span class="pronunciation">es.ka.loˈfɾi.os pe.ɾi.o.pe.raˈto.ɾjos</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -904,7 +1004,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="clinical-psychology-/-anesthesiology"
-                 data-first-letter="E">
+                 data-first-letter="A">
                 <h2>anticipatory stress (SP. estrés anticipatorio) <span class="gender-display">m.</span> <span class="pronunciation">esˈtɾes an.ti.si.paˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -921,7 +1021,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="internal-medicine-/-anesthesiology"
-                 data-first-letter="F">
+                 data-first-letter="M">
                 <h2>moderate fever (SP. fiebre moderada) <span class="gender-display">f.</span> <span class="pronunciation">ˈfje.βɾe mo.ðeˈɾa.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -938,7 +1038,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="internal-medicine-/-anesthesiology"
-                 data-first-letter="F">
+                 data-first-letter="P">
                 <h2>persistent fever (SP. fiebre persistente) <span class="gender-display">f.</span> <span class="pronunciation">ˈfje.βɾe peɾ.sisˈten.te</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -955,7 +1055,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="endocrinology-/-anesthesiology"
-                 data-first-letter="H">
+                 data-first-letter="C">
                 <h2>chronic hyperlipidemia (SP. hiperlipidemia crónica) <span class="gender-display">f.</span> <span class="pronunciation">i.per.li.piˈðe.mi.a ˈkɾo.ni.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -972,7 +1072,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology"
-                 data-first-letter="H">
+                 data-first-letter="A">
                 <h2>arterial hypertension (SP. hipertensión arterial) <span class="gender-display">f.</span> <span class="pronunciation">i.per.tenˈsjon aɾ.teˈɾjal</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -989,7 +1089,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology-/-clinical-psychology"
-                 data-first-letter="I">
+                 data-first-letter="P">
                 <h2>pre-surgical insomnia (SP. insomnio prequirúrgico) <span class="gender-display">m.</span> <span class="pronunciation">inˈsom.njo pɾe.kiˈɾuɾ.xi.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1006,7 +1106,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="I">
+                 data-first-letter="C">
                 <h2>congestive heart failure (SP. insuficiencia cardíaca congestiva) <span class="gender-display">f.</span> <span class="pronunciation">in.su.fi.siˈen.sja karˈði.a.ka kon.xesˈti.βa</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1023,7 +1123,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="nephrology-/-anesthesiology"
-                 data-first-letter="I">
+                 data-first-letter="C">
                 <h2>chronic kidney failure (SP. insuficiencia renal crónica) <span class="gender-display">f.</span> <span class="pronunciation">in.su.fi.siˈen.sja reˈnal ˈkɾo.ni.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1040,7 +1140,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="neurology-/-general-medicine"
-                 data-first-letter="L">
+                 data-first-letter="N">
                 <h2>near fainting (lipothymia) (SP. lipotimia) <span class="gender-display">f.</span> <span class="pronunciation">li.poˈti.mja</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1074,7 +1174,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="general-medicine/neurology"
-                 data-first-letter="M">
+                 data-first-letter="S">
                 <h2>sudden dizziness (SP. mareos repentinos) <span class="gender-display">m. pl.</span> <span class="pronunciation">maˈɾe.os re.penˈti.nos</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1091,7 +1191,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="neurology"
-                 data-first-letter="M">
+                 data-first-letter="F">
                 <h2>frequent migraines (SP. migrañas frecuentes) <span class="gender-display">f. pl.</span> <span class="pronunciation">miˈɣɾa.njas fɾeˈkwen.tes</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1108,7 +1208,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="gastroenterology-/-anesthesiology"
-                 data-first-letter="N">
+                 data-first-letter="R">
                 <h2>repeated nausea and vomiting (SP. náuseas y vómitos repetidos) <span class="gender-display">m. pl.</span> <span class="pronunciation">ˈnau.se.as i ˈβo.mi.tos re.peˈti.ðos</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1125,7 +1225,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology-/-endocrinology"
-                 data-first-letter="O">
+                 data-first-letter="M">
                 <h2>morbid obesity (SP. obesidad mórbida) <span class="gender-display">f.</span> <span class="pronunciation">o.be.siˈðað ˈmoɾ.βiða</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1142,7 +1242,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="cardiology"
-                 data-first-letter="P">
+                 data-first-letter="I">
                 <h2>irregular palpitations (SP. palpitaciones irregulares) <span class="gender-display">f. pl.</span> <span class="pronunciation">pal.pi.taˈsjones i.re.ɣuˈla.res</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1159,7 +1259,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="P">
+                 data-first-letter="R">
                 <h2>rapid palpitations (SP. palpitaciones rápidas) <span class="gender-display">f. pl.</span> <span class="pronunciation">pal.pi.taˈsjones ˈra.pi.ðas</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1176,7 +1276,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="gastroenterology-/-anesthesiology"
-                 data-first-letter="R">
+                 data-first-letter="P">
                 <h2>persistent gastroesophageal reflux (SP. reflujo gastroesofágico persistente) <span class="gender-display">m.</span> <span class="pronunciation">reˈflu.xo ɣas.tɾo.e.soˈfa.xi.ko peɾ.sisˈten.te</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1193,7 +1293,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="endocrinology-/-internal-medicine"
-                 data-first-letter="S">
+                 data-first-letter="E">
                 <h2>excessive nighttime thirst (SP. sed excesiva nocturna) <span class="gender-display">f.</span> <span class="pronunciation">seð ek.seˈsi.βa nokˈtuɾ.na</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1210,7 +1310,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="general-medicine-/-anesthesiology"
-                 data-first-letter="S">
+                 data-first-letter="F">
                 <h2>feeling of faintness (SP. sensación de desmayo) <span class="gender-display">f.</span> <span class="pronunciation">sen.saˈsjón ðe desˈma.ʝo</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1227,7 +1327,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="neurology-/-anesthesiology"
-                 data-first-letter="S">
+                 data-first-letter="V">
                 <h2>vasovagal syncope (SP. síncope vasovagal) <span class="gender-display">m.</span> <span class="pronunciation">ˈsin.ko.pe βa.so.βaˈɣal</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1244,7 +1344,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="clinical-psychology-/-sleep-medicine"
-                 data-first-letter="S">
+                 data-first-letter="R">
                 <h2>restless sleep (SP. sueño inquieto) <span class="gender-display">m.</span> <span class="pronunciation">ˈswe.ɲo inˈkje.to</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1261,7 +1361,7 @@
             <div class="dictionary-entry"
                  data-category-en="symptoms-and-history"
                  data-specialty-en="anesthesiology-/-preventive-medicine"
-                 data-first-letter="T">
+                 data-first-letter="A">
                 <h2>active smoking (SP. tabaquismo activo) <span class="gender-display">m.</span> <span class="pronunciation">ta.baˈkjs.mo akˈti.βo</span></h2>
                 <p><strong>Category (EN)</strong>: Symptoms and history</p>
                 <p><strong>Category (SP)</strong>: Síntomas y antecedentes</p>
@@ -1346,7 +1446,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-internal-medicine"
-                 data-first-letter="A">
+                 data-first-letter="D">
                 <h2>drug allergy (SP. alergia a medicamentos) <span class="gender-display">f.</span> <span class="pronunciation">a.leɾˈxia a me.di.kaˈmen.tos</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1363,7 +1463,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-pain-medicine"
-                 data-first-letter="A">
+                 data-first-letter="O">
                 <h2>opioid allergy (SP. alergia a opiáceos) <span class="gender-display">f.</span> <span class="pronunciation">a.leɾˈxia a oˈpja.se.os</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1380,7 +1480,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-internal-medicine"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>penicillin allergy (SP. alergia a penicilina) <span class="gender-display">f.</span> <span class="pronunciation">a.leɾˈxia a pe.ni.siˈli.na</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1397,7 +1497,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-occupational-medicine"
-                 data-first-letter="A">
+                 data-first-letter="L">
                 <h2>latex allergy (latex gloves) (SP. alergia al látex (guantes de látex)) <span class="gender-display">f.</span> <span class="pronunciation">a.leɾˈxia al ˈla.teks</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1414,7 +1514,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-surgery"
-                 data-first-letter="A">
+                 data-first-letter="I">
                 <h2>iodine allergy (povidone) (SP. alergia al yodo (povidona)) <span class="gender-display">f.</span> <span class="pronunciation">a.leɾˈxia al ˈʝo.ðo (po.βiˈðo.na)</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1431,7 +1531,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-nutrition"
-                 data-first-letter="A">
+                 data-first-letter="K">
                 <h2>known food allergy (shellfish, nuts) (SP. alergia alimentaria conocida (mariscos, frutos secos)) <span class="gender-display">f.</span> <span class="pronunciation">a.leɾˈxia a.li.menˈta.ɾja ko.noˈsi.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1448,7 +1548,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="immunology-/-allergology"
-                 data-first-letter="A">
+                 data-first-letter="E">
                 <h2>elevated IgE antibodies (SP. anticuerpos IgE elevados) <span class="gender-display">m.</span> <span class="pronunciation">an.ti.ˈkweɾ.pos i.ɣe e.leˈβa.ðos</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1465,7 +1565,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="medical-emergencies-/-allergology"
-                 data-first-letter="E">
+                 data-first-letter="G">
                 <h2>glottic edema (angioneurotic edema) (SP. edema de glotis (edema angioneurótico)) <span class="gender-display">f.</span> <span class="pronunciation">eˈðe.ma ðe ˈɣlo.tis (eˈðe.ma aŋ.xjo.neuˈɾo.ti.ko)</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1499,7 +1599,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="internal-medicine-/-allergology"
-                 data-first-letter="I">
+                 data-first-letter="D">
                 <h2>drug intolerance (SP. intolerancia a medicamentos) <span class="gender-display">f.</span> <span class="pronunciation">in.to.leˈɾan.sja a me.di.kaˈmen.tos</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1516,7 +1616,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-anesthesiology"
-                 data-first-letter="P">
+                 data-first-letter="S">
                 <h2>skin test for anesthetic allergy (SP. prueba cutánea de alergia a anestésicos) <span class="gender-display">f.</span> <span class="pronunciation">ˈpɾwe.βa kuˈta.ne.a ðe a.leɾˈxia a a.nesˈte.si.kos</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1533,7 +1633,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-anesthesiology"
-                 data-first-letter="R">
+                 data-first-letter="A">
                 <h2>allergic reactions to anesthetic drugs (SP. reacciones alérgicas a los fármacos anestésicos) <span class="gender-display">f. pl.</span> <span class="pronunciation">ɾeaˈk.sjo.nes aˈleɾ.xi.kas a los ˈfaɾ.ma.kos a.nesˈte.si.kos</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1550,7 +1650,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-anesthesiology"
-                 data-first-letter="S">
+                 data-first-letter="E">
                 <h2>exaggerated sensitivity to anesthetics (SP. sensibilidad exagerada a los anestésicos) <span class="gender-display">f.</span> <span class="pronunciation">sen.si.βi.liˈðað ek.sa.xeˈɾa.ða a los a.nesˈte.si.kos</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1567,7 +1667,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="medical-emergencies-/-allergology"
-                 data-first-letter="S">
+                 data-first-letter="A">
                 <h2>anaphylactic shock (SP. shock anafiláctico) <span class="gender-display">m.</span> <span class="pronunciation">ʃok a.na.fiˈlak.ti.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1584,7 +1684,7 @@
             <div class="dictionary-entry"
                  data-category-en="allergies-and-reactions"
                  data-specialty-en="allergology-/-dermatology"
-                 data-first-letter="S">
+                 data-first-letter="A">
                 <h2>allergy symptoms (hives, itching) (SP. síntomas de alergia (urticaria, prurito)) <span class="gender-display">m. pl.</span> <span class="pronunciation">ˈsin.to.mas ðe aˈleɾ.xja (uɾ.tiˈka.ɾja, pɾuˈɾi.to)</span></h2>
                 <p><strong>Category (EN)</strong>: Allergies and reactions</p>
                 <p><strong>Category (SP)</strong>: Alergias y reacciones</p>
@@ -1618,7 +1718,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="bioethics-/-legal-medicine"
-                 data-first-letter="A">
+                 data-first-letter="V">
                 <h2>voluntary acceptance by the patient (SP. aceptación voluntaria del paciente) <span class="gender-display">f.</span> <span class="pronunciation">a.sep.taˈsjon βo.lunˈta.ɾja ðel paˈsjente</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1652,7 +1752,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="bioethics-/-legal-medicine"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>patient autonomy (SP. autonomía del paciente) <span class="gender-display">f.</span> <span class="pronunciation">au.to.noˈmi.a ðel paˈsjente</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1669,7 +1769,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="bioethics/general-medicine"
-                 data-first-letter="B">
+                 data-first-letter="E">
                 <h2>expected benefits (SP. beneficios esperados) <span class="gender-display">m. pl.</span> <span class="pronunciation">be.neˈfi.sjos es.peˈɾa.ðos</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1686,7 +1786,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="bioethics-/-legal-medicine"
-                 data-first-letter="C">
+                 data-first-letter="W">
                 <h2>written consent from the patient (SP. consentimiento escrito del paciente) <span class="gender-display">m.</span> <span class="pronunciation">kon.sen.tiˈmien.to esˈkɾi.to ðel paˈsjente</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1703,7 +1803,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="anesthesiology-/-bioethics"
-                 data-first-letter="C">
+                 data-first-letter="I">
                 <h2>informed consent for anesthesia (SP. consentimiento informado para anestesia) <span class="gender-display">m.</span> <span class="pronunciation">kon.sen.tiˈmjento in.forˈma.ðo ˈpa.ɾa a.nesˈte.sja</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1720,7 +1820,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="pediatric-medicine-/-bioethics"
-                 data-first-letter="C">
+                 data-first-letter="P">
                 <h2>parental consent (for minors) (SP. consentimiento parental (para menores)) <span class="gender-display">m.</span> <span class="pronunciation">kon.sen.tiˈmjento pa.ɾenˈtal (ˈpa.ɾa meˈno.ɾes)</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1737,7 +1837,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="bioethics-/-legal-medicine"
-                 data-first-letter="D">
+                 data-first-letter="R">
                 <h2>rights of the informed patient (SP. derechos del paciente informado) <span class="gender-display">m. pl.</span> <span class="pronunciation">deˈɾe.tʃos ðel paˈsjente in.forˈma.ðo</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1754,7 +1854,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="anesthesiology-/-legal-medicine"
-                 data-first-letter="D">
+                 data-first-letter="A">
                 <h2>anesthetic consent document (SP. documento de consentimiento anestésico) <span class="gender-display">m.</span> <span class="pronunciation">do.kuˈmen.to ðe kon.sen.tiˈmjento a.nesˈte.si.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1788,7 +1888,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="legal-medicine-/-surgery"
-                 data-first-letter="F">
+                 data-first-letter="S">
                 <h2>surgical consent signature (SP. firma de consentimiento quirúrgico) <span class="gender-display">f.</span> <span class="pronunciation">ˈfiɾ.ma ðe kon.sen.tiˈmjento kiˈɾuɾ.xi.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1805,7 +1905,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="bioethics-/-legal-medicine"
-                 data-first-letter="F">
+                 data-first-letter="A">
                 <h2>adult patient signature (SP. firma del paciente adulto) <span class="gender-display">f.</span> <span class="pronunciation">ˈfiɾ.ma ðel paˈsjente aˈðul.to</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1822,7 +1922,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="general-medicine-/-bioethics"
-                 data-first-letter="I">
+                 data-first-letter="C">
                 <h2>comprehensible information for the patient (SP. información comprensible para el paciente) <span class="gender-display">f.</span> <span class="pronunciation">in.for.maˈsjón kom.pɾenˈsi.βle ˈpa.ɾa el paˈsjente</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1839,7 +1939,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="bioethics-/-legal-medicine"
-                 data-first-letter="P">
+                 data-first-letter="Q">
                 <h2>questions resolved before signing (SP. preguntas resueltas antes de firmar) <span class="gender-display">f. pl.</span> <span class="pronunciation">pɾeˈɣun.tas reˈswel.tas ˈan.tes ðe fiɾˈmaɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1873,7 +1973,7 @@
             <div class="dictionary-entry"
                  data-category-en="informed-consent"
                  data-specialty-en="anesthesiology-/-bioethics"
-                 data-first-letter="R">
+                 data-first-letter="K">
                 <h2>known risks of anesthesia (SP. riesgos conocidos de la anestesia) <span class="gender-display">m. pl.</span> <span class="pronunciation">ˈrjes.kos ko.noˈsi.ðos ðe la a.nesˈte.sja</span></h2>
                 <p><strong>Category (EN)</strong>: Informed Consent</p>
                 <p><strong>Category (SP)</strong>: Consentimiento informado</p>
@@ -1890,7 +1990,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="neurology-/-anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="C">
                 <h2>cerebrovascular accident (stroke) (SP. accidente cerebrovascular (ictus)) <span class="gender-display">m.</span> <span class="pronunciation">a.ksiden.te se.ɾe.bɾo.βas.kuˈlaɾ (ˈik.tus)</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -1907,7 +2007,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="anesthesiology/critical-care-medicine"
-                 data-first-letter="A">
+                 data-first-letter="G">
                 <h2>gastric content aspiration (SP. aspiración de contenido gástrico) <span class="gender-display">f.</span> <span class="pronunciation">as.pi.ɾaˈsjon ðe kon.teniˈðo ˈɣas.tɾi.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -1924,7 +2024,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="B">
+                 data-first-letter="S">
                 <h2>severe bradycardia (SP. bradicardia severa) <span class="gender-display">f.</span> <span class="pronunciation">bɾa.ði.ˈkaɾ.dja se.ˈβe.ɾa</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -1941,7 +2041,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="B">
+                 data-first-letter="P">
                 <h2>persistent bronchospasm (SP. broncoespasmo persistente) <span class="gender-display">m.</span> <span class="pronunciation">bɾon.ko.esˈpas.mo peɾ.sisˈten.te</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -1958,7 +2058,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="C">
+                 data-first-letter="I">
                 <h2>intraoperative cardiovascular complication (SP. complicación cardiovascular intraoperatoria) <span class="gender-display">f.</span> <span class="pronunciation">kom.pli.kaˈsjon kaɾ.di.o.βas.kuˈlaɾ in.tɾa.o.pe.ɾaˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -1975,7 +2075,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="neurology-/-anesthesiology"
-                 data-first-letter="C">
+                 data-first-letter="N">
                 <h2>neurological complication (neurological damage) (SP. complicación neurológica (daño neurológico)) <span class="gender-display">f.</span> <span class="pronunciation">kom.pli.kaˈsjon neu.roˈlo.xi.ka (ˈda.ɲo neu.roˈlo.xi.ko)</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -1992,7 +2092,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="nephrology-/-anesthesiology"
-                 data-first-letter="C">
+                 data-first-letter="R">
                 <h2>renal complication (acute kidney failure) (SP. complicación renal (insuficiencia renal aguda)) <span class="gender-display">f.</span> <span class="pronunciation">kom.pli.kaˈsjon reˈnal (in.su.fi.siˈen.sja reˈnal aˈɣu.ða)</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2009,7 +2109,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="C">
+                 data-first-letter="A">
                 <h2>acute respiratory complication (SP. complicación respiratoria aguda) <span class="gender-display">f.</span> <span class="pronunciation">kom.pli.kaˈsjon res.pi.ɾaˈto.ɾja aˈɣu.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2026,7 +2126,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="psychiatry/anesthesiology"
-                 data-first-letter="D">
+                 data-first-letter="P">
                 <h2>postanesthetic delirium (SP. delirio postanestésico) <span class="gender-display">m.</span> <span class="pronunciation">deˈli.ɾjo pos.tan.esˈte.si.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2043,7 +2143,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="D">
+                 data-first-letter="P">
                 <h2>postoperative respiratory depression (SP. depresión respiratoria postoperatoria) <span class="gender-display">f.</span> <span class="pronunciation">de.pɾeˈsjon res.pi.ɾaˈto.ɾja pos.to.peɾaˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2060,7 +2160,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="allergology-/-medical-emergencies"
-                 data-first-letter="E">
+                 data-first-letter="A">
                 <h2>angioneurotic edema (SP. edema angioneurótico) <span class="gender-display">m.</span> <span class="pronunciation">eˈðe.ma aŋ.xjo.neuˈɾo.ti.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2077,7 +2177,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="E">
+                 data-first-letter="A">
                 <h2>acute pulmonary edema (SP. edema pulmonar agudo) <span class="gender-display">m.</span> <span class="pronunciation">eˈðe.ma pul.moˈnar aˈɣu.ðo</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2094,7 +2194,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-critical-care-medicine"
-                 data-first-letter="E">
+                 data-first-letter="P">
                 <h2>pulmonary embolism (SP. embolia pulmonar) <span class="gender-display">f.</span> <span class="pronunciation">em.ˈβo.lja pul.moˈnar</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2111,7 +2211,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="legal-medicine/clinical-safety"
-                 data-first-letter="E">
+                 data-first-letter="U">
                 <h2>unintentional medical error (SP. error médico inadvertido) <span class="gender-display">m.</span> <span class="pronunciation">eˈror ˈme.ði.ko i.nad.βeɾˈti.ðo</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2128,7 +2228,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="anesthesiology-/-clinical-engineering"
-                 data-first-letter="F">
+                 data-first-letter="A">
                 <h2>anesthetic equipment failure (SP. falla de equipo anestésico) <span class="gender-display">f.</span> <span class="pronunciation">ˈfa.ʎa ðe eˈki.po a.nesˈte.si.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2145,7 +2245,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="critical-care-medicine-/-anesthesiology"
-                 data-first-letter="F">
+                 data-first-letter="M">
                 <h2>multiple organ failure (SP. fallo multiorgánico) <span class="gender-display">m.</span> <span class="pronunciation">ˈfa.ʎo mul.ti.oɾˈɣa.ni.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2162,7 +2262,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="anesthesiology-/-genetic-medicine"
-                 data-first-letter="F">
+                 data-first-letter="M">
                 <h2>malignant hyperthermia due to anesthesia (SP. fiebre maligna por anestesia) <span class="gender-display">f.</span> <span class="pronunciation">ˈfje.βɾe maˈliɣ.na poɾ a.nesˈte.sja</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2179,7 +2279,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="neurosurgery-/-anesthesiology"
-                 data-first-letter="H">
+                 data-first-letter="E">
                 <h2>epidural hematoma (SP. hematoma epidural) <span class="gender-display">m.</span> <span class="pronunciation">e.maˈto.ma e.piˈðu.ɾal</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2196,7 +2296,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="surgery/emergency-medicine"
-                 data-first-letter="H">
+                 data-first-letter="M">
                 <h2>massive hemorrhage (SP. hemorragia masiva) <span class="gender-display">f.</span> <span class="pronunciation">he.moˈɾa.xja maˈsi.βa</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2213,7 +2313,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="H">
+                 data-first-letter="A">
                 <h2>acute arterial hypertension (SP. hipertensión arterial aguda) <span class="gender-display">f.</span> <span class="pronunciation">i.peɾ.tenˈsjón aɾ.teˈɾjal aˈɣu.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2230,7 +2330,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="H">
+                 data-first-letter="S">
                 <h2>severe arterial hypotension (SP. hipotensión arterial severa) <span class="gender-display">f.</span> <span class="pronunciation">i.po.tenˈsjon aɾ.teˈɾjal seˈβe.ɾa</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2247,7 +2347,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="critical-care-medicine-/-anesthesiology"
-                 data-first-letter="H">
+                 data-first-letter="A">
                 <h2>acute hypoxia (cerebral hypoxia) (SP. hipoxia aguda (hipoxia cerebral)) <span class="gender-display">f.</span> <span class="pronunciation">iˈpok.sja aˈɣu.ða (iˈpok.sja se.ɾeˈβɾal)</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2264,7 +2364,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="I">
+                 data-first-letter="A">
                 <h2>acute myocardial infarction (heart attack) (SP. infarto agudo de miocardio (ataque cardíaco)) <span class="gender-display">m.</span> <span class="pronunciation">inˈfaɾ.to aˈɣu.ðo ðe mjoˈkaɾ.ðjo (aˈta.ke kaɾˈði.a.ko)</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2281,7 +2381,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="surgery-/-general-medicine"
-                 data-first-letter="I">
+                 data-first-letter="P">
                 <h2>postoperative infection (SP. infección postoperatoria) <span class="gender-display">f.</span> <span class="pronunciation">in.fekˈsjon pos.to.pe.raˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2298,7 +2398,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="gastroenterology-/-anesthesiology"
-                 data-first-letter="I">
+                 data-first-letter="A">
                 <h2>acute hepatic failure (SP. insuficiencia hepática aguda) <span class="gender-display">f.</span> <span class="pronunciation">in.su.fi.siˈen.sja eˈpa.ti.ka aˈɣu.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2315,7 +2415,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="I">
+                 data-first-letter="M">
                 <h2>myocardial ischemia (SP. isquemia miocárdica) <span class="gender-display">f.</span> <span class="pronunciation">isˈke.mja mjoˈkaɾ.ði.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2349,7 +2449,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="neurology-/-anesthesiology"
-                 data-first-letter="L">
+                 data-first-letter="S">
                 <h2>spinal cord injury due to compression (SP. lesión medular por compresión) <span class="gender-display">f.</span> <span class="pronunciation">leˈsjon me.duˈlaɾ poɾ kom.pɾeˈsjon</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2366,7 +2466,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pneumology-/-critical-care-medicine"
-                 data-first-letter="N">
+                 data-first-letter="A">
                 <h2>aspiration pneumonia (SP. neumonía aspirativa) <span class="gender-display">f.</span> <span class="pronunciation">neu.moˈni.a as.pi.ɾaˈti.βa</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2383,7 +2483,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="N">
+                 data-first-letter="P">
                 <h2>postoperative pneumonia (hospital-acquired pneumonia) (SP. neumonía posoperatoria (neumonía hospitalaria)) <span class="gender-display">f.</span> <span class="pronunciation">neu.moˈni.a pos.to.pe.ɾaˈto.ɾja (neu.moˈni.a os.pi.taˈla.ɾja)</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2400,7 +2500,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="critical-care-medicine-/-anesthesiology"
-                 data-first-letter="P">
+                 data-first-letter="C">
                 <h2>cardiorespiratory arrest (SP. parada cardiorrespiratoria) <span class="gender-display">f.</span> <span class="pronunciation">paˈɾa.ða kaɾ.ðjo.res.pi.ɾaˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2417,7 +2517,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-medical-emergencies"
-                 data-first-letter="P">
+                 data-first-letter="S">
                 <h2>sudden cardiac arrest (SP. paro cardíaco súbito) <span class="gender-display">m.</span> <span class="pronunciation">ˈpa.ɾo kaɾˈði.a.ko ˈsu.βi.to</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2434,7 +2534,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="P">
+                 data-first-letter="R">
                 <h2>respiratory arrest (SP. paro respiratorio) <span class="gender-display">m.</span> <span class="pronunciation">ˈpa.ɾo res.pi.ɾaˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2451,7 +2551,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="allergology-/-critical-care-medicine"
-                 data-first-letter="R">
+                 data-first-letter="G">
                 <h2>generalized anaphylactic reaction (SP. reacción anafiláctica generalizada) <span class="gender-display">f.</span> <span class="pronunciation">re.akˈsjon a.na.fiˈlak.ti.ka xe.ne.ɾa.liˈza.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2468,7 +2568,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="pharmacology-/-anesthesiology"
-                 data-first-letter="R">
+                 data-first-letter="S">
                 <h2>severe adverse reactions (SP. reacciones adversas graves) <span class="gender-display">f. pl.</span> <span class="pronunciation">re.akˈsjo.nes adˈβeɾ.sas ˈɣɾa.βes</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2485,7 +2585,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="allergology-/-anesthesiology"
-                 data-first-letter="R">
+                 data-first-letter="A">
                 <h2>allergic reactions to anesthetic drugs (SP. reacciones alérgicas a los fármacos anestésicos) <span class="gender-display">f. pl.</span> <span class="pronunciation">re.akˈsjo.nes aˈleɾ.xi.kas a los ˈfaɾ.ma.kos a.nesˈte.si.kos</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2502,7 +2602,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="anesthesiology"
-                 data-first-letter="R">
+                 data-first-letter="A">
                 <h2>anesthetic risk (SP. riesgo anestésico) <span class="gender-display">m.</span> <span class="pronunciation">ˈrjes.ɣo a.nesˈte.si.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2519,7 +2619,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="surgery-/-general-medicine"
-                 data-first-letter="R">
+                 data-first-letter="S">
                 <h2>surgical risk (SP. riesgo quirúrgico) <span class="gender-display">m.</span> <span class="pronunciation">ˈrjes.ɣo kiˈɾuɾ.xi.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2536,7 +2636,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="anesthesiology/recovery-medicine"
-                 data-first-letter="S">
+                 data-first-letter="P">
                 <h2>prolonged emergence from anesthesia (SP. salida de anestesia prolongada) <span class="gender-display">f.</span> <span class="pronunciation">saˈli.ða ðe a.nesˈte.sja pɾo.lonˈɣa.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2570,7 +2670,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="medical-emergencies-/-allergology"
-                 data-first-letter="S">
+                 data-first-letter="A">
                 <h2>anaphylactic shock (SP. shock anafiláctico) <span class="gender-display">m.</span> <span class="pronunciation">ʃok a.na.fiˈlak.ti.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2587,7 +2687,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="T">
+                 data-first-letter="S">
                 <h2>supraventricular tachycardia (SP. taquicardia supraventricular) <span class="gender-display">f.</span> <span class="pronunciation">ta.kiˈkaɾ.dja su.pɾa.βen.tɾi.kuˈlaɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2604,7 +2704,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="cardiology-/-critical-care-medicine"
-                 data-first-letter="T">
+                 data-first-letter="V">
                 <h2>ventricular tachycardia (SP. taquicardia ventricular) <span class="gender-display">f.</span> <span class="pronunciation">ta.kiˈkaɾ.dja βen.tɾi.kuˈlaɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2621,7 +2721,7 @@
             <div class="dictionary-entry"
                  data-category-en="risks-and-complications"
                  data-specialty-en="surgery/internal-medicine"
-                 data-first-letter="T">
+                 data-first-letter="D">
                 <h2>deep vein thrombosis (DVT) (SP. trombosis venosa profunda) <span class="gender-display">f.</span> <span class="pronunciation">tɾomˈβo.sis βeˈno.sa pɾoˈfun.da</span></h2>
                 <p><strong>Category (EN)</strong>: Risks and complications</p>
                 <p><strong>Category (SP)</strong>: Riesgos y complicaciones</p>
@@ -2689,7 +2789,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology-/-obstetrics"
-                 data-first-letter="A">
+                 data-first-letter="L">
                 <h2>lumbar epidural anesthesia (SP. anestesia epidural lumbar) <span class="gender-display">f.</span> <span class="pronunciation">a.nesˈte.sja e.piˈðu.ɾal lumˈβaɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2706,7 +2806,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology/thoracic-surgery"
-                 data-first-letter="A">
+                 data-first-letter="T">
                 <h2>thoracic epidural anesthesia (SP. anestesia epidural torácica) <span class="gender-display">f.</span> <span class="pronunciation">a.nesˈte.sja e.piˈðu.ɾal toˈɾa.si.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2723,7 +2823,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="dermatology-/-anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="T">
                 <h2>topical local anesthesia (e.g. lidocaine on the skin) (SP. anestesia local tópico (ej. lidocaína en la piel)) <span class="gender-display">f.</span> <span class="pronunciation">a.nesˈte.sja loˈkal ˈto.pi.ko (li.ðo.kaˈi.na en la ˈpjel)</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2740,7 +2840,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery-/-general-medicine"
-                 data-first-letter="A">
+                 data-first-letter="S">
                 <h2>skin antisepsis with povidone-iodine (SP. antisepsia de la piel con povidona yodada) <span class="gender-display">f.</span> <span class="pronunciation">an.tiˈsep.sja ðe la ˈpjel kon po.βiˈðo.na ʝoˈða.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2757,7 +2857,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="C">
                 <h2>controlled endotracheal suctioning (SP. aspiración endotraqueal controlada) <span class="gender-display">f.</span> <span class="pronunciation">as.pi.ɾaˈsjon en.do.tɾaˈke.al kon.tɾoˈla.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2774,7 +2874,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="internal-medicine-/-anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="C">
                 <h2>cardiac and pulmonary auscultation (SP. auscultación cardíaca y pulmonar) <span class="gender-display">f.</span> <span class="pronunciation">aus.kul.taˈsjon kaɾˈði.a.ka i pul.moˈnar</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2791,7 +2891,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology-/-orthopedic-surgery"
-                 data-first-letter="B">
+                 data-first-letter="P">
                 <h2>peripheral nerve block (e.g. brachial plexus block) (SP. bloqueo nervioso periférico (ej. bloqueo plexo braquial)) <span class="gender-display">m.</span> <span class="pronunciation">ˈblo.ke.o neɾ.βjo.so pe.ɾiˈfe.ɾi.ko (ˈblo.ke.o ˈplek.so ˈβɾa.kjal)</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2808,7 +2908,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology-/-surgery"
-                 data-first-letter="B">
+                 data-first-letter="S">
                 <h2>spinal blocks (e.g., spinal anesthesia) (SP. bloqueos espinales (p. ej. bloqueo raquídeo)) <span class="gender-display">m. pl.</span> <span class="pronunciation">ˈblo.ke.os es.piˈna.les (bloˈke.o raˈki.ðe.o)</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2825,7 +2925,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="internal-medicine-/-critical-care"
-                 data-first-letter="C">
+                 data-first-letter="P">
                 <h2>placement of central venous catheter (SP. canalización de catéter venoso central) <span class="gender-display">f.</span> <span class="pronunciation">ka.na.li.saˈsjon ðe kaˈte.teɾ βeˈno.so senˈtɾal</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2842,7 +2942,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="general-medicine/nursing"
-                 data-first-letter="C">
+                 data-first-letter="P">
                 <h2>placement of peripheral intravenous line (SP. canalización de vía intravenosa periférica) <span class="gender-display">f.</span> <span class="pronunciation">ka.na.li.saˈsjon ðe ˈβi.a in.tɾa.βeˈno.sa pe.ɾiˈfe.ɾi.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2859,7 +2959,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery-/-general-medicine"
-                 data-first-letter="C">
+                 data-first-letter="M">
                 <h2>major open surgery (SP. cirugía abierta mayor) <span class="gender-display">f.</span> <span class="pronunciation">si.ɾuˈxi.a aˈβjeɾ.ta maˈʝoɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2876,7 +2976,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery/family-medicine"
-                 data-first-letter="C">
+                 data-first-letter="S">
                 <h2>scheduled outpatient surgery (SP. cirugía ambulatoria programada) <span class="gender-display">f.</span> <span class="pronunciation">si.ɾuˈxi.a am.bu.laˈto.ɾja pɾo.ɣɾaˈma.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2893,7 +2993,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery/emergency-medicine"
-                 data-first-letter="C">
+                 data-first-letter="E">
                 <h2>emergency surgery (SP. cirugía de urgencia) <span class="gender-display">f.</span> <span class="pronunciation">si.ɾuˈxi.a ðe uɾˈxen.sja</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2910,7 +3010,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery-/-gastroenterology"
-                 data-first-letter="C">
+                 data-first-letter="A">
                 <h2>abdominal laparoscopic surgery (SP. cirugía laparoscópica abdominal) <span class="gender-display">f.</span> <span class="pronunciation">si.ɾuˈxi.a la.pa.ɾosˈko.pi.ka ab.do.miˈnal</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2927,7 +3027,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology/pain-medicine"
-                 data-first-letter="C">
+                 data-first-letter="E">
                 <h2>epidural catheter placement (SP. colocación de catéter epidural) <span class="gender-display">f.</span> <span class="pronunciation">ko.lo.kaˈsjon ðe kaˈte.teɾ e.piˈðu.ɾal</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2944,7 +3044,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology-/-surgery"
-                 data-first-letter="C">
+                 data-first-letter="S">
                 <h2>spinal catheter placement (SP. colocación de catéter raquídeo) <span class="gender-display">f.</span> <span class="pronunciation">ko.lo.kaˈsjon ðe kaˈte.teɾ raˈki.ðe.o</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2961,7 +3061,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="pneumology-/-critical-care-medicine"
-                 data-first-letter="D">
+                 data-first-letter="N">
                 <h2>non-invasive ventilation device (SP. dispositivo de ventilación no invasiva) <span class="gender-display">m.</span> <span class="pronunciation">dis.po.siˈti.βo ðe βen.ti.laˈsjon no in.βaˈsi.βa</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2978,7 +3078,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery-/-general-medicine"
-                 data-first-letter="D">
+                 data-first-letter="S">
                 <h2>surgical drainage (SP. drenaje quirúrgico) <span class="gender-display">m.</span> <span class="pronunciation">dreˈna.xe kiˈɾuɾ.xi.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -2995,7 +3095,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="internal-medicine-/-anesthesiology"
-                 data-first-letter="E">
+                 data-first-letter="F">
                 <h2>full preoperative evaluation (SP. evaluación preoperatoria completa) <span class="gender-display">f.</span> <span class="pronunciation">e.βa.lwaˈsjon pɾe.o.pe.ɾaˈto.ɾja komˈple.ta</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3012,7 +3112,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="general-medicine-/-anesthesiology"
-                 data-first-letter="E">
+                 data-first-letter="P">
                 <h2>pre-surgical physical exam (SP. examen físico prequirúrgico) <span class="gender-display">m.</span> <span class="pronunciation">eɣ.saˈmen ˈfi.si.ko pɾe.kiˈɾuɾ.xi.ko</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3029,7 +3129,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery/superficial-nursing"
-                 data-first-letter="H">
+                 data-first-letter="S">
                 <h2>sterile surgical wound (SP. herida quirúrgica estéril) <span class="gender-display">f.</span> <span class="pronunciation">eˈɾi.ða kiˈɾuɾ.xi.ka esˈte.ɾil</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3080,7 +3180,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="general-medicine/critical-care"
-                 data-first-letter="I">
+                 data-first-letter="C">
                 <h2>continuous IV fluid infusion (SP. infusión intravenosa continua de fluidos) <span class="gender-display">f.</span> <span class="pronunciation">in.fuˈsjon in.tɾa.βeˈno.sa konˈti.nwa ðe ˈflwi.ðos</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3097,7 +3197,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology/critical-care-medicine"
-                 data-first-letter="I">
+                 data-first-letter="O">
                 <h2>orotracheal intubation (orotracheal breathing tube) (SP. intubación orotraqueal (tubo respiratorio orotraqueal)) <span class="gender-display">f.</span> <span class="pronunciation">in.tu.βaˈsjon o.ɾo.tɾaˈke.al (ˈtu.βo res.pi.ɾaˈto.ɾjo o.ɾo.tɾaˈke.al)</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3131,7 +3231,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="dermatology-/-outpatient-medicine"
-                 data-first-letter="I">
+                 data-first-letter="S">
                 <h2>subcutaneous injection of local anesthetic (SP. inyección subcutánea de anestésico local) <span class="gender-display">f.</span> <span class="pronunciation">in.jeˈk.sjon sub.kuˈta.ne.a ðe a.nesˈte.si.ko loˈkal</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3148,7 +3248,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="anesthesiology-/-medical-emergencies"
-                 data-first-letter="M">
+                 data-first-letter="S">
                 <h2>supraglottic laryngeal mask (SP. mascarilla laríngea supraglótica) <span class="gender-display">f.</span> <span class="pronunciation">mas.kaˈɾi.ʝa laˈɾin.xja su.pɾaˈɣlo.ti.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3165,7 +3265,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="internal-medicine-/-anesthesiology"
-                 data-first-letter="M">
+                 data-first-letter="C">
                 <h2>continuous blood pressure monitoring (SP. monitorización continua de la presión arterial) <span class="gender-display">f.</span> <span class="pronunciation">mo.ni.to.ɾi.saˈsjon konˈti.nwa ðe la pɾeˈsjon aɾ.teˈɾjal</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3182,7 +3282,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="M">
+                 data-first-letter="O">
                 <h2>oxygen saturation monitoring (SP. monitorización de la saturación de oxígeno) <span class="gender-display">f.</span> <span class="pronunciation">mo.ni.to.ɾi.saˈsjon ðe la sa.tu.ɾaˈsjon ðe ok.siˈxe.no</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3199,7 +3299,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="M">
+                 data-first-letter="E">
                 <h2>ECG monitoring (electrocardiogram) (SP. monitorización ECG (electrocardiograma)) <span class="gender-display">f.</span> <span class="pronunciation">mo.ni.to.ɾi.saˈsjon e.seˈxe (e.lek.tɾo.kaɾ.djoˈɣɾa.ma)</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3216,7 +3316,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="general-medicine/surgery"
-                 data-first-letter="P">
+                 data-first-letter="A">
                 <h2>abdominal palpation (SP. palpación abdominal) <span class="gender-display">f.</span> <span class="pronunciation">pal.paˈsjon ab.do.miˈnal</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3250,7 +3350,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="surgery/nursing"
-                 data-first-letter="P">
+                 data-first-letter="S">
                 <h2>sterile surgical preparation (SP. preparación quirúrgica estéril) <span class="gender-display">f.</span> <span class="pronunciation">pɾe.pa.ɾaˈsjon kiˈɾuɾ.xi.ka esˈte.ɾil</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3267,7 +3367,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="internal-medicine-/-critical-care"
-                 data-first-letter="P">
+                 data-first-letter="A">
                 <h2>arterial puncture (arterial line placement) (SP. punción arterial (canalización arterial)) <span class="gender-display">f.</span> <span class="pronunciation">punˈsjon aɾ.teˈɾjal (ka.na.li.saˈsjon aɾ.teˈɾjal)</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3284,7 +3384,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="neurology-/-hospital-medicine"
-                 data-first-letter="P">
+                 data-first-letter="D">
                 <h2>diagnostic lumbar puncture (SP. punción lumbar diagnóstica) <span class="gender-display">f.</span> <span class="pronunciation">punˈsjon lumˈβar diaɣˈnos.ti.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3301,7 +3401,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="medical-emergencies-/-critical-care-medicine"
-                 data-first-letter="R">
+                 data-first-letter="I">
                 <h2>immediate cardiopulmonary resuscitation (SP. reanimación cardiopulmonar inmediata) <span class="gender-display">f.</span> <span class="pronunciation">ɾea.ni.maˈsjon kaɾ.ði.o.pul.moˈnaɾ im.meˈði.a.ta</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3335,7 +3435,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="pharmacology-/-outpatient-surgery"
-                 data-first-letter="S">
+                 data-first-letter="C">
                 <h2>conscious sedation for minor procedures (SP. sedación consciente para procedimientos menores) <span class="gender-display">f.</span> <span class="pronunciation">se.ðaˈsjon konˈsjente ˈpa.ɾa pɾo.se.ðiˈmjentos meˈno.res</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3352,7 +3452,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="pharmacology-/-endoscopy"
-                 data-first-letter="S">
+                 data-first-letter="M">
                 <h2>moderate intravenous sedation (SP. sedación intravenosa moderada) <span class="gender-display">f.</span> <span class="pronunciation">se.ðaˈsjon in.tɾa.βeˈno.sa mo.ðeˈɾa.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3369,7 +3469,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="general-medicine/nursing"
-                 data-first-letter="T">
+                 data-first-letter="R">
                 <h2>recording of vital signs (SP. toma de constantes vitales) <span class="gender-display">f.</span> <span class="pronunciation">ˈto.ma ðe konsˈtan.tes βiˈta.les</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3386,7 +3486,7 @@
             <div class="dictionary-entry"
                  data-category-en="procedures-and-monitoring"
                  data-specialty-en="pneumology-/-critical-care-medicine"
-                 data-first-letter="V">
+                 data-first-letter="I">
                 <h2>invasive mechanical ventilation with ventilator (SP. ventilación mecánica invasiva con respirador) <span class="gender-display">f.</span> <span class="pronunciation">βen.ti.laˈsjon meˈka.ni.ka in.βaˈsi.βa kon res.pi.ɾaˈðoɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
                 <p><strong>Category (SP)</strong>: Procedimientos y seguimiento</p>
@@ -3403,7 +3503,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology/critical-care-medicine"
-                 data-first-letter="A">
+                 data-first-letter="I">
                 <h2>intravenous general anesthetic (propofol) (SP. anestésico general intravenoso (propofol)) <span class="gender-display">m.</span> <span class="pronunciation">a.nesˈte.si.ko xe.neˈɾal in.tɾa.βeˈno.so (pɾo.poˈfol)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3420,7 +3520,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology-/-surgery"
-                 data-first-letter="A">
+                 data-first-letter="I">
                 <h2>inhaled general anesthetic (sevoflurane, isoflurane) (SP. anestésico general inhalado (sevoflurano, isoflurano)) <span class="gender-display">m.</span> <span class="pronunciation">a.nesˈte.si.ko xe.neˈɾal i.naˈla.ðo (se.βo.fluˈɾa.no, i.so.fluˈɾa.no)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3437,7 +3537,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="ambulatory-medicine-/-minor-surgery"
-                 data-first-letter="A">
+                 data-first-letter="L">
                 <h2>local anesthetic (lidocaine, bupivacaine) (SP. anestésico local (lidocaína, bupivacaína)) <span class="gender-display">m.</span> <span class="pronunciation">a.nesˈte.si.ko loˈkal (li.ðo.kaˈi.na, βu.pi.βaˈka.i.na)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3556,7 +3656,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pharmacology-/-preoperative-medicine"
-                 data-first-letter="E">
+                 data-first-letter="S">
                 <h2>scopolamine IV (SP. escopolamina IV) <span class="gender-display">f.</span> <span class="pronunciation">es.ko.po.laˈmi.na i.βe</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3658,7 +3758,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pharmacology-/-pain-medicine"
-                 data-first-letter="I">
+                 data-first-letter="O">
                 <h2>oral or IV ibuprofen (SP. ibuprofeno oral o IV) <span class="gender-display">m.</span> <span class="pronunciation">i.βu.pɾoˈfe.no oˈɾal o i.βe</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3709,7 +3809,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology-/-surgery"
-                 data-first-letter="R">
+                 data-first-letter="M">
                 <h2>muscle relaxant (SP. relaxante muscular (relajante muscular)) <span class="gender-display">m.</span> <span class="pronunciation">re.laˈxan.te mus.kuˈlaɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3726,7 +3826,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pharmacology-/-pain-medicine"
-                 data-first-letter="A">
+                 data-first-letter="N">
                 <h2>non-opioid analgesic (SP. analgésico no opioide) <span class="gender-display">m.</span> <span class="pronunciation">a.nalˈxe.si.ko no o.pjoˈi.ðe</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3743,7 +3843,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology/pain-medicine"
-                 data-first-letter="A">
+                 data-first-letter="S">
                 <h2>strong opioid analgesic (SP. analgésico opioide fuerte) <span class="gender-display">m.</span> <span class="pronunciation">a.nalˈxe.si.ko o.pjoˈi.ðe ˈfweɾ.te</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3760,7 +3860,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="surgery/preventive-medicine"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>prophylactic intravenous antibiotic (SP. antibiótico profiláctico intravenoso) <span class="gender-display">m.</span> <span class="pronunciation">an.ti.βjoˈti.ko pɾo.fiˈlak.ti.ko in.tɾa.βeˈno.so</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3777,7 +3877,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pharmacology-/-gastroenterology"
-                 data-first-letter="B">
+                 data-first-letter="H">
                 <h2>H2 blocker (ranitidine IV) (SP. bloqueador H2 (ranitidina IV)) <span class="gender-display">m.</span> <span class="pronunciation">blo.keˈa.ðoɾ ˈa.tʃe ˈdos (ɾa.ni.tiˈði.na i.βe)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3794,7 +3894,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="hospital-medicine-/-anesthesiology"
-                 data-first-letter="S">
+                 data-first-letter="0">
                 <h2>0.9% isotonic saline solution (SP. solución salina isotónica 0.9%) <span class="gender-display">f.</span> <span class="pronunciation">so.luˈsjon saˈli.na i.soˈto.ni.ka ˈseɾo punˈto nue.βe poɾ ˈsjen.to</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3811,7 +3911,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="surgical-medicine-/-critical-care"
-                 data-first-letter="S">
+                 data-first-letter="R">
                 <h2>Ringer’s lactate solution (SP. solución de Ringer lactato) <span class="gender-display">f.</span> <span class="pronunciation">so.luˈsjon ðe ˈrin.ɣeɾ lakˈta.to</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3828,7 +3928,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="critical-care-medicine-/-anesthesiology"
-                 data-first-letter="S">
+                 data-first-letter="T">
                 <h2>transfused whole blood (SP. sangre total transfundida) <span class="gender-display">f.</span> <span class="pronunciation">ˈsan.ɡɾe toˈtal tɾans.funˈdi.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3845,7 +3945,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="hematology/surgery"
-                 data-first-letter="C">
+                 data-first-letter="P">
                 <h2>packed red blood cells (SP. concentrado de glóbulos rojos) <span class="gender-display">m.</span> <span class="pronunciation">kon.senˈtɾa.ðo ðe ˈɣlo.βu.los ˈro.xos</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3862,7 +3962,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="intensive-care-medicine-/-anesthesiology"
-                 data-first-letter="P">
+                 data-first-letter="F">
                 <h2>fresh frozen plasma (SP. plasma fresco congelado) <span class="gender-display">m.</span> <span class="pronunciation">ˈplas.ma ˈfɾes.ko kon.xeˈla.ðo</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3879,7 +3979,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="hematology/surgical-medicine"
-                 data-first-letter="H">
+                 data-first-letter="P">
                 <h2>platelet blood derivatives (SP. hemoderivados de plaquetas) <span class="gender-display">m. pl.</span> <span class="pronunciation">e.mo.de.ɾiˈβa.ðos ðe plaˈke.tas</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3896,7 +3996,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="vascular-surgery-/-perioperative-medicine"
-                 data-first-letter="A">
+                 data-first-letter="I">
                 <h2>intravenous anticoagulant (heparin) (SP. anticoagulante IV (heparina)) <span class="gender-display">m.</span> <span class="pronunciation">an.ti.kwa.ɣuˈlan.te i.βe (e.paˈɾi.na)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3913,7 +4013,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="critical-care-medicine-/-anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="V">
                 <h2>vasoactive agents (dopamine, norepinephrine) (SP. agentes vasoactivos (dopamina, noradrenalina)) <span class="gender-display">m. pl.</span> <span class="pronunciation">aˈxen.tes βa.so.akˈti.βos (do.paˈmi.na, no.ɾa.dɾe.naˈli.na)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3930,7 +4030,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology-/-nephrology"
-                 data-first-letter="D">
+                 data-first-letter="I">
                 <h2>IV diuretic (furosemide) (SP. diurético IV (furosemida)) <span class="gender-display">f.</span> <span class="pronunciation">djuˈɾe.ti.ko i.βe (fu.ɾo.seˈmi.ða)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3947,7 +4047,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="B">
+                 data-first-letter="I">
                 <h2>IV beta blocker (esmolol) (SP. betabloqueante IV (esmolol)) <span class="gender-display">m.</span> <span class="pronunciation">ˈbe.ta blo.keˈan.te i.βe (es.moˈlol)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3964,7 +4064,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="cardiology/perioperative-medicine"
-                 data-first-letter="B">
+                 data-first-letter="I">
                 <h2>IV calcium channel blocker (verapamil) (SP. bloqueador de canales de calcio IV (verapamilo)) <span class="gender-display">m.</span> <span class="pronunciation">blo.keˈa.ðoɾ ðe kaˈna.les ðe ˈkal.sjo i.βe (βe.ɾa.paˈmi.lo)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3981,7 +4081,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pediatric-anesthesiology"
-                 data-first-letter="A">
+                 data-first-letter="I">
                 <h2>intravenous pediatric anesthetic (SP. anestésico pediátrico endovenoso) <span class="gender-display">m.</span> <span class="pronunciation">a.nesˈte.si.ko pe.diˈa.tɾi.ko en.do.βeˈno.so</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -3998,7 +4098,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pediatric-anesthesiology-/-child-surgery"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>pediatric inhaled anesthetic (SP. anestésico pediátrico inhalatorio) <span class="gender-display">m.</span> <span class="pronunciation">a.nesˈte.si.ko pe.diˈa.tɾi.ko i.na.laˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4015,7 +4115,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pain-medicine-/-post-operative-care"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>patient-controlled analgesia (PCA) (SP. analgesia controlada por el paciente (PCA)) <span class="gender-display">f.</span> <span class="pronunciation">a.nalˈxe.sja kon.tɾoˈla.ða poɾ el paˈsjente (pe.seˈa)</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4032,7 +4132,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology/pain-medicine"
-                 data-first-letter="A">
+                 data-first-letter="C">
                 <h2>continuous epidural analgesia (SP. analgesia epidural continua) <span class="gender-display">f.</span> <span class="pronunciation">a.nalˈxe.sja e.piˈðu.ɾal konˈti.nwa</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4049,7 +4149,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="surgery-/-hospital-medicine"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>postoperative IV antimicrobial (SP. antimicrobiano IV posoperatorio) <span class="gender-display">m.</span> <span class="pronunciation">an.ti.mi.kɾoˈβja.no i.βe pos.o.pe.ɾaˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4066,7 +4166,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="pneumology-/-postoperative-medicine"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>postoperative oral cough suppressant (SP. antitusivo oral postoperatorio) <span class="gender-display">m.</span> <span class="pronunciation">an.ti.tuˈsi.βo oˈɾal pos.o.pe.ɾaˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4083,7 +4183,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="general-medicine/post-operative-care"
-                 data-first-letter="A">
+                 data-first-letter="O">
                 <h2>oral antidiarrheal (SP. antidiarreico oral) <span class="gender-display">m.</span> <span class="pronunciation">an.ti.djaˈre.i.ko oˈɾal</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4100,7 +4200,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology/preoperative-medicine"
-                 data-first-letter="S">
+                 data-first-letter="O">
                 <h2>oral preanesthetic sedative (SP. sedante preanestésico oral) <span class="gender-display">m.</span> <span class="pronunciation">seˈðan.te pɾe.a.nesˈte.si.ko oˈɾal</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4117,7 +4217,7 @@
             <div class="dictionary-entry"
                  data-category-en="anesthetic-medications"
                  data-specialty-en="anesthesiology/preoperative-medicine"
-                 data-first-letter="S">
+                 data-first-letter="I">
                 <h2>intravenous preanesthetic sedative (SP. sedante preanestésico IV) <span class="gender-display">m.</span> <span class="pronunciation">seˈðan.te pɾe.a.nesˈte.si.ko i.βe</span></h2>
                 <p><strong>Category (EN)</strong>: Anesthetic medications</p>
                 <p><strong>Category (SP)</strong>: Medicamentos anestésicos</p>
@@ -4134,7 +4234,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="anesthesiology-/-nursing"
-                 data-first-letter="O">
+                 data-first-letter="C">
                 <h2>continuous postanesthetic observation (SP. observación postanestésica continua) <span class="gender-display">f.</span> <span class="pronunciation">ob.ser.βaˈsjon pos.ta.nesˈte.si.ka konˈti.nwa</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4151,7 +4251,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="anesthesiology-/-hospital-medicine"
-                 data-first-letter="S">
+                 data-first-letter="A">
                 <h2>anesthetic recovery room (SP. sala de recuperación anestésica) <span class="gender-display">f.</span> <span class="pronunciation">ˈsa.la ðe re.ku.pe.ɾaˈsjon a.nesˈte.si.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4168,7 +4268,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="critical-care-medicine/major-surgery"
-                 data-first-letter="U">
+                 data-first-letter="I">
                 <h2>intensive care unit (ICU) (SP. unidad de cuidados intensivos (UCI)) <span class="gender-display">f.</span> <span class="pronunciation">u.niˈðað ðe kwiˈða.ðos in.tenˈsi.βos (u.seˈi)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4185,7 +4285,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="general-medicine/nursing"
-                 data-first-letter="C">
+                 data-first-letter="P">
                 <h2>postoperative vital signs monitoring (SP. control de signos vitales posoperatorios) <span class="gender-display">m.</span> <span class="pronunciation">konˈtɾol ðe ˈsiɣ.nos βiˈta.les pos.o.pe.ɾaˈto.ɾjos</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4202,7 +4302,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="cardiology-/-anesthesiology"
-                 data-first-letter="C">
+                 data-first-letter="P">
                 <h2>post-surgical blood pressure control (SP. control de la tensión arterial posquirúrgica) <span class="gender-display">m.</span> <span class="pronunciation">konˈtɾol ðe la tenˈsjon aɾ.teˈɾjal pos.kiˈɾuɾ.xi.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4219,7 +4319,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="cardiology-/-nursing"
-                 data-first-letter="M">
+                 data-first-letter="H">
                 <h2>heart rate monitoring (SP. monitorización de la frecuencia cardíaca) <span class="gender-display">f.</span> <span class="pronunciation">mo.ni.to.ɾi.saˈsjon ðe la fɾe.kwɛnˈsja kaɾˈðja.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4236,7 +4336,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pneumology-/-postoperative-medicine"
-                 data-first-letter="M">
+                 data-first-letter="O">
                 <h2>oxygen saturation monitor (SP. monitor de saturación de oxígeno) <span class="gender-display">m.</span> <span class="pronunciation">mo.niˈtoɾ ðe sa.tu.ɾaˈsjon ðe ok.siˈxe.no</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4253,7 +4353,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pain-medicine-/-nursing"
-                 data-first-letter="E">
+                 data-first-letter="P">
                 <h2>pain level assessment (SP. evaluación del nivel de dolor) <span class="gender-display">f.</span> <span class="pronunciation">e.βa.lwaˈsjon ðel niˈβel ðe ðoˈloɾ</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4270,7 +4370,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pain-medicine-/-surgery"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>patient-controlled analgesia (PCA) (SP. analgesia controlada por el paciente (PCA)) <span class="gender-display">f.</span> <span class="pronunciation">a.nalˈxe.sja kon.tɾoˈla.ða poɾ el paˈsjente (pe.seˈa)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4287,7 +4387,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="anesthesiology/pain-medicine"
-                 data-first-letter="A">
+                 data-first-letter="P">
                 <h2>postoperative epidural analgesia (SP. analgesia epidural postoperatoria) <span class="gender-display">f.</span> <span class="pronunciation">a.nalˈxe.sja e.piˈðu.ɾal pos.o.pe.ɾaˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4304,7 +4404,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pain-medicine-/-surgery"
-                 data-first-letter="A">
+                 data-first-letter="R">
                 <h2>rescue oral analgesia (SP. analgesia oral de rescate) <span class="gender-display">f.</span> <span class="pronunciation">a.nalˈxe.sja oˈɾal ðe resˈka.te</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4321,7 +4421,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="hospital-medicine/general-surgery"
-                 data-first-letter="R">
+                 data-first-letter="P">
                 <h2>progressive oral rehydration (SP. rehidratación oral progresiva) <span class="gender-display">f.</span> <span class="pronunciation">re.i.dɾa.taˈsjon oˈɾal pɾo.ɣɾeˈsi.βa</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4338,7 +4438,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="intensive-care-/-surgery"
-                 data-first-letter="R">
+                 data-first-letter="I">
                 <h2>intravenous rehydration if needed (SP. rehidratación intravenosa en caso necesario) <span class="gender-display">f.</span> <span class="pronunciation">re.i.dɾa.taˈsjon in.tɾa.βeˈno.sa en ˈka.so ne.seˈsa.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4355,7 +4455,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="digestive-medicine-/-abdominal-surgery"
-                 data-first-letter="D">
+                 data-first-letter="I">
                 <h2>initial liquid diet (SP. dieta líquida inicial) <span class="gender-display">f.</span> <span class="pronunciation">ˈdje.ta ˈli.ki.ða i.ni.siˈal</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4372,7 +4472,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="nutrition-/-general-surgery"
-                 data-first-letter="D">
+                 data-first-letter="P">
                 <h2>postoperative soft diet (SP. dieta blanda postoperatoria) <span class="gender-display">f.</span> <span class="pronunciation">ˈdje.ta ˈβlan.da pos.o.pe.ɾaˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4389,7 +4489,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="physiotherapy-/-surgery"
-                 data-first-letter="M">
+                 data-first-letter="E">
                 <h2>early mobilization (assisted ambulation) (SP. movilización temprana (levantarse con ayuda)) <span class="gender-display">f.</span> <span class="pronunciation">mo.βi.li.saˈsjon temˈpɾa.na (le.βanˈtaɾ.se kon aˈʝu.ða)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4406,7 +4506,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pneumology-/-postoperative-medicine"
-                 data-first-letter="F">
+                 data-first-letter="R">
                 <h2>respiratory therapy (incentive spirometry) (SP. fisioterapia respiratoria (ejercicios con espirómetro)) <span class="gender-display">f.</span> <span class="pronunciation">fi.sjo.teˈɾa.pja res.pi.ɾaˈto.ɾja (e.xeɾˈsi.sjos kon es.piˈɾo.me.tɾo)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4423,7 +4523,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="hematology/surgery"
-                 data-first-letter="P">
+                 data-first-letter="T">
                 <h2>thromboembolic prophylaxis (compression stockings, heparin) (SP. profilaxis tromboembólica (medias, heparina)) <span class="gender-display">f.</span> <span class="pronunciation">pɾo.fiˈlak.sis tɾom.bo.emˈβo.li.ka (ˈme.djas, e.paˈɾi.na)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4440,7 +4540,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="nursing/general-surgery"
-                 data-first-letter="C">
+                 data-first-letter="S">
                 <h2>surgical wound care and monitoring (SP. curación y vigilancia de herida quirúrgica) <span class="gender-display">f.</span> <span class="pronunciation">ku.ɾaˈsjon i βi.ɣiˈlan.sja ðe eˈɾi.ða kiˈɾuɾ.xi.ka</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4457,7 +4557,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="nursing-/-minor-surgery"
-                 data-first-letter="V">
+                 data-first-letter="S">
                 <h2>sterile dressing at surgical site (SP. vendaje estéril en sitio operatorio) <span class="gender-display">m.</span> <span class="pronunciation">βenˈda.xe esˈte.ɾil en ˈsi.tjo o.pe.ɾaˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4474,7 +4574,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="surgery/nursing"
-                 data-first-letter="E">
+                 data-first-letter="D">
                 <h2>drain removal when indicated (SP. extracción de drenajes cuando proceda) <span class="gender-display">f.</span> <span class="pronunciation">ek.stɾakˈsjon ðe dɾeˈna.xes ˈkwan.do pɾoˈse.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4491,7 +4591,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="anesthesiology-/-medical-documentation"
-                 data-first-letter="I">
+                 data-first-letter="P">
                 <h2>postoperative anesthesia report (SP. informe anestésico posoperatorio) <span class="gender-display">m.</span> <span class="pronunciation">inˈfoɾ.me a.nesˈte.si.ko pos.o.pe.ɾaˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4508,7 +4608,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="nursing/post-operative-medicine"
-                 data-first-letter="E">
+                 data-first-letter="R">
                 <h2>recovery room nursing care (SP. enfermería de sala de recuperación) <span class="gender-display">f.</span> <span class="pronunciation">en.feɾ.meˈɾi.a ðe ˈsa.la ðe re.ku.pe.ɾaˈsjon</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4525,7 +4625,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pneumology-/-anesthesiology"
-                 data-first-letter="O">
+                 data-first-letter="S">
                 <h2>supplemental oxygen therapy (SP. oxigenoterapia suplementaria) <span class="gender-display">f.</span> <span class="pronunciation">ok.si.xe.no.teˈɾa.pja su.ple.menˈta.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4542,7 +4642,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="anesthesiology-/-major-surgery"
-                 data-first-letter="E">
+                 data-first-letter="N">
                 <h2>numb limb (due to epidural block) (SP. extremidad adormecida (por bloqueo epidural)) <span class="gender-display">f.</span> <span class="pronunciation">ek.stɾe.miˈðað a.ðoɾ.meˈθi.ða (poɾ bloˈke.o e.piˈðu.ɾal)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4559,7 +4659,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="anesthesiology-/-general-surgery"
-                 data-first-letter="D">
+                 data-first-letter="M">
                 <h2>mild lower back pain (after spinal anesthesia) (SP. dolor leve en la espalda baja (después de anestesia raquídea)) <span class="gender-display">m.</span> <span class="pronunciation">doˈloɾ ˈle.βe en la esˈpal.da ˈba.xa (desˈpwes ðe a.nesˈte.sja raˈki.ðe.a)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4576,7 +4676,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pharmacology-/-nursing"
-                 data-first-letter="N">
+                 data-first-letter="M">
                 <h2>mild postoperative nausea (SP. náuseas leves en el postoperatorio) <span class="gender-display">f.</span> <span class="pronunciation">ˈnau.se.as ˈle.βes en el pos.o.pe.ɾaˈto.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4593,7 +4693,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="gastroenterology-/-anesthesiology"
-                 data-first-letter="V">
+                 data-first-letter="R">
                 <h2>residual vomiting (SP. vómitos residuales) <span class="gender-display">m.</span> <span class="pronunciation">ˈβo.mi.tos re.siˈðwa.les</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4610,7 +4710,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="neurology-/-anesthesiology"
-                 data-first-letter="V">
+                 data-first-letter="T">
                 <h2>transient blurred vision (SP. visión borrosa transitoria) <span class="gender-display">f.</span> <span class="pronunciation">βiˈsjon βoˈro.sa tɾan.siˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4627,7 +4727,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="neurology-/-anesthesiology"
-                 data-first-letter="C">
+                 data-first-letter="M">
                 <h2>mild postanesthetic confusion (SP. confusión postanestésica leve) <span class="gender-display">f.</span> <span class="pronunciation">kon.fuˈsjon pos.ta.nesˈte.si.ka ˈle.βe</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4644,7 +4744,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="neurology/post-operative-medicine"
-                 data-first-letter="T">
+                 data-first-letter="B">
                 <h2>brief balance disturbances (SP. trastornos del equilibrio breves) <span class="gender-display">m. pl.</span> <span class="pronunciation">tɾasˈtoɾ.nos ðel e.kiˈli.bɾjo ˈβɾe.βes</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4661,7 +4761,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="pneumology-/-intensive-care-medicine"
-                 data-first-letter="P">
+                 data-first-letter="A">
                 <h2>airway protection with cannula if needed (SP. protección de vías aéreas con cánula si es necesario) <span class="gender-display">f.</span> <span class="pronunciation">pɾo.teksˈjon ðe ˈβi.as aˈe.ɾe.as kon ˈka.nu.la si es ne.seˈsa.ɾjo</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4678,7 +4778,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="hospital-medicine/surgery"
-                 data-first-letter="A">
+                 data-first-letter="S">
                 <h2>scheduled hospital discharge (SP. alta hospitalaria programada) <span class="gender-display">f.</span> <span class="pronunciation">ˈal.ta os.pi.taˈla.ɾja pɾo.ɣɾaˈma.ða</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4695,7 +4795,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="surgical-medicine/outpatient-care"
-                 data-first-letter="S">
+                 data-first-letter="O">
                 <h2>outpatient follow-up consultation (SP. seguimiento en consulta externa) <span class="gender-display">m.</span> <span class="pronunciation">se.ɣiˈmien.to en konˈsuːl.ta ekˈsteɾ.na</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4712,7 +4812,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="family-medicine/general-surgery"
-                 data-first-letter="C">
+                 data-first-letter="I">
                 <h2>indicated home care instructions (SP. cuidados domiciliarios indicados) <span class="gender-display">m. pl.</span> <span class="pronunciation">kwi.ðaˈðos do.mi.si.liˈa.ɾjos in.diˈka.ðos</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4729,7 +4829,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="hospital-medicine/surgery"
-                 data-first-letter="M">
+                 data-first-letter="D">
                 <h2>discharge medications (painkillers, antiemetics) (SP. medicamentos de alta (analgésicos, antieméticos)) <span class="gender-display">m. pl.</span> <span class="pronunciation">me.di.kaˈmen.tos ðe ˈal.ta (a.nalˈxe.si.kos, an.ti.eˈme.ti.kos)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4746,7 +4846,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="surgery/outpatient-medicine"
-                 data-first-letter="R">
+                 data-first-letter="S">
                 <h2>suture check at follow-up visit (SP. revisión de suturas en consulta postoperatoria) <span class="gender-display">f.</span> <span class="pronunciation">re.βi.sjon ðe suˈtu.ɾas en konˈsuːl.ta pos.o.pe.ɾaˈto.ɾja</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4763,7 +4863,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="surgery-/-general-medicine"
-                 data-first-letter="D">
+                 data-first-letter="R">
                 <h2>recommended complete rest (24–48 h) (SP. descanso absoluto recomendado (24–48 h)) <span class="gender-display">m.</span> <span class="pronunciation">desˈkan.so ab.soˈlu.to re.ko.menˈda.ðo (bein.ti.kw.a.tɾo–kwar.en.ta.i.o.ˈtʃo o.ɾas)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -4780,7 +4880,7 @@
             <div class="dictionary-entry"
                  data-category-en="postoperative-care"
                  data-specialty-en="anesthesiology/critical-care-medicine"
-                 data-first-letter="C">
+                 data-first-letter="O">
                 <h2>orotracheal intubation aftercare (throat) (SP. cuidados de la intubación orotraqueal (garganta)) <span class="gender-display">m. pl.</span> <span class="pronunciation">kwiˈða.ðos ðe la in.tu.βaˈsjon o.ɾo.tɾaˈke.al (ɡaɾˈɣan.ta)</span></h2>
                 <p><strong>Category (EN)</strong>: Postoperative care</p>
                 <p><strong>Category (SP)</strong>: Cuidados postoperatorios</p>
@@ -5083,62 +5183,6 @@
                 <hr>
             </div>
     
-        </div> <div class="alphabetical-sidebar"> <h3>Alphabetical Index</h3>
-            <a href="#" class="alphabet-link active-letter" data-letter="all">All</a>
-
-            <a href="#" class="alphabet-link" data-letter="a">A</a>
-        
-            <a href="#" class="alphabet-link" data-letter="b">B</a>
-        
-            <a href="#" class="alphabet-link" data-letter="c">C</a>
-        
-            <a href="#" class="alphabet-link" data-letter="d">D</a>
-        
-            <a href="#" class="alphabet-link" data-letter="e">E</a>
-        
-            <a href="#" class="alphabet-link" data-letter="f">F</a>
-        
-            <span class="alphabet-link disabled" data-letter="g">G</span>
-        
-            <a href="#" class="alphabet-link" data-letter="h">H</a>
-        
-            <a href="#" class="alphabet-link" data-letter="i">I</a>
-        
-            <span class="alphabet-link disabled" data-letter="j">J</span>
-        
-            <a href="#" class="alphabet-link" data-letter="k">K</a>
-        
-            <a href="#" class="alphabet-link" data-letter="l">L</a>
-        
-            <a href="#" class="alphabet-link" data-letter="m">M</a>
-        
-            <a href="#" class="alphabet-link" data-letter="n">N</a>
-        
-            <a href="#" class="alphabet-link" data-letter="o">O</a>
-        
-            <a href="#" class="alphabet-link" data-letter="p">P</a>
-        
-            <span class="alphabet-link disabled" data-letter="q">Q</span>
-        
-            <a href="#" class="alphabet-link" data-letter="r">R</a>
-        
-            <a href="#" class="alphabet-link" data-letter="s">S</a>
-        
-            <a href="#" class="alphabet-link" data-letter="t">T</a>
-        
-            <a href="#" class="alphabet-link" data-letter="u">U</a>
-        
-            <a href="#" class="alphabet-link" data-letter="v">V</a>
-        
-            <span class="alphabet-link disabled" data-letter="w">W</span>
-        
-            <span class="alphabet-link disabled" data-letter="x">X</span>
-        
-            <span class="alphabet-link disabled" data-letter="y">Y</span>
-        
-            <span class="alphabet-link disabled" data-letter="z">Z</span>
-        
-            <a href="#" class="alphabet-link clear-letter-filter" data-letter="all">Clear Letter</a>
         </div> </div> <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
@@ -5146,25 +5190,25 @@
             const specialtyFilter = document.getElementById('specialtyFilter');
             const clearFiltersButton = document.getElementById('clearFiltersButton');
             const dictionaryEntries = document.querySelectorAll('.dictionary-entry');
-            const alphabetLinks = document.querySelectorAll('.alphabet-link'); // Get all letter links
+            const alphabetLinks = document.querySelectorAll('.alphabet-link');
 
             let activeFilters = {
                 category: 'all',
                 specialty: 'all',
-                letter: 'all' // New filter for alphabetical
+                letter: 'all'
             };
 
             function applyFilters() {
                 const searchTerm = searchInput.value.toLowerCase();
                 const selectedCategory = categoryFilter.value;
                 const selectedSpecialty = specialtyFilter.value;
-                const selectedLetter = activeFilters.letter; // Get active letter from state
+                const selectedLetter = activeFilters.letter;
 
                 dictionaryEntries.forEach(entry => {
                     const entryText = entry.textContent.toLowerCase();
                     const entryCategory = entry.dataset.categoryEn;
                     const entrySpecialty = entry.dataset.specialtyEn;
-                    const entryFirstLetter = entry.dataset.firstLetter.toLowerCase(); // Get first letter
+                    const entryFirstLetter = entry.dataset.firstLetter.toLowerCase();
 
                     const matchesSearch = entryText.includes(searchTerm);
                     const matchesCategory = (selectedCategory === 'all' || entryCategory === selectedCategory);
@@ -5181,7 +5225,7 @@
                 });
             }
 
-            // Event listeners
+            // Event listeners for changes
             searchInput.addEventListener('keyup', applyFilters);
             categoryFilter.addEventListener('change', applyFilters);
             specialtyFilter.addEventListener('change', applyFilters);
@@ -5189,16 +5233,12 @@
             // Event listener for alphabetical links
             alphabetLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent page jump
+                    e.preventDefault();
                     const clickedLetter = this.dataset.letter;
 
-                    // Remove 'active-letter' from all links
+                    // Remove 'active-letter' from all links, then add to clicked
                     alphabetLinks.forEach(l => l.classList.remove('active-letter'));
-
-                    // Set 'active-letter' on clicked link (unless it's 'All' and other filters are selected)
-                    if (clickedLetter !== 'all' || (clickedLetter === 'all' && searchInput.value === '' && categoryFilter.value === 'all' && specialtyFilter.value === 'all')) {
-                         this.classList.add('active-letter');
-                    }
+                    this.classList.add('active-letter');
                    
                     activeFilters.letter = clickedLetter;
                     applyFilters();
@@ -5210,12 +5250,14 @@
                 categoryFilter.value = 'all';
                 specialtyFilter.value = 'all';
                 activeFilters.letter = 'all'; // Reset alphabetical filter
-                alphabetLinks.forEach(l => l.classList.remove('active-letter')); // Clear active letter highlight
-                document.querySelector('.alphabetical-sidebar a[data-letter="all"]').classList.add('active-letter'); // Set 'All' letter as active
+                // Reset active class for alphabet links (set 'All' active)
+                alphabetLinks.forEach(l => l.classList.remove('active-letter'));
+                document.querySelector('.alphabetical-sidebar a[data-letter="all"]').classList.add('active-letter');
+                
                 applyFilters();
             });
 
-            // Initial state: If you want to show all entries initially on page load, uncomment the line below:
+            // If you want to show all entries initially on page load, uncomment the line below:
             // applyFilters();
         });
     </script>
