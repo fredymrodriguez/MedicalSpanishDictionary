@@ -100,6 +100,55 @@
         .dictionary-entry.hidden {
             display: none;
         }
+        /* Filter Button Styling */
+        .filter-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background-color: #e0e7ff; /* Light blue background for filters */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .filter-container h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .filter-button {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            font-size: 0.9em;
+            white-space: nowrap; /* Keep button text on one line */
+        }
+        .filter-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        .filter-button.active {
+            background-color: #28a745; /* Green for active filter */
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        }
+        .filter-group {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted #bbd;
+        }
+        .filter-group:last-child {
+            border-bottom: none;
+        }
+        .clear-filters-button {
+            background-color: #dc3545; /* Red for clear filters */
+            margin-top: 15px;
+        }
+        .clear-filters-button:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -110,8 +159,331 @@
         <input type="text" id="searchInput" placeholder="Search terms, categories, or specialties...">
     </div>
 
+    <div class="filter-container">
+        <h3>Filter by Category:</h3>
+        <div class="filter-group" id="category-filters">
+            <button class="filter-button active" data-filter-type="category" data-filter-value="all">All Categories</button>
 
-    <div class="dictionary-entry">
+            <button class="filter-button" data-filter-type="category" data-filter-value="allergies and reactions">Allergies and reactions (Alergias y reacciones)</button>
+    
+            <button class="filter-button" data-filter-type="category" data-filter-value="anesthetic medications">Anesthetic medications (Consentimiento informado)</button>
+    
+            <button class="filter-button" data-filter-type="category" data-filter-value="informed consent">Informed Consent (Cuidados postoperatorios)</button>
+    
+            <button class="filter-button" data-filter-type="category" data-filter-value="patient’s faq">Patient’s FAQ (Medicamentos anestésicos)</button>
+    
+            <button class="filter-button" data-filter-type="category" data-filter-value="postoperative care">Postoperative care (Preguntas frecuentes del paciente)</button>
+    
+            <button class="filter-button" data-filter-type="category" data-filter-value="procedures and monitoring">Procedures and monitoring (Procedimientos y seguimiento)</button>
+    
+            <button class="filter-button" data-filter-type="category" data-filter-value="risks and complications">Risks and complications (Riesgos y complicaciones)</button>
+    
+            <button class="filter-button" data-filter-type="category" data-filter-value="symptoms and history">Symptoms and history (Síntomas y antecedentes)</button>
+    
+        </div>
+
+        <h3>Filter by Specialty:</h3>
+        <div class="filter-group" id="specialty-filters">
+            <button class="filter-button active" data-filter-type="specialty" data-filter-value="all">All Specialties</button>
+
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology">Allergology (Alergología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / anesthesiology">Allergology / Anesthesiology (Alergología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / critical care medicine">Allergology / Critical Care Medicine (Alergología / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / dentistry / anesthesiology">Allergology / Dentistry / Anesthesiology (Alergología / Dermatología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / dermatology">Allergology / Dermatology (Alergología / Medicina crítica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / internal medicine">Allergology / Internal Medicine (Alergología / Medicina del dolor)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / medical emergencies">Allergology / Medical emergencies (Alergología / Medicina interna)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / nutrition">Allergology / Nutrition (Alergología / Medicina ocupacional)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / occupational medicine">Allergology / Occupational Medicine (Alergología / Medicina preventiva)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / pain medicine">Allergology / Pain Medicine (Alergología / Nutrición)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / preventive medicine">Allergology / Preventive Medicine (Alergología / Odontología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / surgery">Allergology / Surgery (Alergología / Urgencias médicas)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="ambulatory medicine / minor surgery">Ambulatory Medicine / Minor Surgery (Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology">Anesthesiology (Anestesiología / Alergología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / allergology">Anesthesiology / Allergology (Anestesiología / Bioética)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / bioethics">Anesthesiology / Bioethics (Anestesiología / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / clinical engineering">Anesthesiology / Clinical Engineering (Anestesiología / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / clinical psychology">Anesthesiology / Clinical Psychology (Anestesiología / Cirugía mayor)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / endocrinology">Anesthesiology / Endocrinology (Anestesiología / Cirugía ortopédica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / general surgery">Anesthesiology / General Surgery (Anestesiología / Cirugía torácica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / genetic medicine">Anesthesiology / Genetic Medicine (Anestesiología / Documentación médica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / hospital medicine">Anesthesiology / Hospital Medicine (Anestesiología / Endocrinología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / internal medicine">Anesthesiology / Internal Medicine (Anestesiología / Enfermería)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / legal medicine">Anesthesiology / Legal Medicine (Anestesiología / Ingeniería clínica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / major surgery">Anesthesiology / Major Surgery (Anestesiología / Medicina crítica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / medical documentation">Anesthesiology / Medical Documentation (Anestesiología / Medicina de emergencia)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / medical emergencies">Anesthesiology / Medical Emergencies (Anestesiología / Medicina de recuperación)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / nephrology">Anesthesiology / Nephrology (Anestesiología / Medicina del dolor)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / nursing">Anesthesiology / Nursing (Anestesiología / Medicina genética)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / obstetrics">Anesthesiology / Obstetrics (Anestesiología / Medicina hospitalaria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / orthopedic surgery">Anesthesiology / Orthopedic Surgery (Anestesiología / Medicina interna)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / personalized medicine">Anesthesiology / Personalized Medicine (Anestesiología / Medicina legal)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / pneumology">Anesthesiology / Pneumology (Anestesiología / Medicina personalizada)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / preventive medicine">Anesthesiology / Preventive Medicine (Anestesiología / Medicina preoperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / surgery">Anesthesiology / Surgery (Anestesiología / Medicina preventiva)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/critical care medicine">Anesthesiology/Critical Care Medicine (Anestesiología / Nefrología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/emergency medicine">Anesthesiology/Emergency Medicine (Anestesiología / Neumología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/pain medicine">Anesthesiology/Pain Medicine (Anestesiología / Obstetricia)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/preoperative medicine">Anesthesiology/Preoperative Medicine (Anestesiología / Psicología clínica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/recovery medicine">Anesthesiology/Recovery Medicine (Anestesiología / Urgencias médicas)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/thoracic surgery">Anesthesiology/Thoracic Surgery (Anestesiología pediátrica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="bioethics / legal medicine">Bioethics / Legal Medicine (Anestesiología pediátrica / Cirugía infantil)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="bioethics/general medicine">Bioethics/General Medicine (Bioética / Medicina general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology">Cardiology (Bioética / Medicina legal)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / anesthesiology">Cardiology / Anesthesiology (Cardiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / critical care medicine">Cardiology / Critical Care Medicine (Cardiología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / medical emergencies">Cardiology / Medical Emergencies (Cardiología / Enfermería)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / nursing">Cardiology / Nursing (Cardiología / Medicina crítica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / pulmonology">Cardiology / Pulmonology (Cardiología / Medicina perioperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology/perioperative medicine">Cardiology/Perioperative Medicine (Cardiología / Neumología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="clinical psychology / anesthesiology">Clinical Psychology / Anesthesiology (Cardiología / Urgencias médicas)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="clinical psychology / sleep medicine">Clinical Psychology / Sleep Medicine (Cirugía / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="critical care medicine / anesthesiology">Critical Care Medicine / Anesthesiology (Cirugía / Enfermería)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="critical care medicine/major surgery">Critical Care Medicine/Major Surgery (Cirugía / Enfermería superficial)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="dermatology / anesthesiology">Dermatology / Anesthesiology (Cirugía / Gastroenterología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="dermatology / outpatient medicine">Dermatology / Outpatient Medicine (Cirugía / Medicina ambulatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="digestive medicine / abdominal surgery">Digestive Medicine / Abdominal Surgery (Cirugía / Medicina de emergencia)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="digestive medicine / surgery">Digestive Medicine / Surgery (Cirugía / Medicina familiar)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="endocrinology / anesthesiology">Endocrinology / Anesthesiology (Cirugía / Medicina general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="endocrinology / internal medicine">Endocrinology / Internal Medicine (Cirugía / Medicina hospitalaria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="family medicine/general surgery">Family Medicine/General Surgery (Cirugía / Medicina interna)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="gastroenterology / anesthesiology">Gastroenterology / Anesthesiology (Cirugía / Medicina preventiva)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine / anesthesiology">General Medicine / Anesthesiology (Cirugía vascular / Medicina perioperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine / bioethics">General Medicine / Bioethics (Cuidados intensivos / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/critical care">General Medicine/Critical Care (Dermatología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/neurology">General Medicine/Neurology (Dermatología / Medicina ambulatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/nursing">General Medicine/Nursing (Endocrinología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/post-operative care">General Medicine/Post-Operative Care (Endocrinología / Medicina interna)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/surgery">General Medicine/Surgery (Enfermería / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="hematology/surgery">Hematology/Surgery (Enfermería / Cirugía menor)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="hematology/surgical medicine">Hematology/Surgical Medicine (Enfermería / Cuidados intensivos)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="hospital medicine / anesthesiology">Hospital Medicine / Anesthesiology (Enfermería / Medicina hospitalaria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="hospital medicine/general surgery">Hospital Medicine/General Surgery (Enfermería / Medicina postoperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="hospital medicine/surgery">Hospital Medicine/Surgery (Farmacología / Alergología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="immunology / allergology">Immunology / Allergology (Farmacología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="intensive care / surgery">Intensive Care / Surgery (Farmacología / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="intensive care medicine / anesthesiology">Intensive Care Medicine / Anesthesiology (Farmacología / Cirugía ambulatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine">Internal Medicine (Farmacología / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / allergology">Internal Medicine / Allergology (Farmacología / Endoscopía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / anesthesiology">Internal Medicine / Anesthesiology (Farmacología / Enfermería)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / critical care">Internal Medicine / Critical Care (Farmacología / Gastroenterología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / critical care medicine">Internal Medicine / Critical Care Medicine (Farmacología / Medicina del dolor)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / preoperative">Internal Medicine / Preoperative (Farmacología / Medicina hospitalaria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / surgery">Internal Medicine / Surgery (Farmacología / Medicina perioperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="legal medicine / bioethics">Legal Medicine / Bioethics (Farmacología / Medicina preoperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="legal medicine / surgery">Legal Medicine / Surgery (Fisioterapia / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="legal medicine/clinical safety">Legal Medicine/Clinical Safety (Gastroenterología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="medical emergencies / anesthesiology">Medical Emergencies / Anesthesiology (Hematología / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="medical emergencies / critical care medicine">Medical Emergencies / Critical Care Medicine (Hematología / Medicina quirúrgica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="medical emergencies / allergology">Medical emergencies / Allergology (Inmunología / Alergología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="nephrology / anesthesiology">Nephrology / Anesthesiology (Medicina ambulatoria / Cirugía menor)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology">Neurology (Medicina crítica / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology / anesthesiology">Neurology / Anesthesiology (Medicina crítica / Cirugía mayor)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology / general medicine">Neurology / General Medicine (Medicina del dolor / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology / hospital medicine">Neurology / Hospital Medicine (Medicina del dolor / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology/post-operative medicine">Neurology/Post-Operative Medicine (Medicina del dolor / Cuidados postoperatorios)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurosurgery / anesthesiology">Neurosurgery / Anesthesiology (Medicina del dolor / Enfermería)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing / hospital medicine">Nursing / Hospital Medicine (Medicina digestiva / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing / intensive care">Nursing / Intensive Care (Medicina digestiva / Cirugía abdominal)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing / minor surgery">Nursing / Minor Surgery (Medicina familiar / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing/general surgery">Nursing/General Surgery (Medicina general / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing/post-operative medicine">Nursing/Post-Operative Medicine (Medicina general / Bioética)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="nutrition / general surgery">Nutrition / General Surgery (Medicina general / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="orthopedics / physical medicine">Orthopedics / Physical Medicine (Medicina general / Cuidados críticos)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / anesthesiology">Pain Medicine / Anesthesiology (Medicina general / Cuidados postoperatorios)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / nursing">Pain Medicine / Nursing (Medicina general / Enfermería)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / post-operative care">Pain Medicine / Post-Operative Care (Medicina general / Neurología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / surgery">Pain Medicine / Surgery (Medicina hospitalaria / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pediatric anesthesiology">Pediatric Anesthesiology (Medicina hospitalaria / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pediatric anesthesiology / child surgery">Pediatric Anesthesiology / Child Surgery (Medicina hospitalaria / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pediatric medicine / bioethics">Pediatric Medicine / Bioethics (Medicina intensiva / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / allergology">Pharmacology / Allergology (Medicina interna)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / anesthesiology">Pharmacology / Anesthesiology (Medicina interna / Alergología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / endoscopy">Pharmacology / Endoscopy (Medicina interna / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / gastroenterology">Pharmacology / Gastroenterology (Medicina interna / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / general surgery">Pharmacology / General Surgery (Medicina interna / Cuidados intensivos)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / hospital medicine">Pharmacology / Hospital Medicine (Medicina interna / Medicina crítica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / nursing">Pharmacology / Nursing (Medicina interna / Preoperatorio)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / outpatient surgery">Pharmacology / Outpatient Surgery (Medicina legal / Bioética)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / pain medicine">Pharmacology / Pain Medicine (Medicina legal / Cirugía)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / perioperative medicine">Pharmacology / Perioperative Medicine (Medicina legal / Seguridad clínica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / preoperative medicine">Pharmacology / Preoperative Medicine (Medicina pediátrica / Bioética)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / surgery">Pharmacology / Surgery (Medicina preoperatoria / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="physiotherapy / surgery">Physiotherapy / Surgery (Medicina quirúrgica / Atención ambulatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / anesthesiology">Pneumology / Anesthesiology (Medicina quirúrgica / Cuidados intensivos)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / critical care medicine">Pneumology / Critical Care Medicine (Nefrología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / general surgery">Pneumology / General Surgery (Neumología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / intensive care medicine">Pneumology / Intensive Care Medicine (Neumología / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / postoperative medicine">Pneumology / Postoperative Medicine (Neumología / Medicina crítica)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="preoperative medicine / general surgery">Preoperative Medicine / General Surgery (Neumología / Medicina intensiva)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="psychiatry/anesthesiology">Psychiatry/Anesthesiology (Neumología / Medicina postoperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / anesthesiology">Surgery / Anesthesiology (Neurocirugía / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / gastroenterology">Surgery / Gastroenterology (Neurología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / general medicine">Surgery / General Medicine (Neurología / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / hospital medicine">Surgery / Hospital Medicine (Neurología / Medicina general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/emergency medicine">Surgery/Emergency Medicine (Neurología / Medicina hospitalaria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/family medicine">Surgery/Family Medicine (Neurología / Medicina postoperatoria)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/internal medicine">Surgery/Internal Medicine (Nutrición / Cirugía general)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/nursing">Surgery/Nursing (Ortopedia / Medicina física)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/outpatient medicine">Surgery/Outpatient Medicine (Psicología clínica / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/preventive medicine">Surgery/Preventive Medicine (Psicología clínica / Medicina del sueño)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/superficial nursing">Surgery/Superficial Nursing (Psiquiatría / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgical medicine / critical care">Surgical Medicine / Critical Care (Urgencias médicas / Alergología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgical medicine/outpatient care">Surgical Medicine/Outpatient Care (Urgencias médicas / Anestesiología)</button>
+    
+            <button class="filter-button" data-filter-type="specialty" data-filter-value="vascular surgery / perioperative medicine">Vascular Surgery / Perioperative Medicine (Urgencias médicas / Medicina crítica)</button>
+    
+        </div>
+        <button class="filter-button clear-filters-button" data-filter-type="clear" data-filter-value="all">Clear All Filters</button>
+    </div>
+
+
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="internal-medicine">
         <h2>agotamiento crónico</h2>
         <p><strong>English</strong>: chronic exhaustion</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -131,7 +503,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="allergology">
         <h2>alergias medicamentosas conocidas</h2>
         <p><strong>English</strong>: known drug allergies</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -151,7 +525,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology">
         <h2>ansiedad preoperatoria</h2>
         <p><strong>English</strong>: preoperative anxiety</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -171,7 +547,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="cardiology">
         <h2>antecedentes familiares de enfermedad cardíaca</h2>
         <p><strong>English</strong>: family history of heart disease</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -191,7 +569,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology">
         <h2>apnea del sueño</h2>
         <p><strong>English</strong>: sleep apnea</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -211,7 +591,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="cardiology">
         <h2>arritmia cardíaca</h2>
         <p><strong>English</strong>: cardiac arrhythmia</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -231,7 +613,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>asma bronquial</h2>
         <p><strong>English</strong>: bronchial asthma</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -251,7 +635,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="neurology">
         <h2>cefalea tensional</h2>
         <p><strong>English</strong>: tension headache</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -271,7 +657,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology">
         <h2>consumo de alcohol excesivo</h2>
         <p><strong>English</strong>: excessive alcohol consumption</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -291,7 +679,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="endocrinology-/-anesthesiology">
         <h2>diabetes mellitus</h2>
         <p><strong>English</strong>: diabetes mellitus</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -311,7 +701,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="gastroenterology-/-anesthesiology">
         <h2>disfunción hepática</h2>
         <p><strong>English</strong>: hepatic dysfunction</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -331,7 +723,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="surgery-/-general-medicine">
         <h2>dolor abdominal agudo</h2>
         <p><strong>English</strong>: acute abdominal pain</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -351,7 +745,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="neurology">
         <h2>dolor de cabeza severo</h2>
         <p><strong>English</strong>: severe headache</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -371,7 +767,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="orthopedics-/-physical-medicine">
         <h2>dolor lumbar intenso</h2>
         <p><strong>English</strong>: intense lower back pain</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -391,7 +789,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="cardiology-/-pulmonology">
         <h2>dolor torácico punzante</h2>
         <p><strong>English</strong>: stabbing chest pain</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -411,7 +811,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="cardiology">
         <h2>enfermedad cardíaca isquémica</h2>
         <p><strong>English</strong>: ischemic heart disease</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -431,7 +833,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>enfermedad pulmonar obstructiva crónica</h2>
         <p><strong>English</strong>: chronic obstructive pulmonary disease (COPD)</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -451,7 +855,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="neurology">
         <h2>episodios de convulsiones epilépticas</h2>
         <p><strong>English</strong>: epileptic seizure episodes</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -471,7 +877,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology">
         <h2>escalofríos perioperatorios</h2>
         <p><strong>English</strong>: perioperative chills</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -491,7 +899,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="clinical-psychology-/-anesthesiology">
         <h2>estrés anticipatorio</h2>
         <p><strong>English</strong>: anticipatory stress</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -511,7 +921,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="internal-medicine-/-anesthesiology">
         <h2>fiebre moderada</h2>
         <p><strong>English</strong>: moderate fever</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -531,7 +943,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="internal-medicine-/-anesthesiology">
         <h2>fiebre persistente</h2>
         <p><strong>English</strong>: persistent fever</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -551,7 +965,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="endocrinology-/-anesthesiology">
         <h2>hiperlipidemia crónica</h2>
         <p><strong>English</strong>: chronic hyperlipidemia</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -571,7 +987,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology">
         <h2>hipertensión arterial</h2>
         <p><strong>English</strong>: arterial hypertension</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -591,7 +1009,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology-/-clinical-psychology">
         <h2>insomnio prequirúrgico</h2>
         <p><strong>English</strong>: pre-surgical insomnia</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -611,7 +1031,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>insuficiencia cardíaca congestiva</h2>
         <p><strong>English</strong>: congestive heart failure</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -631,7 +1053,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="nephrology-/-anesthesiology">
         <h2>insuficiencia renal crónica</h2>
         <p><strong>English</strong>: chronic kidney failure</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -651,7 +1075,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="neurology-/-general-medicine">
         <h2>lipotimia</h2>
         <p><strong>English</strong>: near fainting (lipothymia)</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -671,7 +1097,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="general-medicine-/-anesthesiology">
         <h2>mareos matutinos</h2>
         <p><strong>English</strong>: morning dizziness</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -691,7 +1119,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="general-medicine/neurology">
         <h2>mareos repentinos</h2>
         <p><strong>English</strong>: sudden dizziness</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -711,7 +1141,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="neurology">
         <h2>migrañas frecuentes</h2>
         <p><strong>English</strong>: frequent migraines</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -731,7 +1163,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="gastroenterology-/-anesthesiology">
         <h2>náuseas y vómitos repetidos</h2>
         <p><strong>English</strong>: repeated nausea and vomiting</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -751,7 +1185,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology-/-endocrinology">
         <h2>obesidad mórbida</h2>
         <p><strong>English</strong>: morbid obesity</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -771,7 +1207,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="cardiology">
         <h2>palpitaciones irregulares</h2>
         <p><strong>English</strong>: irregular palpitations</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -791,7 +1229,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>palpitaciones rápidas</h2>
         <p><strong>English</strong>: rapid palpitations</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -811,7 +1251,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="gastroenterology-/-anesthesiology">
         <h2>reflujo gastroesofágico persistente</h2>
         <p><strong>English</strong>: persistent gastroesophageal reflux</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -831,7 +1273,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="endocrinology-/-internal-medicine">
         <h2>sed excesiva nocturna</h2>
         <p><strong>English</strong>: excessive nighttime thirst</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -851,7 +1295,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="general-medicine-/-anesthesiology">
         <h2>sensación de desmayo</h2>
         <p><strong>English</strong>: feeling of faintness</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -871,7 +1317,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="neurology-/-anesthesiology">
         <h2>síncope vasovagal</h2>
         <p><strong>English</strong>: vasovagal syncope</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -891,7 +1339,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="clinical-psychology-/-sleep-medicine">
         <h2>sueño inquieto</h2>
         <p><strong>English</strong>: restless sleep</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -911,7 +1361,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="anesthesiology-/-preventive-medicine">
         <h2>tabaquismo activo</h2>
         <p><strong>English</strong>: active smoking</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -931,7 +1383,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="symptoms-and-history"
+         data-specialty-en="endocrinology-/-anesthesiology">
         <h2>trastornos tiroideos (hipertiroidismo/hipotiroidismo)</h2>
         <p><strong>English</strong>: thyroid disorders (hyperthyroidism/hypothyroidism)</p>
         <p><strong>Category (EN)</strong>: Symptoms and history</p>
@@ -951,7 +1405,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="medical-emergencies-/-allergology">
         <h2>administración de epinefrina IM como emergencia</h2>
         <p><strong>English</strong>: administration of IM epinephrine as emergency</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -971,7 +1427,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-anesthesiology">
         <h2>alergia a anestésicos generales</h2>
         <p><strong>English</strong>: allergy to general anesthetics</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -991,7 +1449,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-dentistry-/-anesthesiology">
         <h2>alergia a anestésicos locales</h2>
         <p><strong>English</strong>: allergy to local anesthetics</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1011,7 +1471,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-internal-medicine">
         <h2>alergia a medicamentos</h2>
         <p><strong>English</strong>: drug allergy</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1031,7 +1493,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-pain-medicine">
         <h2>alergia a opiáceos</h2>
         <p><strong>English</strong>: opioid allergy</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1051,7 +1515,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-internal-medicine">
         <h2>alergia a penicilina</h2>
         <p><strong>English</strong>: penicillin allergy</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1071,7 +1537,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-occupational-medicine">
         <h2>alergia al látex (guantes de látex)</h2>
         <p><strong>English</strong>: latex allergy (latex gloves)</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1091,7 +1559,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-surgery">
         <h2>alergia al yodo (povidona)</h2>
         <p><strong>English</strong>: iodine allergy (povidone)</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1111,7 +1581,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-nutrition">
         <h2>alergia alimentaria conocida (mariscos, frutos secos)</h2>
         <p><strong>English</strong>: known food allergy (shellfish, nuts)</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1131,7 +1603,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="immunology-/-allergology">
         <h2>anticuerpos IgE elevados</h2>
         <p><strong>English</strong>: elevated IgE antibodies</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1151,7 +1625,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="medical-emergencies-/-allergology">
         <h2>edema de glotis (edema angioneurótico)</h2>
         <p><strong>English</strong>: glottic edema (angioneurotic edema)</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1171,7 +1647,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-preventive-medicine">
         <h2>historial de anafilaxia</h2>
         <p><strong>English</strong>: history of anaphylaxis</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1191,7 +1669,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="internal-medicine-/-allergology">
         <h2>intolerancia a medicamentos</h2>
         <p><strong>English</strong>: drug intolerance</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1211,7 +1691,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-anesthesiology">
         <h2>prueba cutánea de alergia a anestésicos</h2>
         <p><strong>English</strong>: skin test for anesthetic allergy</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1231,7 +1713,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-anesthesiology">
         <h2>reacciones alérgicas a los fármacos anestésicos</h2>
         <p><strong>English</strong>: allergic reactions to anesthetic drugs</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1251,7 +1735,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-anesthesiology">
         <h2>sensibilidad exagerada a los anestésicos</h2>
         <p><strong>English</strong>: exaggerated sensitivity to anesthetics</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1271,7 +1757,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="medical-emergencies-/-allergology">
         <h2>shock anafiláctico</h2>
         <p><strong>English</strong>: anaphylactic shock</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1291,7 +1779,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="allergology-/-dermatology">
         <h2>síntomas de alergia (urticaria, prurito)</h2>
         <p><strong>English</strong>: allergy symptoms (hives, itching)</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1311,7 +1801,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="allergies-and-reactions"
+         data-specialty-en="pharmacology-/-allergology">
         <h2>uso de antihistamínicos intravenosos</h2>
         <p><strong>English</strong>: use of intravenous antihistamines</p>
         <p><strong>Category (EN)</strong>: Allergies and reactions</p>
@@ -1331,7 +1823,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics-/-legal-medicine">
         <h2>aceptación voluntaria del paciente</h2>
         <p><strong>English</strong>: voluntary acceptance by the patient</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1351,7 +1845,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="anesthesiology-/-bioethics">
         <h2>alternativas a la anestesia propuesta</h2>
         <p><strong>English</strong>: alternatives to proposed anesthesia</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1371,7 +1867,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics-/-legal-medicine">
         <h2>autonomía del paciente</h2>
         <p><strong>English</strong>: patient autonomy</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1391,7 +1889,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics/general-medicine">
         <h2>beneficios esperados</h2>
         <p><strong>English</strong>: expected benefits</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1411,7 +1911,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics-/-legal-medicine">
         <h2>consentimiento escrito del paciente</h2>
         <p><strong>English</strong>: written consent from the patient</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1431,7 +1933,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="anesthesiology-/-bioethics">
         <h2>consentimiento informado para anestesia</h2>
         <p><strong>English</strong>: informed consent for anesthesia</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1451,7 +1955,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="pediatric-medicine-/-bioethics">
         <h2>consentimiento parental (para menores)</h2>
         <p><strong>English</strong>: parental consent (for minors)</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1471,7 +1977,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics-/-legal-medicine">
         <h2>derechos del paciente informado</h2>
         <p><strong>English</strong>: rights of the informed patient</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1491,7 +1999,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="anesthesiology-/-legal-medicine">
         <h2>documento de consentimiento anestésico</h2>
         <p><strong>English</strong>: anesthetic consent document</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1511,7 +2021,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics/general-medicine">
         <h2>explicaciones sobre riesgos y beneficios</h2>
         <p><strong>English</strong>: explanations about risks and benefits</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1531,7 +2043,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="legal-medicine-/-surgery">
         <h2>firma de consentimiento quirúrgico</h2>
         <p><strong>English</strong>: surgical consent signature</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1551,7 +2065,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics-/-legal-medicine">
         <h2>firma del paciente adulto</h2>
         <p><strong>English</strong>: adult patient signature</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1571,7 +2087,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="general-medicine-/-bioethics">
         <h2>información comprensible para el paciente</h2>
         <p><strong>English</strong>: comprehensible information for the patient</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1591,7 +2109,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="bioethics-/-legal-medicine">
         <h2>preguntas resueltas antes de firmar</h2>
         <p><strong>English</strong>: questions resolved before signing</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1611,7 +2131,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="legal-medicine-/-bioethics">
         <h2>rechazo a procedimientos sin consentimiento</h2>
         <p><strong>English</strong>: refusal of procedures without consent</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1631,7 +2153,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="informed-consent"
+         data-specialty-en="anesthesiology-/-bioethics">
         <h2>riesgos conocidos de la anestesia</h2>
         <p><strong>English</strong>: known risks of anesthesia</p>
         <p><strong>Category (EN)</strong>: Informed Consent</p>
@@ -1651,7 +2175,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="neurology-/-anesthesiology">
         <h2>accidente cerebrovascular (ictus)</h2>
         <p><strong>English</strong>: cerebrovascular accident (stroke)</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1671,7 +2197,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="anesthesiology/critical-care-medicine">
         <h2>aspiración de contenido gástrico</h2>
         <p><strong>English</strong>: gastric content aspiration</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1691,7 +2219,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>bradicardia severa</h2>
         <p><strong>English</strong>: severe bradycardia</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1711,7 +2241,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>broncoespasmo persistente</h2>
         <p><strong>English</strong>: persistent bronchospasm</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1731,7 +2263,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>complicación cardiovascular intraoperatoria</h2>
         <p><strong>English</strong>: intraoperative cardiovascular complication</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1751,7 +2285,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="neurology-/-anesthesiology">
         <h2>complicación neurológica (daño neurológico)</h2>
         <p><strong>English</strong>: neurological complication (neurological damage)</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1771,7 +2307,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="nephrology-/-anesthesiology">
         <h2>complicación renal (insuficiencia renal aguda)</h2>
         <p><strong>English</strong>: renal complication (acute kidney failure)</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1791,7 +2329,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>complicación respiratoria aguda</h2>
         <p><strong>English</strong>: acute respiratory complication</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1811,7 +2351,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="psychiatry/anesthesiology">
         <h2>delirio postanestésico</h2>
         <p><strong>English</strong>: postanesthetic delirium</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1831,7 +2373,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>depresión respiratoria postoperatoria</h2>
         <p><strong>English</strong>: postoperative respiratory depression</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1851,7 +2395,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="allergology-/-medical-emergencies">
         <h2>edema angioneurótico</h2>
         <p><strong>English</strong>: angioneurotic edema</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1871,7 +2417,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>edema pulmonar agudo</h2>
         <p><strong>English</strong>: acute pulmonary edema</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1891,7 +2439,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-critical-care-medicine">
         <h2>embolia pulmonar</h2>
         <p><strong>English</strong>: pulmonary embolism</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1911,7 +2461,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="legal-medicine/clinical-safety">
         <h2>error médico inadvertido</h2>
         <p><strong>English</strong>: unintentional medical error</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1931,7 +2483,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="anesthesiology-/-clinical-engineering">
         <h2>falla de equipo anestésico</h2>
         <p><strong>English</strong>: anesthetic equipment failure</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1951,7 +2505,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="critical-care-medicine-/-anesthesiology">
         <h2>fallo multiorgánico</h2>
         <p><strong>English</strong>: multiple organ failure</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1971,7 +2527,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="anesthesiology-/-genetic-medicine">
         <h2>fiebre maligna por anestesia</h2>
         <p><strong>English</strong>: malignant hyperthermia due to anesthesia</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -1991,7 +2549,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="neurosurgery-/-anesthesiology">
         <h2>hematoma epidural</h2>
         <p><strong>English</strong>: epidural hematoma</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2011,7 +2571,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="surgery/emergency-medicine">
         <h2>hemorragia masiva</h2>
         <p><strong>English</strong>: massive hemorrhage</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2031,7 +2593,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>hipertensión arterial aguda</h2>
         <p><strong>English</strong>: acute arterial hypertension</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2051,7 +2615,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>hipotensión arterial severa</h2>
         <p><strong>English</strong>: severe arterial hypotension</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2071,7 +2637,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="critical-care-medicine-/-anesthesiology">
         <h2>hipoxia aguda (hipoxia cerebral)</h2>
         <p><strong>English</strong>: acute hypoxia (cerebral hypoxia)</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2091,7 +2659,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>infarto agudo de miocardio (ataque cardíaco)</h2>
         <p><strong>English</strong>: acute myocardial infarction (heart attack)</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2111,7 +2681,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="surgery-/-general-medicine">
         <h2>infección postoperatoria</h2>
         <p><strong>English</strong>: postoperative infection</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2131,7 +2703,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="gastroenterology-/-anesthesiology">
         <h2>insuficiencia hepática aguda</h2>
         <p><strong>English</strong>: acute hepatic failure</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2151,7 +2725,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>isquemia miocárdica</h2>
         <p><strong>English</strong>: myocardial ischemia</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2171,7 +2747,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="anesthesiology-/-pneumology">
         <h2>laringoespasmo</h2>
         <p><strong>English</strong>: laryngospasm</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2191,7 +2769,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="neurology-/-anesthesiology">
         <h2>lesión medular por compresión</h2>
         <p><strong>English</strong>: spinal cord injury due to compression</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2211,7 +2791,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pneumology-/-critical-care-medicine">
         <h2>neumonía aspirativa</h2>
         <p><strong>English</strong>: aspiration pneumonia</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2231,7 +2813,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>neumonía posoperatoria (neumonía hospitalaria)</h2>
         <p><strong>English</strong>: postoperative pneumonia (hospital-acquired pneumonia)</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2251,7 +2835,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="critical-care-medicine-/-anesthesiology">
         <h2>parada cardiorrespiratoria</h2>
         <p><strong>English</strong>: cardiorespiratory arrest</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2271,7 +2857,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-medical-emergencies">
         <h2>paro cardíaco súbito</h2>
         <p><strong>English</strong>: sudden cardiac arrest</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2291,7 +2879,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>paro respiratorio</h2>
         <p><strong>English</strong>: respiratory arrest</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2311,7 +2901,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="allergology-/-critical-care-medicine">
         <h2>reacción anafiláctica generalizada</h2>
         <p><strong>English</strong>: generalized anaphylactic reaction</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2331,7 +2923,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="pharmacology-/-anesthesiology">
         <h2>reacciones adversas graves</h2>
         <p><strong>English</strong>: severe adverse reactions</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2351,7 +2945,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="allergology-/-anesthesiology">
         <h2>reacciones alérgicas a los fármacos anestésicos</h2>
         <p><strong>English</strong>: allergic reactions to anesthetic drugs</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2371,7 +2967,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="anesthesiology">
         <h2>riesgo anestésico</h2>
         <p><strong>English</strong>: anesthetic risk</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2391,7 +2989,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="surgery-/-general-medicine">
         <h2>riesgo quirúrgico</h2>
         <p><strong>English</strong>: surgical risk</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2411,7 +3011,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="anesthesiology/recovery-medicine">
         <h2>salida de anestesia prolongada</h2>
         <p><strong>English</strong>: prolonged emergence from anesthesia</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2431,7 +3033,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="internal-medicine-/-critical-care-medicine">
         <h2>sepsis</h2>
         <p><strong>English</strong>: sepsis</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2451,7 +3055,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="medical-emergencies-/-allergology">
         <h2>shock anafiláctico</h2>
         <p><strong>English</strong>: anaphylactic shock</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2471,7 +3077,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>taquicardia supraventricular</h2>
         <p><strong>English</strong>: supraventricular tachycardia</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2491,7 +3099,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="cardiology-/-critical-care-medicine">
         <h2>taquicardia ventricular</h2>
         <p><strong>English</strong>: ventricular tachycardia</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2511,7 +3121,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="risks-and-complications"
+         data-specialty-en="surgery/internal-medicine">
         <h2>trombosis venosa profunda</h2>
         <p><strong>English</strong>: deep vein thrombosis (DVT)</p>
         <p><strong>Category (EN)</strong>: Risks and complications</p>
@@ -2531,7 +3143,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="critical-care-medicine-/-anesthesiology">
         <h2>administración de oxígeno al 100% por mascarilla</h2>
         <p><strong>English</strong>: administration of 100% oxygen by mask</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2551,7 +3165,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="general-medicine-/-anesthesiology">
         <h2>administración de oxígeno por cánula nasal</h2>
         <p><strong>English</strong>: administration of oxygen via nasal cannula</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2571,7 +3187,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology-/-clinical-engineering">
         <h2>ajuste de la máquina de anestesia</h2>
         <p><strong>English</strong>: adjustment of the anesthesia machine</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2591,7 +3209,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology-/-obstetrics">
         <h2>anestesia epidural lumbar</h2>
         <p><strong>English</strong>: lumbar epidural anesthesia</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2611,7 +3231,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology/thoracic-surgery">
         <h2>anestesia epidural torácica</h2>
         <p><strong>English</strong>: thoracic epidural anesthesia</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2631,7 +3253,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="dermatology-/-anesthesiology">
         <h2>anestesia local tópico (ej. lidocaína en la piel)</h2>
         <p><strong>English</strong>: topical local anesthesia (e.g. lidocaine on the skin)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2651,7 +3275,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery-/-general-medicine">
         <h2>antisepsia de la piel con povidona yodada</h2>
         <p><strong>English</strong>: skin antisepsis with povidone-iodine</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2671,7 +3297,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>aspiración endotraqueal controlada</h2>
         <p><strong>English</strong>: controlled endotracheal suctioning</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2691,7 +3319,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="internal-medicine-/-anesthesiology">
         <h2>auscultación cardíaca y pulmonar</h2>
         <p><strong>English</strong>: cardiac and pulmonary auscultation</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2711,7 +3341,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology-/-orthopedic-surgery">
         <h2>bloqueo nervioso periférico (ej. bloqueo plexo braquial)</h2>
         <p><strong>English</strong>: peripheral nerve block (e.g. brachial plexus block)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2731,7 +3363,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>bloqueos espinales (p. ej. bloqueo raquídeo)</h2>
         <p><strong>English</strong>: spinal blocks (e.g., spinal anesthesia)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2751,7 +3385,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="internal-medicine-/-critical-care">
         <h2>canalización de catéter venoso central</h2>
         <p><strong>English</strong>: placement of central venous catheter</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2771,7 +3407,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="general-medicine/nursing">
         <h2>canalización de vía intravenosa periférica</h2>
         <p><strong>English</strong>: placement of peripheral intravenous line</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2791,7 +3429,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery-/-general-medicine">
         <h2>cirugía abierta mayor</h2>
         <p><strong>English</strong>: major open surgery</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2811,7 +3451,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery/family-medicine">
         <h2>cirugía ambulatoria programada</h2>
         <p><strong>English</strong>: scheduled outpatient surgery</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2831,7 +3473,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery/emergency-medicine">
         <h2>cirugía de urgencia</h2>
         <p><strong>English</strong>: emergency surgery</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2851,7 +3495,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery-/-gastroenterology">
         <h2>cirugía laparoscópica abdominal</h2>
         <p><strong>English</strong>: abdominal laparoscopic surgery</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2871,7 +3517,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology/pain-medicine">
         <h2>colocación de catéter epidural</h2>
         <p><strong>English</strong>: epidural catheter placement</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2891,7 +3539,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>colocación de catéter raquídeo</h2>
         <p><strong>English</strong>: spinal catheter placement</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2911,7 +3561,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pneumology-/-critical-care-medicine">
         <h2>dispositivo de ventilación no invasiva</h2>
         <p><strong>English</strong>: non-invasive ventilation device</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2931,7 +3583,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery-/-general-medicine">
         <h2>drenaje quirúrgico</h2>
         <p><strong>English</strong>: surgical drainage</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2951,7 +3605,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="internal-medicine-/-anesthesiology">
         <h2>evaluación preoperatoria completa</h2>
         <p><strong>English</strong>: full preoperative evaluation</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2971,7 +3627,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="general-medicine-/-anesthesiology">
         <h2>examen físico prequirúrgico</h2>
         <p><strong>English</strong>: pre-surgical physical exam</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -2991,7 +3649,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery/superficial-nursing">
         <h2>herida quirúrgica estéril</h2>
         <p><strong>English</strong>: sterile surgical wound</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3011,7 +3671,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology/critical-care-medicine">
         <h2>inducción anestésica intravenosa (propofol IV)</h2>
         <p><strong>English</strong>: intravenous anesthetic induction (propofol IV)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3031,7 +3693,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pharmacology-/-hospital-medicine">
         <h2>infusión de medicamentos IV (por bomba de infusión)</h2>
         <p><strong>English</strong>: IV medication infusion (via infusion pump)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3051,7 +3715,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="general-medicine/critical-care">
         <h2>infusión intravenosa continua de fluidos</h2>
         <p><strong>English</strong>: continuous IV fluid infusion</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3071,7 +3737,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology/critical-care-medicine">
         <h2>intubación orotraqueal (tubo respiratorio orotraqueal)</h2>
         <p><strong>English</strong>: orotracheal intubation (orotracheal breathing tube)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3091,7 +3759,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pharmacology-/-preoperative-medicine">
         <h2>inyección intramuscular de sedante</h2>
         <p><strong>English</strong>: intramuscular injection of sedative</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3111,7 +3781,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="dermatology-/-outpatient-medicine">
         <h2>inyección subcutánea de anestésico local</h2>
         <p><strong>English</strong>: subcutaneous injection of local anesthetic</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3131,7 +3803,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="anesthesiology-/-medical-emergencies">
         <h2>mascarilla laríngea supraglótica</h2>
         <p><strong>English</strong>: supraglottic laryngeal mask</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3151,7 +3825,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="internal-medicine-/-anesthesiology">
         <h2>monitorización continua de la presión arterial</h2>
         <p><strong>English</strong>: continuous blood pressure monitoring</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3171,7 +3847,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>monitorización de la saturación de oxígeno</h2>
         <p><strong>English</strong>: oxygen saturation monitoring</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3191,7 +3869,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>monitorización ECG (electrocardiograma)</h2>
         <p><strong>English</strong>: ECG monitoring (electrocardiogram)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3211,7 +3891,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="general-medicine/surgery">
         <h2>palpación abdominal</h2>
         <p><strong>English</strong>: abdominal palpation</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3231,7 +3913,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery-/-anesthesiology">
         <h2>posicionamiento de paciente en decúbito supino</h2>
         <p><strong>English</strong>: patient positioning in supine decubitus</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3251,7 +3935,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="surgery/nursing">
         <h2>preparación quirúrgica estéril</h2>
         <p><strong>English</strong>: sterile surgical preparation</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3271,7 +3957,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="internal-medicine-/-critical-care">
         <h2>punción arterial (canalización arterial)</h2>
         <p><strong>English</strong>: arterial puncture (arterial line placement)</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3291,7 +3979,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="neurology-/-hospital-medicine">
         <h2>punción lumbar diagnóstica</h2>
         <p><strong>English</strong>: diagnostic lumbar puncture</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3311,7 +4001,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="medical-emergencies-/-critical-care-medicine">
         <h2>reanimación cardiopulmonar inmediata</h2>
         <p><strong>English</strong>: immediate cardiopulmonary resuscitation</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3331,7 +4023,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="internal-medicine-/-preoperative">
         <h2>revisión de historia clínica</h2>
         <p><strong>English</strong>: review of medical history</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3351,7 +4045,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pharmacology-/-outpatient-surgery">
         <h2>sedación consciente para procedimientos menores</h2>
         <p><strong>English</strong>: conscious sedation for minor procedures</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3371,7 +4067,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pharmacology-/-endoscopy">
         <h2>sedación intravenosa moderada</h2>
         <p><strong>English</strong>: moderate intravenous sedation</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3391,7 +4089,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="general-medicine/nursing">
         <h2>toma de constantes vitales</h2>
         <p><strong>English</strong>: recording of vital signs</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3411,7 +4111,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="procedures-and-monitoring"
+         data-specialty-en="pneumology-/-critical-care-medicine">
         <h2>ventilación mecánica invasiva con respirador</h2>
         <p><strong>English</strong>: invasive mechanical ventilation with ventilator</p>
         <p><strong>Category (EN)</strong>: Procedures and monitoring</p>
@@ -3431,7 +4133,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/critical-care-medicine">
         <h2>anestésico general intravenoso (propofol)</h2>
         <p><strong>English</strong>: intravenous general anesthetic (propofol)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3451,7 +4155,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>anestésico general inhalado (sevoflurano, isoflurano)</h2>
         <p><strong>English</strong>: inhaled general anesthetic (sevoflurane, isoflurane)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3471,7 +4177,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="ambulatory-medicine-/-minor-surgery">
         <h2>anestésico local (lidocaína, bupivacaína)</h2>
         <p><strong>English</strong>: local anesthetic (lidocaine, bupivacaine)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3491,7 +4199,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-anesthesiology">
         <h2>midazolam IV (benzodiacepina)</h2>
         <p><strong>English</strong>: midazolam IV (benzodiazepine)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3511,7 +4221,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/pain-medicine">
         <h2>fentanilo IV (opioide)</h2>
         <p><strong>English</strong>: fentanyl IV (opioid)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3531,7 +4243,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/emergency-medicine">
         <h2>ketamina IV (anestésico disociativo)</h2>
         <p><strong>English</strong>: ketamine IV (dissociative anesthetic)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3551,7 +4265,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>succinilcolina IV (bloqueador neuromuscular)</h2>
         <p><strong>English</strong>: succinylcholine IV (neuromuscular blocker)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3571,7 +4287,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/critical-care-medicine">
         <h2>rocuronio IV (bloqueador neuromuscular)</h2>
         <p><strong>English</strong>: rocuronium IV (neuromuscular blocker)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3591,7 +4309,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/pain-medicine">
         <h2>morfina IV (opioide)</h2>
         <p><strong>English</strong>: morphine IV (opioid)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3611,7 +4331,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-preoperative-medicine">
         <h2>escopolamina IV</h2>
         <p><strong>English</strong>: scopolamine IV</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3631,7 +4353,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-general-surgery">
         <h2>metoclopramida IV (antiemético)</h2>
         <p><strong>English</strong>: metoclopramide IV (antiemetic)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3651,7 +4375,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-perioperative-medicine">
         <h2>ondansetrón IV (antiemético)</h2>
         <p><strong>English</strong>: ondansetron IV (antiemetic)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3671,7 +4397,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-surgery">
         <h2>dexametasona IV (corticoide)</h2>
         <p><strong>English</strong>: dexamethasone IV (corticosteroid)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3691,7 +4419,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-pain-medicine">
         <h2>ketorolaco IV (AINE)</h2>
         <p><strong>English</strong>: ketorolac IV (NSAID)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3711,7 +4441,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-general-surgery">
         <h2>acetaminofén/paracetamol IV</h2>
         <p><strong>English</strong>: acetaminophen/paracetamol IV</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3731,7 +4463,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-pain-medicine">
         <h2>ibuprofeno oral o IV</h2>
         <p><strong>English</strong>: oral or IV ibuprofen</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3751,7 +4485,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-allergology">
         <h2>difenhidramina IV (antihistamínico)</h2>
         <p><strong>English</strong>: diphenhydramine IV (antihistamine)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3771,7 +4507,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="medical-emergencies-/-anesthesiology">
         <h2>adrenalina IM/IV (anfinefrina)</h2>
         <p><strong>English</strong>: adrenaline IM/IV (epinephrine)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3791,7 +4529,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>relaxante muscular (relajante muscular)</h2>
         <p><strong>English</strong>: muscle relaxant</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3811,7 +4551,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-pain-medicine">
         <h2>analgésico no opioide</h2>
         <p><strong>English</strong>: non-opioid analgesic</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3831,7 +4573,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/pain-medicine">
         <h2>analgésico opioide fuerte</h2>
         <p><strong>English</strong>: strong opioid analgesic</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3851,7 +4595,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="surgery/preventive-medicine">
         <h2>antibiótico profiláctico intravenoso</h2>
         <p><strong>English</strong>: prophylactic intravenous antibiotic</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3871,7 +4617,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pharmacology-/-gastroenterology">
         <h2>bloqueador H2 (ranitidina IV)</h2>
         <p><strong>English</strong>: H2 blocker (ranitidine IV)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3891,7 +4639,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="hospital-medicine-/-anesthesiology">
         <h2>solución salina isotónica 0.9%</h2>
         <p><strong>English</strong>: 0.9% isotonic saline solution</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3911,7 +4661,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="surgical-medicine-/-critical-care">
         <h2>solución de Ringer lactato</h2>
         <p><strong>English</strong>: Ringer’s lactate solution</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3931,7 +4683,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="critical-care-medicine-/-anesthesiology">
         <h2>sangre total transfundida</h2>
         <p><strong>English</strong>: transfused whole blood</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3951,7 +4705,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="hematology/surgery">
         <h2>concentrado de glóbulos rojos</h2>
         <p><strong>English</strong>: packed red blood cells</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3971,7 +4727,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="intensive-care-medicine-/-anesthesiology">
         <h2>plasma fresco congelado</h2>
         <p><strong>English</strong>: fresh frozen plasma</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -3991,7 +4749,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="hematology/surgical-medicine">
         <h2>hemoderivados de plaquetas</h2>
         <p><strong>English</strong>: platelet blood derivatives</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4011,7 +4771,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="vascular-surgery-/-perioperative-medicine">
         <h2>anticoagulante IV (heparina)</h2>
         <p><strong>English</strong>: intravenous anticoagulant (heparin)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4031,7 +4793,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="critical-care-medicine-/-anesthesiology">
         <h2>agentes vasoactivos (dopamina, noradrenalina)</h2>
         <p><strong>English</strong>: vasoactive agents (dopamine, norepinephrine)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4051,7 +4815,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology-/-nephrology">
         <h2>diurético IV (furosemida)</h2>
         <p><strong>English</strong>: IV diuretic (furosemide)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4071,7 +4837,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>betabloqueante IV (esmolol)</h2>
         <p><strong>English</strong>: IV beta blocker (esmolol)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4091,7 +4859,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="cardiology/perioperative-medicine">
         <h2>bloqueador de canales de calcio IV (verapamilo)</h2>
         <p><strong>English</strong>: IV calcium channel blocker (verapamil)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4111,7 +4881,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pediatric-anesthesiology">
         <h2>anestésico pediátrico endovenoso</h2>
         <p><strong>English</strong>: intravenous pediatric anesthetic</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4131,7 +4903,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pediatric-anesthesiology-/-child-surgery">
         <h2>anestésico pediátrico inhalatorio</h2>
         <p><strong>English</strong>: pediatric inhaled anesthetic</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4151,7 +4925,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pain-medicine-/-post-operative-care">
         <h2>analgesia controlada por el paciente (PCA)</h2>
         <p><strong>English</strong>: patient-controlled analgesia (PCA)</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4171,7 +4947,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/pain-medicine">
         <h2>analgesia epidural continua</h2>
         <p><strong>English</strong>: continuous epidural analgesia</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4191,7 +4969,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="surgery-/-hospital-medicine">
         <h2>antimicrobiano IV posoperatorio</h2>
         <p><strong>English</strong>: postoperative IV antimicrobial</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4211,7 +4991,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="pneumology-/-postoperative-medicine">
         <h2>antitusivo oral postoperatorio</h2>
         <p><strong>English</strong>: postoperative oral cough suppressant</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4231,7 +5013,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="general-medicine/post-operative-care">
         <h2>antidiarreico oral</h2>
         <p><strong>English</strong>: oral antidiarrheal</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4251,7 +5035,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/preoperative-medicine">
         <h2>sedante preanestésico oral</h2>
         <p><strong>English</strong>: oral preanesthetic sedative</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4271,7 +5057,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="anesthetic-medications"
+         data-specialty-en="anesthesiology/preoperative-medicine">
         <h2>sedante preanestésico IV</h2>
         <p><strong>English</strong>: intravenous preanesthetic sedative</p>
         <p><strong>Category (EN)</strong>: Anesthetic medications</p>
@@ -4291,7 +5079,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="anesthesiology-/-nursing">
         <h2>observación postanestésica continua</h2>
         <p><strong>English</strong>: continuous postanesthetic observation</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4311,7 +5101,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="anesthesiology-/-hospital-medicine">
         <h2>sala de recuperación anestésica</h2>
         <p><strong>English</strong>: anesthetic recovery room</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4331,7 +5123,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="critical-care-medicine/major-surgery">
         <h2>unidad de cuidados intensivos (UCI)</h2>
         <p><strong>English</strong>: intensive care unit (ICU)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4351,7 +5145,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="general-medicine/nursing">
         <h2>control de signos vitales posoperatorios</h2>
         <p><strong>English</strong>: postoperative vital signs monitoring</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4371,7 +5167,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="cardiology-/-anesthesiology">
         <h2>control de la tensión arterial posquirúrgica</h2>
         <p><strong>English</strong>: post-surgical blood pressure control</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4391,7 +5189,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="cardiology-/-nursing">
         <h2>monitorización de la frecuencia cardíaca</h2>
         <p><strong>English</strong>: heart rate monitoring</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4411,7 +5211,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pneumology-/-postoperative-medicine">
         <h2>monitor de saturación de oxígeno</h2>
         <p><strong>English</strong>: oxygen saturation monitor</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4431,7 +5233,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pain-medicine-/-nursing">
         <h2>evaluación del nivel de dolor</h2>
         <p><strong>English</strong>: pain level assessment</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4451,7 +5255,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pain-medicine-/-surgery">
         <h2>analgesia controlada por el paciente (PCA)</h2>
         <p><strong>English</strong>: patient-controlled analgesia (PCA)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4471,7 +5277,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="anesthesiology/pain-medicine">
         <h2>analgesia epidural postoperatoria</h2>
         <p><strong>English</strong>: postoperative epidural analgesia</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4491,7 +5299,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pain-medicine-/-surgery">
         <h2>analgesia oral de rescate</h2>
         <p><strong>English</strong>: rescue oral analgesia</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4511,7 +5321,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="hospital-medicine/general-surgery">
         <h2>rehidratación oral progresiva</h2>
         <p><strong>English</strong>: progressive oral rehydration</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4531,7 +5343,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="intensive-care-/-surgery">
         <h2>rehidratación intravenosa en caso necesario</h2>
         <p><strong>English</strong>: intravenous rehydration if needed</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4551,7 +5365,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="digestive-medicine-/-abdominal-surgery">
         <h2>dieta líquida inicial</h2>
         <p><strong>English</strong>: initial liquid diet</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4571,7 +5387,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="nutrition-/-general-surgery">
         <h2>dieta blanda postoperatoria</h2>
         <p><strong>English</strong>: postoperative soft diet</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4591,7 +5409,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="physiotherapy-/-surgery">
         <h2>movilización temprana (levantarse con ayuda)</h2>
         <p><strong>English</strong>: early mobilization (assisted ambulation)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4611,7 +5431,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pneumology-/-postoperative-medicine">
         <h2>fisioterapia respiratoria (ejercicios con espirómetro)</h2>
         <p><strong>English</strong>: respiratory therapy (incentive spirometry)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4631,7 +5453,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="hematology/surgery">
         <h2>profilaxis tromboembólica (medias, heparina)</h2>
         <p><strong>English</strong>: thromboembolic prophylaxis (compression stockings, heparin)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4651,7 +5475,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="nursing/general-surgery">
         <h2>curación y vigilancia de herida quirúrgica</h2>
         <p><strong>English</strong>: surgical wound care and monitoring</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4671,7 +5497,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="nursing-/-minor-surgery">
         <h2>vendaje estéril en sitio operatorio</h2>
         <p><strong>English</strong>: sterile dressing at surgical site</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4691,7 +5519,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="surgery/nursing">
         <h2>extracción de drenajes cuando proceda</h2>
         <p><strong>English</strong>: drain removal when indicated</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4711,7 +5541,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="anesthesiology-/-medical-documentation">
         <h2>informe anestésico posoperatorio</h2>
         <p><strong>English</strong>: postoperative anesthesia report</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4731,7 +5563,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="nursing/post-operative-medicine">
         <h2>enfermería de sala de recuperación</h2>
         <p><strong>English</strong>: recovery room nursing care</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4751,7 +5585,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pneumology-/-anesthesiology">
         <h2>oxigenoterapia suplementaria</h2>
         <p><strong>English</strong>: supplemental oxygen therapy</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4771,7 +5607,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="anesthesiology-/-major-surgery">
         <h2>extremidad adormecida (por bloqueo epidural)</h2>
         <p><strong>English</strong>: numb limb (due to epidural block)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4791,7 +5629,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="anesthesiology-/-general-surgery">
         <h2>dolor leve en la espalda baja (después de anestesia raquídea)</h2>
         <p><strong>English</strong>: mild lower back pain (after spinal anesthesia)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4811,7 +5651,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pharmacology-/-nursing">
         <h2>náuseas leves en el postoperatorio</h2>
         <p><strong>English</strong>: mild postoperative nausea</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4831,7 +5673,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="gastroenterology-/-anesthesiology">
         <h2>vómitos residuales</h2>
         <p><strong>English</strong>: residual vomiting</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4851,7 +5695,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="neurology-/-anesthesiology">
         <h2>visión borrosa transitoria</h2>
         <p><strong>English</strong>: transient blurred vision</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4871,7 +5717,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="neurology-/-anesthesiology">
         <h2>confusión postanestésica leve</h2>
         <p><strong>English</strong>: mild postanesthetic confusion</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4891,7 +5739,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="neurology/post-operative-medicine">
         <h2>trastornos del equilibrio breves</h2>
         <p><strong>English</strong>: brief balance disturbances</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4911,7 +5761,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="pneumology-/-intensive-care-medicine">
         <h2>protección de vías aéreas con cánula si es necesario</h2>
         <p><strong>English</strong>: airway protection with cannula if needed</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4931,7 +5783,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="hospital-medicine/surgery">
         <h2>alta hospitalaria programada</h2>
         <p><strong>English</strong>: scheduled hospital discharge</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4951,7 +5805,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="surgical-medicine/outpatient-care">
         <h2>seguimiento en consulta externa</h2>
         <p><strong>English</strong>: outpatient follow-up consultation</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4971,7 +5827,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="family-medicine/general-surgery">
         <h2>cuidados domiciliarios indicados</h2>
         <p><strong>English</strong>: indicated home care instructions</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -4991,7 +5849,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="hospital-medicine/surgery">
         <h2>medicamentos de alta (analgésicos, antieméticos)</h2>
         <p><strong>English</strong>: discharge medications (painkillers, antiemetics)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -5011,7 +5871,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="surgery/outpatient-medicine">
         <h2>revisión de suturas en consulta postoperatoria</h2>
         <p><strong>English</strong>: suture check at follow-up visit</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -5031,7 +5893,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="surgery-/-general-medicine">
         <h2>descanso absoluto recomendado (24–48?h)</h2>
         <p><strong>English</strong>: recommended complete rest (24–48?h)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -5051,7 +5915,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="anesthesiology/critical-care-medicine">
         <h2>cuidados de la intubación orotraqueal (garganta)</h2>
         <p><strong>English</strong>: orotracheal intubation aftercare (throat)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -5071,7 +5937,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="nursing-/-intensive-care">
         <h2>profilaxis de úlceras por presión (cama)</h2>
         <p><strong>English</strong>: pressure ulcer prevention (bed)</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -5091,7 +5959,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="postoperative-care"
+         data-specialty-en="nursing-/-hospital-medicine">
         <h2>registro de diuresis y líquidos ingeridos</h2>
         <p><strong>English</strong>: record of urine output and fluid intake</p>
         <p><strong>Category (EN)</strong>: Postoperative care</p>
@@ -5111,7 +5981,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="surgery-/-anesthesiology">
         <h2>“¿Por qué no debo comer antes de la cirugía?”</h2>
         <p><strong>English</strong>: “Why can’t I eat before surgery?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5131,7 +6003,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology-/-allergology">
         <h2>“¿Puedo tener una reacción alérgica a la anestesia?”</h2>
         <p><strong>English</strong>: “Can I have an allergic reaction to anesthesia?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5151,7 +6025,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology/critical-care-medicine">
         <h2>“¿Se deja de respirar durante la anestesia general?”</h2>
         <p><strong>English</strong>: “Do you stop breathing during general anesthesia?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5171,7 +6047,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>“¿Cuánto tiempo dura la anestesia?”</h2>
         <p><strong>English</strong>: “How long does the anesthesia last?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5191,7 +6069,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="pain-medicine-/-surgery">
         <h2>“¿Qué sucede si siento dolor luego de que desaparezcan los efectos de la anestesia?”</h2>
         <p><strong>English</strong>: “What happens if I feel pain after the anesthesia wears off?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5211,7 +6091,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>“¿Qué tipo de anestesia me aplicarán?”</h2>
         <p><strong>English</strong>: “What type of anesthesia will I receive?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5231,7 +6113,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="pain-medicine-/-anesthesiology">
         <h2>“¿Voy a sentir dolor al despertarme?”</h2>
         <p><strong>English</strong>: “Will I feel pain when I wake up?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5251,7 +6135,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="digestive-medicine-/-surgery">
         <h2>“¿Cuándo podré comer después de la cirugía?”</h2>
         <p><strong>English</strong>: “When will I be able to eat after surgery?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5271,7 +6157,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="preoperative-medicine-/-general-surgery">
         <h2>“¿Puedo llevar mis lentes o prótesis?”</h2>
         <p><strong>English</strong>: “Can I wear my glasses or prostheses?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5291,7 +6179,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology-/-surgery">
         <h2>“¿Va a estar el anestesiólogo conmigo todo el tiempo?”</h2>
         <p><strong>English</strong>: “Will the anesthesiologist stay with me the whole time?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5311,7 +6201,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="internal-medicine-/-surgery">
         <h2>“¿Qué medicamentos debo suspender antes de la operación?”</h2>
         <p><strong>English</strong>: “What medications should I stop before surgery?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5331,7 +6223,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="pneumology-/-general-surgery">
         <h2>“¿Tengo que dejar de fumar antes de la cirugía?”</h2>
         <p><strong>English</strong>: “Do I need to stop smoking before surgery?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5351,7 +6245,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology-/-internal-medicine">
         <h2>“¿Es seguro que me pongan anestesia general?”</h2>
         <p><strong>English</strong>: “Is it safe for me to be given general anesthesia?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5371,7 +6267,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology-/-preventive-medicine">
         <h2>“¿Qué riesgos presenta la anestesia?”</h2>
         <p><strong>English</strong>: “What risks does anesthesia involve?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5391,7 +6289,9 @@
         <hr>
     </div>
     
-    <div class="dictionary-entry">
+    <div class="dictionary-entry"
+         data-category-en="patient’s-faq"
+         data-specialty-en="anesthesiology-/-personalized-medicine">
         <h2>“¿Qué anestésicos son los más adecuados para mí?”</h2>
         <p><strong>English</strong>: “Which anesthetics are best suited for me?”</p>
         <p><strong>Category (EN)</strong>: Patient’s FAQ</p>
@@ -5415,20 +6315,69 @@
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
             const dictionaryEntries = document.querySelectorAll('.dictionary-entry');
+            const filterButtons = document.querySelectorAll('.filter-button');
 
-            searchInput.addEventListener('keyup', function() {
+            let activeFilters = {
+                category: 'all',
+                specialty: 'all'
+            };
+
+            function applyFilters() {
                 const searchTerm = searchInput.value.toLowerCase();
 
                 dictionaryEntries.forEach(entry => {
                     const entryText = entry.textContent.toLowerCase();
+                    const entryCategory = entry.dataset.categoryEn;
+                    const entrySpecialty = entry.dataset.specialtyEn;
 
-                    if (entryText.includes(searchTerm)) {
+                    const matchesSearch = entryText.includes(searchTerm);
+                    const matchesCategory = (activeFilters.category === 'all' || entryCategory === activeFilters.category);
+                    const matchesSpecialty = (activeFilters.specialty === 'all' || entrySpecialty === activeFilters.specialty);
+
+                    if (matchesSearch && matchesCategory && matchesSpecialty) {
                         entry.classList.remove('hidden');
                     } else {
                         entry.classList.add('hidden');
                     }
                 });
+            }
+
+            // Event listener for search input
+            searchInput.addEventListener('keyup', applyFilters);
+
+            // Event listener for filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filterType = this.dataset.filterType;
+                    const filterValue = this.dataset.filterValue;
+
+                    // Handle 'Clear All Filters' button
+                    if (filterType === 'clear') {
+                        activeFilters.category = 'all';
+                        activeFilters.specialty = 'all';
+                        // Reset active state for all filter buttons
+                        document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
+                        // Set 'All' buttons as active
+                        document.querySelector('[data-filter-type="category"][data-filter-value="all"]').classList.add('active');
+                        document.querySelector('[data-filter-type="specialty"][data-filter-value="all"]').classList.add('active');
+                    } else {
+                        // Remove 'active' class from all buttons of the same type
+                        document.querySelectorAll(`.filter-button[data-filter-type="${filterType}"]`).forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        // Add 'active' class to the clicked button
+                        this.classList.add('active');
+
+                        // Update activeFilters
+                        activeFilters[filterType] = filterValue;
+                    }
+
+                    applyFilters(); // Re-apply all filters
+                });
             });
+
+            // Initial application of filters on page load
+            applyFilters();
         });
     </script>
 </body>
