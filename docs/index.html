@@ -96,11 +96,14 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            /* Initially hide all entries */
+            display: none; /* KEY CHANGE: Hide by default */
         }
-        .dictionary-entry.hidden {
-            display: none;
+        .dictionary-entry.visible { /* New class to show items */
+            display: block;
         }
-        /* Filter Button Styling */
+
+        /* Filter Dropdown Styling */
         .filter-container {
             text-align: center;
             margin: 30px 0;
@@ -108,43 +111,41 @@
             background-color: #e0e7ff; /* Light blue background for filters */
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex; /* Use flexbox for layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            justify-content: center; /* Center items */
+            gap: 15px; /* Space between filter groups */
         }
-        .filter-container h3 {
-            margin-top: 0;
+        .filter-group-dropdown {
+            flex: 1 1 auto; /* Allow items to grow and shrink */
+            min-width: 250px; /* Minimum width before wrapping */
+            text-align: left;
+        }
+        .filter-group-dropdown label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 15px;
         }
-        .filter-button {
-            background-color: #007bff;
-            color: white;
-            padding: 8px 15px;
-            border: none;
+        .filter-group-dropdown select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 1em;
+            background-color: white;
             cursor: pointer;
-            margin: 5px;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            font-size: 0.9em;
-            white-space: nowrap; /* Keep button text on one line */
-        }
-        .filter-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-1px);
-        }
-        .filter-button.active {
-            background-color: #28a745; /* Green for active filter */
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-        }
-        .filter-group {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px dotted #bbd;
-        }
-        .filter-group:last-child {
-            border-bottom: none;
         }
         .clear-filters-button {
             background-color: #dc3545; /* Red for clear filters */
-            margin-top: 15px;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px auto; /* Center button */
+            font-size: 1em;
+            transition: background-color 0.3s ease;
         }
         .clear-filters-button:hover {
             background-color: #c82333;
@@ -160,324 +161,328 @@
     </div>
 
     <div class="filter-container">
-        <h3>Filter by Category:</h3>
-        <div class="filter-group" id="category-filters">
-            <button class="filter-button active" data-filter-type="category" data-filter-value="all">All Categories</button>
+        <div class="filter-group-dropdown">
+            <label for="categoryFilter">Filter by Category:</label>
+            <select id="categoryFilter">
+                <option value="all">All Categories</option>
 
-            <button class="filter-button" data-filter-type="category" data-filter-value="allergies and reactions">Allergies and reactions (Alergias y reacciones)</button>
+                <option value="allergies-and-reactions">Allergies and reactions (Alergias y reacciones)</option>
     
-            <button class="filter-button" data-filter-type="category" data-filter-value="anesthetic medications">Anesthetic medications (Consentimiento informado)</button>
+                <option value="anesthetic-medications">Anesthetic medications (Consentimiento informado)</option>
     
-            <button class="filter-button" data-filter-type="category" data-filter-value="informed consent">Informed Consent (Cuidados postoperatorios)</button>
+                <option value="informed-consent">Informed Consent (Cuidados postoperatorios)</option>
     
-            <button class="filter-button" data-filter-type="category" data-filter-value="patient’s faq">Patient’s FAQ (Medicamentos anestésicos)</button>
+                <option value="patient’s-faq">Patient’s FAQ (Medicamentos anestésicos)</option>
     
-            <button class="filter-button" data-filter-type="category" data-filter-value="postoperative care">Postoperative care (Preguntas frecuentes del paciente)</button>
+                <option value="postoperative-care">Postoperative care (Preguntas frecuentes del paciente)</option>
     
-            <button class="filter-button" data-filter-type="category" data-filter-value="procedures and monitoring">Procedures and monitoring (Procedimientos y seguimiento)</button>
+                <option value="procedures-and-monitoring">Procedures and monitoring (Procedimientos y seguimiento)</option>
     
-            <button class="filter-button" data-filter-type="category" data-filter-value="risks and complications">Risks and complications (Riesgos y complicaciones)</button>
+                <option value="risks-and-complications">Risks and complications (Riesgos y complicaciones)</option>
     
-            <button class="filter-button" data-filter-type="category" data-filter-value="symptoms and history">Symptoms and history (Síntomas y antecedentes)</button>
+                <option value="symptoms-and-history">Symptoms and history (Síntomas y antecedentes)</option>
     
+            </select>
         </div>
 
-        <h3>Filter by Specialty:</h3>
-        <div class="filter-group" id="specialty-filters">
-            <button class="filter-button active" data-filter-type="specialty" data-filter-value="all">All Specialties</button>
+        <div class="filter-group-dropdown">
+            <label for="specialtyFilter">Filter by Specialty:</label>
+            <select id="specialtyFilter">
+                <option value="all">All Specialties</option>
 
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology">Allergology (Alergología)</button>
+                <option value="allergology">Allergology (Alergología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / anesthesiology">Allergology / Anesthesiology (Alergología / Anestesiología)</button>
+                <option value="allergology-/-anesthesiology">Allergology / Anesthesiology (Alergología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / critical care medicine">Allergology / Critical Care Medicine (Alergología / Cirugía)</button>
+                <option value="allergology-/-critical-care-medicine">Allergology / Critical Care Medicine (Alergología / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / dentistry / anesthesiology">Allergology / Dentistry / Anesthesiology (Alergología / Dermatología)</button>
+                <option value="allergology-/-dentistry-/-anesthesiology">Allergology / Dentistry / Anesthesiology (Alergología / Dermatología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / dermatology">Allergology / Dermatology (Alergología / Medicina crítica)</button>
+                <option value="allergology-/-dermatology">Allergology / Dermatology (Alergología / Medicina crítica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / internal medicine">Allergology / Internal Medicine (Alergología / Medicina del dolor)</button>
+                <option value="allergology-/-internal-medicine">Allergology / Internal Medicine (Alergología / Medicina del dolor)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / medical emergencies">Allergology / Medical emergencies (Alergología / Medicina interna)</button>
+                <option value="allergology-/-medical-emergencies">Allergology / Medical emergencies (Alergología / Medicina interna)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / nutrition">Allergology / Nutrition (Alergología / Medicina ocupacional)</button>
+                <option value="allergology-/-nutrition">Allergology / Nutrition (Alergología / Medicina ocupacional)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / occupational medicine">Allergology / Occupational Medicine (Alergología / Medicina preventiva)</button>
+                <option value="allergology-/-occupational-medicine">Allergology / Occupational Medicine (Alergología / Medicina preventiva)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / pain medicine">Allergology / Pain Medicine (Alergología / Nutrición)</button>
+                <option value="allergology-/-pain-medicine">Allergology / Pain Medicine (Alergología / Nutrición)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / preventive medicine">Allergology / Preventive Medicine (Alergología / Odontología / Anestesiología)</button>
+                <option value="allergology-/-preventive-medicine">Allergology / Preventive Medicine (Alergología / Odontología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="allergology / surgery">Allergology / Surgery (Alergología / Urgencias médicas)</button>
+                <option value="allergology-/-surgery">Allergology / Surgery (Alergología / Urgencias médicas)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="ambulatory medicine / minor surgery">Ambulatory Medicine / Minor Surgery (Anestesiología)</button>
+                <option value="ambulatory-medicine-/-minor-surgery">Ambulatory Medicine / Minor Surgery (Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology">Anesthesiology (Anestesiología / Alergología)</button>
+                <option value="anesthesiology">Anesthesiology (Anestesiología / Alergología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / allergology">Anesthesiology / Allergology (Anestesiología / Bioética)</button>
+                <option value="anesthesiology-/-allergology">Anesthesiology / Allergology (Anestesiología / Bioética)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / bioethics">Anesthesiology / Bioethics (Anestesiología / Cirugía)</button>
+                <option value="anesthesiology-/-bioethics">Anesthesiology / Bioethics (Anestesiología / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / clinical engineering">Anesthesiology / Clinical Engineering (Anestesiología / Cirugía general)</button>
+                <option value="anesthesiology-/-clinical-engineering">Anesthesiology / Clinical Engineering (Anestesiología / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / clinical psychology">Anesthesiology / Clinical Psychology (Anestesiología / Cirugía mayor)</button>
+                <option value="anesthesiology-/-clinical-psychology">Anesthesiology / Clinical Psychology (Anestesiología / Cirugía mayor)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / endocrinology">Anesthesiology / Endocrinology (Anestesiología / Cirugía ortopédica)</button>
+                <option value="anesthesiology-/-endocrinology">Anesthesiology / Endocrinology (Anestesiología / Cirugía ortopédica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / general surgery">Anesthesiology / General Surgery (Anestesiología / Cirugía torácica)</button>
+                <option value="anesthesiology-/-general-surgery">Anesthesiology / General Surgery (Anestesiología / Cirugía torácica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / genetic medicine">Anesthesiology / Genetic Medicine (Anestesiología / Documentación médica)</button>
+                <option value="anesthesiology-/-genetic-medicine">Anesthesiology / Genetic Medicine (Anestesiología / Documentación médica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / hospital medicine">Anesthesiology / Hospital Medicine (Anestesiología / Endocrinología)</button>
+                <option value="anesthesiology-/-hospital-medicine">Anesthesiology / Hospital Medicine (Anestesiología / Endocrinología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / internal medicine">Anesthesiology / Internal Medicine (Anestesiología / Enfermería)</button>
+                <option value="anesthesiology-/-internal-medicine">Anesthesiology / Internal Medicine (Anestesiología / Enfermería)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / legal medicine">Anesthesiology / Legal Medicine (Anestesiología / Ingeniería clínica)</button>
+                <option value="anesthesiology-/-legal-medicine">Anesthesiology / Legal Medicine (Anestesiología / Ingeniería clínica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / major surgery">Anesthesiology / Major Surgery (Anestesiología / Medicina crítica)</button>
+                <option value="anesthesiology-/-major-surgery">Anesthesiology / Major Surgery (Anestesiología / Medicina crítica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / medical documentation">Anesthesiology / Medical Documentation (Anestesiología / Medicina de emergencia)</button>
+                <option value="anesthesiology-/-medical-documentation">Anesthesiology / Medical Documentation (Anestesiología / Medicina de emergencia)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / medical emergencies">Anesthesiology / Medical Emergencies (Anestesiología / Medicina de recuperación)</button>
+                <option value="anesthesiology-/-medical-emergencies">Anesthesiology / Medical Emergencies (Anestesiología / Medicina de recuperación)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / nephrology">Anesthesiology / Nephrology (Anestesiología / Medicina del dolor)</button>
+                <option value="anesthesiology-/-nephrology">Anesthesiology / Nephrology (Anestesiología / Medicina del dolor)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / nursing">Anesthesiology / Nursing (Anestesiología / Medicina genética)</button>
+                <option value="anesthesiology-/-nursing">Anesthesiology / Nursing (Anestesiología / Medicina genética)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / obstetrics">Anesthesiology / Obstetrics (Anestesiología / Medicina hospitalaria)</button>
+                <option value="anesthesiology-/-obstetrics">Anesthesiology / Obstetrics (Anestesiología / Medicina hospitalaria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / orthopedic surgery">Anesthesiology / Orthopedic Surgery (Anestesiología / Medicina interna)</button>
+                <option value="anesthesiology-/-orthopedic-surgery">Anesthesiology / Orthopedic Surgery (Anestesiología / Medicina interna)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / personalized medicine">Anesthesiology / Personalized Medicine (Anestesiología / Medicina legal)</button>
+                <option value="anesthesiology-/-personalized-medicine">Anesthesiology / Personalized Medicine (Anestesiología / Medicina legal)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / pneumology">Anesthesiology / Pneumology (Anestesiología / Medicina personalizada)</button>
+                <option value="anesthesiology-/-pneumology">Anesthesiology / Pneumology (Anestesiología / Medicina personalizada)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / preventive medicine">Anesthesiology / Preventive Medicine (Anestesiología / Medicina preoperatoria)</button>
+                <option value="anesthesiology-/-preventive-medicine">Anesthesiology / Preventive Medicine (Anestesiología / Medicina preoperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology / surgery">Anesthesiology / Surgery (Anestesiología / Medicina preventiva)</button>
+                <option value="anesthesiology-/-surgery">Anesthesiology / Surgery (Anestesiología / Medicina preventiva)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/critical care medicine">Anesthesiology/Critical Care Medicine (Anestesiología / Nefrología)</button>
+                <option value="anesthesiology/critical-care-medicine">Anesthesiology/Critical Care Medicine (Anestesiología / Nefrología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/emergency medicine">Anesthesiology/Emergency Medicine (Anestesiología / Neumología)</button>
+                <option value="anesthesiology/emergency-medicine">Anesthesiology/Emergency Medicine (Anestesiología / Neumología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/pain medicine">Anesthesiology/Pain Medicine (Anestesiología / Obstetricia)</button>
+                <option value="anesthesiology/pain-medicine">Anesthesiology/Pain Medicine (Anestesiología / Obstetricia)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/preoperative medicine">Anesthesiology/Preoperative Medicine (Anestesiología / Psicología clínica)</button>
+                <option value="anesthesiology/preoperative-medicine">Anesthesiology/Preoperative Medicine (Anestesiología / Psicología clínica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/recovery medicine">Anesthesiology/Recovery Medicine (Anestesiología / Urgencias médicas)</button>
+                <option value="anesthesiology/recovery-medicine">Anesthesiology/Recovery Medicine (Anestesiología / Urgencias médicas)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="anesthesiology/thoracic surgery">Anesthesiology/Thoracic Surgery (Anestesiología pediátrica)</button>
+                <option value="anesthesiology/thoracic-surgery">Anesthesiology/Thoracic Surgery (Anestesiología pediátrica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="bioethics / legal medicine">Bioethics / Legal Medicine (Anestesiología pediátrica / Cirugía infantil)</button>
+                <option value="bioethics-/-legal-medicine">Bioethics / Legal Medicine (Anestesiología pediátrica / Cirugía infantil)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="bioethics/general medicine">Bioethics/General Medicine (Bioética / Medicina general)</button>
+                <option value="bioethics/general-medicine">Bioethics/General Medicine (Bioética / Medicina general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology">Cardiology (Bioética / Medicina legal)</button>
+                <option value="cardiology">Cardiology (Bioética / Medicina legal)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / anesthesiology">Cardiology / Anesthesiology (Cardiología)</button>
+                <option value="cardiology-/-anesthesiology">Cardiology / Anesthesiology (Cardiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / critical care medicine">Cardiology / Critical Care Medicine (Cardiología / Anestesiología)</button>
+                <option value="cardiology-/-critical-care-medicine">Cardiology / Critical Care Medicine (Cardiología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / medical emergencies">Cardiology / Medical Emergencies (Cardiología / Enfermería)</button>
+                <option value="cardiology-/-medical-emergencies">Cardiology / Medical Emergencies (Cardiología / Enfermería)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / nursing">Cardiology / Nursing (Cardiología / Medicina crítica)</button>
+                <option value="cardiology-/-nursing">Cardiology / Nursing (Cardiología / Medicina crítica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology / pulmonology">Cardiology / Pulmonology (Cardiología / Medicina perioperatoria)</button>
+                <option value="cardiology-/-pulmonology">Cardiology / Pulmonology (Cardiología / Medicina perioperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="cardiology/perioperative medicine">Cardiology/Perioperative Medicine (Cardiología / Neumología)</button>
+                <option value="cardiology/perioperative-medicine">Cardiology/Perioperative Medicine (Cardiología / Neumología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="clinical psychology / anesthesiology">Clinical Psychology / Anesthesiology (Cardiología / Urgencias médicas)</button>
+                <option value="clinical-psychology-/-anesthesiology">Clinical Psychology / Anesthesiology (Cardiología / Urgencias médicas)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="clinical psychology / sleep medicine">Clinical Psychology / Sleep Medicine (Cirugía / Anestesiología)</button>
+                <option value="clinical-psychology-/-sleep-medicine">Clinical Psychology / Sleep Medicine (Cirugía / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="critical care medicine / anesthesiology">Critical Care Medicine / Anesthesiology (Cirugía / Enfermería)</button>
+                <option value="critical-care-medicine-/-anesthesiology">Critical Care Medicine / Anesthesiology (Cirugía / Enfermería)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="critical care medicine/major surgery">Critical Care Medicine/Major Surgery (Cirugía / Enfermería superficial)</button>
+                <option value="critical-care-medicine/major-surgery">Critical Care Medicine/Major Surgery (Cirugía / Enfermería superficial)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="dermatology / anesthesiology">Dermatology / Anesthesiology (Cirugía / Gastroenterología)</button>
+                <option value="dermatology-/-anesthesiology">Dermatology / Anesthesiology (Cirugía / Gastroenterología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="dermatology / outpatient medicine">Dermatology / Outpatient Medicine (Cirugía / Medicina ambulatoria)</button>
+                <option value="dermatology-/-outpatient-medicine">Dermatology / Outpatient Medicine (Cirugía / Medicina ambulatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="digestive medicine / abdominal surgery">Digestive Medicine / Abdominal Surgery (Cirugía / Medicina de emergencia)</button>
+                <option value="digestive-medicine-/-abdominal-surgery">Digestive Medicine / Abdominal Surgery (Cirugía / Medicina de emergencia)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="digestive medicine / surgery">Digestive Medicine / Surgery (Cirugía / Medicina familiar)</button>
+                <option value="digestive-medicine-/-surgery">Digestive Medicine / Surgery (Cirugía / Medicina familiar)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="endocrinology / anesthesiology">Endocrinology / Anesthesiology (Cirugía / Medicina general)</button>
+                <option value="endocrinology-/-anesthesiology">Endocrinology / Anesthesiology (Cirugía / Medicina general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="endocrinology / internal medicine">Endocrinology / Internal Medicine (Cirugía / Medicina hospitalaria)</button>
+                <option value="endocrinology-/-internal-medicine">Endocrinology / Internal Medicine (Cirugía / Medicina hospitalaria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="family medicine/general surgery">Family Medicine/General Surgery (Cirugía / Medicina interna)</button>
+                <option value="family-medicine/general-surgery">Family Medicine/General Surgery (Cirugía / Medicina interna)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="gastroenterology / anesthesiology">Gastroenterology / Anesthesiology (Cirugía / Medicina preventiva)</button>
+                <option value="gastroenterology-/-anesthesiology">Gastroenterology / Anesthesiology (Cirugía / Medicina preventiva)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine / anesthesiology">General Medicine / Anesthesiology (Cirugía vascular / Medicina perioperatoria)</button>
+                <option value="general-medicine-/-anesthesiology">General Medicine / Anesthesiology (Cirugía vascular / Medicina perioperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine / bioethics">General Medicine / Bioethics (Cuidados intensivos / Cirugía)</button>
+                <option value="general-medicine-/-bioethics">General Medicine / Bioethics (Cuidados intensivos / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/critical care">General Medicine/Critical Care (Dermatología / Anestesiología)</button>
+                <option value="general-medicine/critical-care">General Medicine/Critical Care (Dermatología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/neurology">General Medicine/Neurology (Dermatología / Medicina ambulatoria)</button>
+                <option value="general-medicine/neurology">General Medicine/Neurology (Dermatología / Medicina ambulatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/nursing">General Medicine/Nursing (Endocrinología / Anestesiología)</button>
+                <option value="general-medicine/nursing">General Medicine/Nursing (Endocrinología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/post-operative care">General Medicine/Post-Operative Care (Endocrinología / Medicina interna)</button>
+                <option value="general-medicine/post-operative-care">General Medicine/Post-Operative Care (Endocrinología / Medicina interna)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="general medicine/surgery">General Medicine/Surgery (Enfermería / Cirugía general)</button>
+                <option value="general-medicine/surgery">General Medicine/Surgery (Enfermería / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="hematology/surgery">Hematology/Surgery (Enfermería / Cirugía menor)</button>
+                <option value="hematology/surgery">Hematology/Surgery (Enfermería / Cirugía menor)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="hematology/surgical medicine">Hematology/Surgical Medicine (Enfermería / Cuidados intensivos)</button>
+                <option value="hematology/surgical-medicine">Hematology/Surgical Medicine (Enfermería / Cuidados intensivos)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="hospital medicine / anesthesiology">Hospital Medicine / Anesthesiology (Enfermería / Medicina hospitalaria)</button>
+                <option value="hospital-medicine-/-anesthesiology">Hospital Medicine / Anesthesiology (Enfermería / Medicina hospitalaria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="hospital medicine/general surgery">Hospital Medicine/General Surgery (Enfermería / Medicina postoperatoria)</button>
+                <option value="hospital-medicine/general-surgery">Hospital Medicine/General Surgery (Enfermería / Medicina postoperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="hospital medicine/surgery">Hospital Medicine/Surgery (Farmacología / Alergología)</button>
+                <option value="hospital-medicine/surgery">Hospital Medicine/Surgery (Farmacología / Alergología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="immunology / allergology">Immunology / Allergology (Farmacología / Anestesiología)</button>
+                <option value="immunology-/-allergology">Immunology / Allergology (Farmacología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="intensive care / surgery">Intensive Care / Surgery (Farmacología / Cirugía)</button>
+                <option value="intensive-care-/-surgery">Intensive Care / Surgery (Farmacología / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="intensive care medicine / anesthesiology">Intensive Care Medicine / Anesthesiology (Farmacología / Cirugía ambulatoria)</button>
+                <option value="intensive-care-medicine-/-anesthesiology">Intensive Care Medicine / Anesthesiology (Farmacología / Cirugía ambulatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine">Internal Medicine (Farmacología / Cirugía general)</button>
+                <option value="internal-medicine">Internal Medicine (Farmacología / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / allergology">Internal Medicine / Allergology (Farmacología / Endoscopía)</button>
+                <option value="internal-medicine-/-allergology">Internal Medicine / Allergology (Farmacología / Endoscopía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / anesthesiology">Internal Medicine / Anesthesiology (Farmacología / Enfermería)</button>
+                <option value="internal-medicine-/-anesthesiology">Internal Medicine / Anesthesiology (Farmacología / Enfermería)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / critical care">Internal Medicine / Critical Care (Farmacología / Gastroenterología)</button>
+                <option value="internal-medicine-/-critical-care">Internal Medicine / Critical Care (Farmacología / Gastroenterología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / critical care medicine">Internal Medicine / Critical Care Medicine (Farmacología / Medicina del dolor)</button>
+                <option value="internal-medicine-/-critical-care-medicine">Internal Medicine / Critical Care Medicine (Farmacología / Medicina del dolor)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / preoperative">Internal Medicine / Preoperative (Farmacología / Medicina hospitalaria)</button>
+                <option value="internal-medicine-/-preoperative">Internal Medicine / Preoperative (Farmacología / Medicina hospitalaria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="internal medicine / surgery">Internal Medicine / Surgery (Farmacología / Medicina perioperatoria)</button>
+                <option value="internal-medicine-/-surgery">Internal Medicine / Surgery (Farmacología / Medicina perioperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="legal medicine / bioethics">Legal Medicine / Bioethics (Farmacología / Medicina preoperatoria)</button>
+                <option value="legal-medicine-/-bioethics">Legal Medicine / Bioethics (Farmacología / Medicina preoperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="legal medicine / surgery">Legal Medicine / Surgery (Fisioterapia / Cirugía)</button>
+                <option value="legal-medicine-/-surgery">Legal Medicine / Surgery (Fisioterapia / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="legal medicine/clinical safety">Legal Medicine/Clinical Safety (Gastroenterología / Anestesiología)</button>
+                <option value="legal-medicine/clinical-safety">Legal Medicine/Clinical Safety (Gastroenterología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="medical emergencies / anesthesiology">Medical Emergencies / Anesthesiology (Hematología / Cirugía)</button>
+                <option value="medical-emergencies-/-anesthesiology">Medical Emergencies / Anesthesiology (Hematología / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="medical emergencies / critical care medicine">Medical Emergencies / Critical Care Medicine (Hematología / Medicina quirúrgica)</button>
+                <option value="medical-emergencies-/-critical-care-medicine">Medical Emergencies / Critical Care Medicine (Hematología / Medicina quirúrgica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="medical emergencies / allergology">Medical emergencies / Allergology (Inmunología / Alergología)</button>
+                <option value="medical-emergencies-/-allergology">Medical emergencies / Allergology (Inmunología / Alergología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="nephrology / anesthesiology">Nephrology / Anesthesiology (Medicina ambulatoria / Cirugía menor)</button>
+                <option value="nephrology-/-anesthesiology">Nephrology / Anesthesiology (Medicina ambulatoria / Cirugía menor)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology">Neurology (Medicina crítica / Anestesiología)</button>
+                <option value="neurology">Neurology (Medicina crítica / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology / anesthesiology">Neurology / Anesthesiology (Medicina crítica / Cirugía mayor)</button>
+                <option value="neurology-/-anesthesiology">Neurology / Anesthesiology (Medicina crítica / Cirugía mayor)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology / general medicine">Neurology / General Medicine (Medicina del dolor / Anestesiología)</button>
+                <option value="neurology-/-general-medicine">Neurology / General Medicine (Medicina del dolor / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology / hospital medicine">Neurology / Hospital Medicine (Medicina del dolor / Cirugía)</button>
+                <option value="neurology-/-hospital-medicine">Neurology / Hospital Medicine (Medicina del dolor / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurology/post-operative medicine">Neurology/Post-Operative Medicine (Medicina del dolor / Cuidados postoperatorios)</button>
+                <option value="neurology/post-operative-medicine">Neurology/Post-Operative Medicine (Medicina del dolor / Cuidados postoperatorios)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="neurosurgery / anesthesiology">Neurosurgery / Anesthesiology (Medicina del dolor / Enfermería)</button>
+                <option value="neurosurgery-/-anesthesiology">Neurosurgery / Anesthesiology (Medicina del dolor / Enfermería)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing / hospital medicine">Nursing / Hospital Medicine (Medicina digestiva / Cirugía)</button>
+                <option value="nursing-/-hospital-medicine">Nursing / Hospital Medicine (Medicina digestiva / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing / intensive care">Nursing / Intensive Care (Medicina digestiva / Cirugía abdominal)</button>
+                <option value="nursing-/-intensive-care">Nursing / Intensive Care (Medicina digestiva / Cirugía abdominal)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing / minor surgery">Nursing / Minor Surgery (Medicina familiar / Cirugía general)</button>
+                <option value="nursing-/-minor-surgery">Nursing / Minor Surgery (Medicina familiar / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing/general surgery">Nursing/General Surgery (Medicina general / Anestesiología)</button>
+                <option value="nursing/general-surgery">Nursing/General Surgery (Medicina general / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="nursing/post-operative medicine">Nursing/Post-Operative Medicine (Medicina general / Bioética)</button>
+                <option value="nursing/post-operative-medicine">Nursing/Post-Operative Medicine (Medicina general / Bioética)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="nutrition / general surgery">Nutrition / General Surgery (Medicina general / Cirugía)</button>
+                <option value="nutrition-/-general-surgery">Nutrition / General Surgery (Medicina general / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="orthopedics / physical medicine">Orthopedics / Physical Medicine (Medicina general / Cuidados críticos)</button>
+                <option value="orthopedics-/-physical-medicine">Orthopedics / Physical Medicine (Medicina general / Cuidados críticos)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / anesthesiology">Pain Medicine / Anesthesiology (Medicina general / Cuidados postoperatorios)</button>
+                <option value="pain-medicine-/-anesthesiology">Pain Medicine / Anesthesiology (Medicina general / Cuidados postoperatorios)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / nursing">Pain Medicine / Nursing (Medicina general / Enfermería)</button>
+                <option value="pain-medicine-/-nursing">Pain Medicine / Nursing (Medicina general / Enfermería)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / post-operative care">Pain Medicine / Post-Operative Care (Medicina general / Neurología)</button>
+                <option value="pain-medicine-/-post-operative-care">Pain Medicine / Post-Operative Care (Medicina general / Neurología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pain medicine / surgery">Pain Medicine / Surgery (Medicina hospitalaria / Anestesiología)</button>
+                <option value="pain-medicine-/-surgery">Pain Medicine / Surgery (Medicina hospitalaria / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pediatric anesthesiology">Pediatric Anesthesiology (Medicina hospitalaria / Cirugía)</button>
+                <option value="pediatric-anesthesiology">Pediatric Anesthesiology (Medicina hospitalaria / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pediatric anesthesiology / child surgery">Pediatric Anesthesiology / Child Surgery (Medicina hospitalaria / Cirugía general)</button>
+                <option value="pediatric-anesthesiology-/-child-surgery">Pediatric Anesthesiology / Child Surgery (Medicina hospitalaria / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pediatric medicine / bioethics">Pediatric Medicine / Bioethics (Medicina intensiva / Anestesiología)</button>
+                <option value="pediatric-medicine-/-bioethics">Pediatric Medicine / Bioethics (Medicina intensiva / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / allergology">Pharmacology / Allergology (Medicina interna)</button>
+                <option value="pharmacology-/-allergology">Pharmacology / Allergology (Medicina interna)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / anesthesiology">Pharmacology / Anesthesiology (Medicina interna / Alergología)</button>
+                <option value="pharmacology-/-anesthesiology">Pharmacology / Anesthesiology (Medicina interna / Alergología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / endoscopy">Pharmacology / Endoscopy (Medicina interna / Anestesiología)</button>
+                <option value="pharmacology-/-endoscopy">Pharmacology / Endoscopy (Medicina interna / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / gastroenterology">Pharmacology / Gastroenterology (Medicina interna / Cirugía)</button>
+                <option value="pharmacology-/-gastroenterology">Pharmacology / Gastroenterology (Medicina interna / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / general surgery">Pharmacology / General Surgery (Medicina interna / Cuidados intensivos)</button>
+                <option value="pharmacology-/-general-surgery">Pharmacology / General Surgery (Medicina interna / Cuidados intensivos)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / hospital medicine">Pharmacology / Hospital Medicine (Medicina interna / Medicina crítica)</button>
+                <option value="pharmacology-/-hospital-medicine">Pharmacology / Hospital Medicine (Medicina interna / Medicina crítica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / nursing">Pharmacology / Nursing (Medicina interna / Preoperatorio)</button>
+                <option value="pharmacology-/-nursing">Pharmacology / Nursing (Medicina interna / Preoperatorio)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / outpatient surgery">Pharmacology / Outpatient Surgery (Medicina legal / Bioética)</button>
+                <option value="pharmacology-/-outpatient-surgery">Pharmacology / Outpatient Surgery (Medicina legal / Bioética)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / pain medicine">Pharmacology / Pain Medicine (Medicina legal / Cirugía)</button>
+                <option value="pharmacology-/-pain-medicine">Pharmacology / Pain Medicine (Medicina legal / Cirugía)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / perioperative medicine">Pharmacology / Perioperative Medicine (Medicina legal / Seguridad clínica)</button>
+                <option value="pharmacology-/-perioperative-medicine">Pharmacology / Perioperative Medicine (Medicina legal / Seguridad clínica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / preoperative medicine">Pharmacology / Preoperative Medicine (Medicina pediátrica / Bioética)</button>
+                <option value="pharmacology-/-preoperative-medicine">Pharmacology / Preoperative Medicine (Medicina pediátrica / Bioética)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pharmacology / surgery">Pharmacology / Surgery (Medicina preoperatoria / Cirugía general)</button>
+                <option value="pharmacology-/-surgery">Pharmacology / Surgery (Medicina preoperatoria / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="physiotherapy / surgery">Physiotherapy / Surgery (Medicina quirúrgica / Atención ambulatoria)</button>
+                <option value="physiotherapy-/-surgery">Physiotherapy / Surgery (Medicina quirúrgica / Atención ambulatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / anesthesiology">Pneumology / Anesthesiology (Medicina quirúrgica / Cuidados intensivos)</button>
+                <option value="pneumology-/-anesthesiology">Pneumology / Anesthesiology (Medicina quirúrgica / Cuidados intensivos)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / critical care medicine">Pneumology / Critical Care Medicine (Nefrología / Anestesiología)</button>
+                <option value="pneumology-/-critical-care-medicine">Pneumology / Critical Care Medicine (Nefrología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / general surgery">Pneumology / General Surgery (Neumología / Anestesiología)</button>
+                <option value="pneumology-/-general-surgery">Pneumology / General Surgery (Neumología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / intensive care medicine">Pneumology / Intensive Care Medicine (Neumología / Cirugía general)</button>
+                <option value="pneumology-/-intensive-care-medicine">Pneumology / Intensive Care Medicine (Neumología / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="pneumology / postoperative medicine">Pneumology / Postoperative Medicine (Neumología / Medicina crítica)</button>
+                <option value="pneumology-/-postoperative-medicine">Pneumology / Postoperative Medicine (Neumología / Medicina crítica)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="preoperative medicine / general surgery">Preoperative Medicine / General Surgery (Neumología / Medicina intensiva)</button>
+                <option value="preoperative-medicine-/-general-surgery">Preoperative Medicine / General Surgery (Neumología / Medicina intensiva)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="psychiatry/anesthesiology">Psychiatry/Anesthesiology (Neumología / Medicina postoperatoria)</button>
+                <option value="psychiatry/anesthesiology">Psychiatry/Anesthesiology (Neumología / Medicina postoperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / anesthesiology">Surgery / Anesthesiology (Neurocirugía / Anestesiología)</button>
+                <option value="surgery-/-anesthesiology">Surgery / Anesthesiology (Neurocirugía / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / gastroenterology">Surgery / Gastroenterology (Neurología)</button>
+                <option value="surgery-/-gastroenterology">Surgery / Gastroenterology (Neurología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / general medicine">Surgery / General Medicine (Neurología / Anestesiología)</button>
+                <option value="surgery-/-general-medicine">Surgery / General Medicine (Neurología / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery / hospital medicine">Surgery / Hospital Medicine (Neurología / Medicina general)</button>
+                <option value="surgery-/-hospital-medicine">Surgery / Hospital Medicine (Neurología / Medicina general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/emergency medicine">Surgery/Emergency Medicine (Neurología / Medicina hospitalaria)</button>
+                <option value="surgery/emergency-medicine">Surgery/Emergency Medicine (Neurología / Medicina hospitalaria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/family medicine">Surgery/Family Medicine (Neurología / Medicina postoperatoria)</button>
+                <option value="surgery/family-medicine">Surgery/Family Medicine (Neurología / Medicina postoperatoria)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/internal medicine">Surgery/Internal Medicine (Nutrición / Cirugía general)</button>
+                <option value="surgery/internal-medicine">Surgery/Internal Medicine (Nutrición / Cirugía general)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/nursing">Surgery/Nursing (Ortopedia / Medicina física)</button>
+                <option value="surgery/nursing">Surgery/Nursing (Ortopedia / Medicina física)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/outpatient medicine">Surgery/Outpatient Medicine (Psicología clínica / Anestesiología)</button>
+                <option value="surgery/outpatient-medicine">Surgery/Outpatient Medicine (Psicología clínica / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/preventive medicine">Surgery/Preventive Medicine (Psicología clínica / Medicina del sueño)</button>
+                <option value="surgery/preventive-medicine">Surgery/Preventive Medicine (Psicología clínica / Medicina del sueño)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgery/superficial nursing">Surgery/Superficial Nursing (Psiquiatría / Anestesiología)</button>
+                <option value="surgery/superficial-nursing">Surgery/Superficial Nursing (Psiquiatría / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgical medicine / critical care">Surgical Medicine / Critical Care (Urgencias médicas / Alergología)</button>
+                <option value="surgical-medicine-/-critical-care">Surgical Medicine / Critical Care (Urgencias médicas / Alergología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="surgical medicine/outpatient care">Surgical Medicine/Outpatient Care (Urgencias médicas / Anestesiología)</button>
+                <option value="surgical-medicine/outpatient-care">Surgical Medicine/Outpatient Care (Urgencias médicas / Anestesiología)</option>
     
-            <button class="filter-button" data-filter-type="specialty" data-filter-value="vascular surgery / perioperative medicine">Vascular Surgery / Perioperative Medicine (Urgencias médicas / Medicina crítica)</button>
+                <option value="vascular-surgery-/-perioperative-medicine">Vascular Surgery / Perioperative Medicine (Urgencias médicas / Medicina crítica)</option>
     
+            </select>
         </div>
-        <button class="filter-button clear-filters-button" data-filter-type="clear" data-filter-value="all">Clear All Filters</button>
+        <button class="clear-filters-button" id="clearFiltersButton">Clear All Filters & Show All</button>
     </div>
 
 
@@ -6314,70 +6319,54 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const specialtyFilter = document.getElementById('specialtyFilter');
+            const clearFiltersButton = document.getElementById('clearFiltersButton');
             const dictionaryEntries = document.querySelectorAll('.dictionary-entry');
-            const filterButtons = document.querySelectorAll('.filter-button');
 
-            let activeFilters = {
-                category: 'all',
-                specialty: 'all'
-            };
+            // Initial state: all entries are hidden until a filter/search is applied
+            // The CSS 'display: none' for .dictionary-entry already handles this
 
             function applyFilters() {
                 const searchTerm = searchInput.value.toLowerCase();
+                const selectedCategory = categoryFilter.value;
+                const selectedSpecialty = specialtyFilter.value;
 
                 dictionaryEntries.forEach(entry => {
                     const entryText = entry.textContent.toLowerCase();
-                    const entryCategory = entry.dataset.categoryEn;
-                    const entrySpecialty = entry.dataset.specialtyEn;
+                    const entryCategory = entry.dataset.categoryEn; // get from data-attribute
+                    const entrySpecialty = entry.dataset.specialtyEn; // get from data-attribute
 
                     const matchesSearch = entryText.includes(searchTerm);
-                    const matchesCategory = (activeFilters.category === 'all' || entryCategory === activeFilters.category);
-                    const matchesSpecialty = (activeFilters.specialty === 'all' || entrySpecialty === activeFilters.specialty);
+                    const matchesCategory = (selectedCategory === 'all' || entryCategory === selectedCategory);
+                    const matchesSpecialty = (selectedSpecialty === 'all' || entrySpecialty === selectedSpecialty);
 
                     if (matchesSearch && matchesCategory && matchesSpecialty) {
-                        entry.classList.remove('hidden');
+                        entry.classList.add('visible'); // Use 'visible' class to show
+                        entry.classList.remove('hidden'); // Ensure 'hidden' is removed
                     } else {
-                        entry.classList.add('hidden');
+                        entry.classList.add('hidden'); // Use 'hidden' class to hide
+                        entry.classList.remove('visible'); // Ensure 'visible' is removed
                     }
                 });
             }
 
-            // Event listener for search input
+            // Event listeners
             searchInput.addEventListener('keyup', applyFilters);
+            categoryFilter.addEventListener('change', applyFilters);
+            specialtyFilter.addEventListener('change', applyFilters);
 
-            // Event listener for filter buttons
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const filterType = this.dataset.filterType;
-                    const filterValue = this.dataset.filterValue;
-
-                    // Handle 'Clear All Filters' button
-                    if (filterType === 'clear') {
-                        activeFilters.category = 'all';
-                        activeFilters.specialty = 'all';
-                        // Reset active state for all filter buttons
-                        document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
-                        // Set 'All' buttons as active
-                        document.querySelector('[data-filter-type="category"][data-filter-value="all"]').classList.add('active');
-                        document.querySelector('[data-filter-type="specialty"][data-filter-value="all"]').classList.add('active');
-                    } else {
-                        // Remove 'active' class from all buttons of the same type
-                        document.querySelectorAll(`.filter-button[data-filter-type="${filterType}"]`).forEach(btn => {
-                            btn.classList.remove('active');
-                        });
-                        // Add 'active' class to the clicked button
-                        this.classList.add('active');
-
-                        // Update activeFilters
-                        activeFilters[filterType] = filterValue;
-                    }
-
-                    applyFilters(); // Re-apply all filters
-                });
+            clearFiltersButton.addEventListener('click', function() {
+                searchInput.value = ''; // Clear search input
+                categoryFilter.value = 'all'; // Reset category dropdown
+                specialtyFilter.value = 'all'; // Reset specialty dropdown
+                applyFilters(); // Re-apply to show all
             });
 
-            // Initial application of filters on page load
-            applyFilters();
+            // Optional: Initially show all entries if search and filters are empty on load
+            // Or keep them hidden until user interacts (current default behavior).
+            // If you want to show all initially, you can call applyFilters() here:
+            // applyFilters();
         });
     </script>
 </body>
